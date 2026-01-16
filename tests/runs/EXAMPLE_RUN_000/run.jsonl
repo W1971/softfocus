@@ -1,0 +1,3 @@
+{"timestamp":"2026-01-15T10:00:00Z","run_id":"EXAMPLE_RUN_000","scenario_id":"TS-READY-BASE-001","script":"stage-runner-linear.sh","check":"repository_integrity","result":"PASS","risk":"NONE","human_override":false}
+{"timestamp":"2026-01-15T10:00:01Z","run_id":"EXAMPLE_RUN_000","scenario_id":"TS-READY-BASE-001","script":"content-validator.js","check":"content_validation","result":"PASS","risk":"NONE","human_override":false}
+{"timestamp":"2026-01-15T10:00:02Z","run_id":"EXAMPLE_RUN_000","scenario_id":"TS-READY-BASE-001","script":"build","check":"determinism","result":"PASS","risk":"NONE","human_override":false}

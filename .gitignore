@@ -10,3 +10,7 @@ node_modules/
 
 # Lockfiles (project decision)
 package-lock.json
+.wip/
+.wip/
+tests/runs/RUN-*/
+tests/runs/RUN-*/
