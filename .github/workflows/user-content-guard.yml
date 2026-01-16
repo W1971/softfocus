@@ -1,0 +1,22 @@
+name: Governance — User Content Guard
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  user-content-guard:
+    name: User Content Advisory Language Guard
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure guard script is executable
+        run: chmod +x scripts/governance/user-content-guard.sh
+
+      - name: Run user content guard
+        run: scripts/governance/user-content-guard.sh
