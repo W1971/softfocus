@@ -1,0 +1,22 @@
+name: Governance — EN↔RU Structure Parity Check
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  structure-parity:
+    name: EN↔RU Structure Parity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure script is executable
+        run: chmod +x scripts/governance/structure-parity-check.sh
+
+      - name: Run EN↔RU structure parity check
+        run: scripts/governance/structure-parity-check.sh
