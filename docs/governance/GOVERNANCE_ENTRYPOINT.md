@@ -1,44 +1,95 @@
-# SoftFocus — Governance Entry Point (Canonical)
+# SoftFocus — Governance Entrypoint
 
-Version: 1.0  
-Status: CANONICAL / ENFORCED  
-Audience: Core maintainers, CI systems, auditors
+Version: v1.1  
+Status: ACTIVE  
+Audience: Maintainers, auditors, CI systems
 
 ---
 
 ## Purpose
 
-Данный документ фиксирует **единственную допустимую точку входа**
-для выполнения governance-флоу в SoftFocus.
+This document is the **single entry point**
+into the SoftFocus governance system.
+
+It defines:
+- where canonical documentation lives;
+- how scripts and workflows are organized;
+- how project state and progression are tracked.
+
+No governance-relevant work may proceed
+without alignment to this entrypoint.
 
 ---
 
-## Canonical Entry Point
+## Canonical Documentation Index
 
-Единственным допустимым entry point является:
+### 1. Project Documentation Library
 
-scripts/governance/full-governance-run.sh
+**Path:**
 
----
-
-## Enforcement Rules
-
-1. Ни один сценарий READY / RELEASE не считается валидным,
-   если он был запущен напрямую, минуя full-governance-run.sh.
-2. Любой RUN, не созданный через canonical entry point,
-   считается **non-compliant** и исключается из audit trail.
-3. CI и release automation обязаны использовать
-   только canonical entry point.
+Defines:
+- all markdown documentation domains;
+- directory structure;
+- document lifecycle (ACTIVE / LOCKED / ARCHIVE);
+- language rules (EN canonical, RU localized).
 
 ---
 
-## Rationale
+### 2. Scripts & Workflows Library
 
-Единая точка входа:
-- устраняет обходы governance;
-- сохраняет линейность;
-- делает ответственность явной;
-- упрощает аудит.
+**Path:**
 
-Governance — это протокол, а не набор утилит.
+Defines:
+- all script domains;
+- governance, audit, CI, stage, and release scripts;
+- canonical execution workflows;
+- rules for adding or modifying scripts.
+
+---
+
+### 3. Project Roadmap
+
+**Path:**
+
+Defines:
+- completed phases;
+- current project state;
+- allowed next phases;
+- governance conditions for progression.
+
+---
+
+## Architecture & Phase Control
+
+**Path:**
+
+Contains:
+- phase kickoff documents;
+- phase completion locks;
+- architectural flow definitions.
+
+Only documents in this directory
+may authorize phase transitions.
+
+---
+
+## Governance Enforcement
+
+Governance is enforced through:
+- CI workflows;
+- structure audits;
+- parity checks;
+- append-only audit logs.
+
+No manual override is allowed
+outside defined governance scripts.
+
+---
+
+## Final Rule
+
+If a document, script, or action
+is not referenced directly or indirectly
+from this entrypoint,
+it is **not governance-authorized**.
 
