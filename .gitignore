@@ -14,3 +14,4 @@ package-lock.json
 .wip/
 tests/runs/RUN-*/
 tests/runs/RUN-*/
+archive/
