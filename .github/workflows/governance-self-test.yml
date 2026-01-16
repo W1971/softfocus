@@ -1,0 +1,43 @@
+name: Governance Self-Test
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  governance-self-test:
+    name: Governance Self-Test (Mandatory)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure bash scripts are executable
+        run: |
+          chmod +x scripts/**/*.sh || true
+          chmod +x tests/**/*.sh || true
+
+      - name: Run Governance Self-Test
+        run: |
+          RUN_ID="RUN-$(date -u +%Y%m%dT%H%M%SZ)"
+          echo "[CI] RUN_ID=${RUN_ID}"
+
+          ./tests/scenarios/TS-GOVERNANCE-SELF-001.sh "$RUN_ID"
+
+          ./tests/helpers/verify-test-logs.sh "$RUN_ID"
+
+      - name: Verify self-test result
+        run: |
+          LOG="tests/runs/$(ls -td tests/runs/RUN-* | head -n 1)/run.log"
+
+          if ! grep -q "RESULT: GOVERNANCE SELF-TEST PASSED" "$LOG"; then
+            echo "[CI][FAIL] Governance self-test did not pass"
+            exit 1
+          fi
+
+          echo "[CI][PASS] Governance self-test passed"
