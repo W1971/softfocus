@@ -1,6 +1,6 @@
 # SoftFocus — Project Markdown Documentation Library
 
-Version: v1.0  
+Version: v1.1  
 Status: ACTIVE  
 Audience: Maintainers, auditors, contributors
 
@@ -17,7 +17,7 @@ It defines:
 - purpose of each document group;
 - lifecycle status (ACTIVE / LOCKED / ARCHIVE).
 
-This file is the **entry point** for documentation navigation.
+This file is the **single entry point** for documentation navigation.
 
 ---
 
@@ -25,29 +25,30 @@ This file is the **entry point** for documentation navigation.
 
 ### 1. Architecture
 
-**Path:**
+**Path:** `docs/architecture/`
 
 **Purpose:**
 - define system phases;
 - lock architectural decisions;
-- describe governance flows.
+- describe governance and release flows.
 
-**Examples:**
+**Includes:**
 - Phase kickoffs
-- Phase completion locks
-- Testing strategy
-- Execution flow
+- Phase locks
+- Enforcement specifications
+- Release and distribution rules
 
-Status:
+**Status:**
 - Phase 1 / Phase A: LOCKED
 - Phase B: LOCKED
-- Phase C: ACTIVE (after kickoff)
+- Phase C: LOCKED
+- Phase D: LOCKED
 
 ---
 
 ### 2. Governance
 
-**Path:**
+**Path:** `docs/governance/`
 
 **Purpose:**
 - define governance rules;
@@ -60,31 +61,31 @@ Status:
 - RISK_ESCALATION_POLICY.md
 - GOVERNANCE_ENTRYPOINT.md
 
-Status: ACTIVE
+**Status:** ACTIVE
 
 ---
 
 ### 3. User Documentation
 
-**Path:**
+**Path:** `docs/user/`
 
 **Purpose:**
 - neutral system descriptions;
 - explanation of assessment and results;
 - no advice, no conversion copy.
 
-Status: ACTIVE  
+**Status:** ACTIVE  
 Governed by: user-content guard
 
 ---
 
 ### 4. Roadmap & Meta
 
-**Path:**
+**Path:** `docs/roadmap/`
 
 **Purpose:**
-- high-level project overview;
-- roadmap and phase state;
+- project progression overview;
+- phase state tracking;
 - contributor orientation.
 
 ---
@@ -94,7 +95,7 @@ Governed by: user-content guard
 - English (EN): canonical source
 - Russian (RU): localized, structure-locked
 
-Rules:
+**Rules:**
 - EN is authoritative
 - RU must be structurally identical
 - Structure parity enforced by CI
@@ -103,14 +104,13 @@ Rules:
 
 ## Change Policy
 
-- New documents must be registered in this index
-- Structural changes require a new version
-- Silent additions are forbidden
+- New documents must be registered here.
+- Structural changes require a new version.
+- Silent additions are forbidden.
 
 ---
 
 ## Final Statement
 
 This document is the **single source of truth**
-for SoftFocus markdown documentation.
-
+for SoftFocus markdown documentation structure and lifecycle.
