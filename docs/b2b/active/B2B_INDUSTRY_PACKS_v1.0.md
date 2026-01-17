@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology **solely to clarify scope exclusion**.  
+> SoftFocus does **not** provide diagnosis, treatment, or therapeutic services,  
+> and is not a medical or mental health system.
+
 # SoftFocus — B2B Industry Packs
 
 Version: v1.0  
@@ -19,16 +24,19 @@ not in methodology.
 ## Pack 1 — Technology Teams
 
 Target:
+
 - Software companies
 - Product organizations
 - Engineering-led startups
 
 Focus Areas:
+
 - decision load accumulation
 - cognitive sustainability
 - error cost under fatigue
 
 Deliverables:
+
 - team-level risk snapshot
 - manager-specific brief
 - decision integrity indicators
@@ -38,16 +46,19 @@ Deliverables:
 ## Pack 2 — Healthcare Organizations
 
 Target:
+
 - hospitals
 - clinical departments
 - emergency units
 
 Focus Areas:
+
 - recovery disruption
 - vigilance sustainability
 - fatigue under time pressure
 
 Deliverables:
+
 - aggregated risk patterns
 - shift-impact analysis
 - recovery efficiency overview
@@ -59,17 +70,20 @@ Non-clinical framing enforced.
 ## Pack 3 — Operations & Safety-Critical
 
 Target:
+
 - aviation
 - maritime
 - logistics control centers
 - industrial operations
 
 Focus Areas:
+
 - sustained vigilance
 - decision integrity
 - shift-induced degradation
 
 Deliverables:
+
 - risk concentration map
 - stability signals
 - near-term degradation indicators
@@ -79,6 +93,7 @@ Deliverables:
 ## Common Constraints
 
 All B2B packs:
+
 - use anonymized aggregation only
 - avoid individual profiling
 - provide interpretive insight, not prescriptions
@@ -89,7 +104,7 @@ All B2B packs:
 ## Value Proposition (Unified)
 
 SoftFocus B2B packs help organizations:
+
 - detect silent performance risk,
 - reduce error probability,
 - protect decision quality over time.
-

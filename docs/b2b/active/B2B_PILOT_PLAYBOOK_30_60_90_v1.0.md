@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology **solely to clarify scope exclusion**.  
+> SoftFocus does **not** provide diagnosis, treatment, or therapeutic services,  
+> and is not a medical or mental health system.
+
 # SoftFocus — B2B Pilot Playbook (30–60–90 Days)
 
 Version: v1.0  

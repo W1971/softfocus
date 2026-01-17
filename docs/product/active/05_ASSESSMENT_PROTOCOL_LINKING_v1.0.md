@@ -1,7 +1,14 @@
+> **Non-Clinical Scope Declaration**  
+> This document describes internal system design and product evolution.  
+> Any clinical terminology is used **only to define what is explicitly excluded**.  
+> SoftFocus does not operate as a diagnostic or therapeutic system.
+
 ---
+
 type: product-spec
 status: canonical
 version: 1.0
+
 ---
 
 # Assessment → Protocol Linking

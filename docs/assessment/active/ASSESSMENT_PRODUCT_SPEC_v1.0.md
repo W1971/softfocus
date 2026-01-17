@@ -12,6 +12,7 @@ This document defines the SoftFocus assessment
 as a **standalone product**, not a funnel artifact.
 
 The assessment must:
+
 - deliver value without payment,
 - create intellectual engagement,
 - justify return visits,
@@ -37,7 +38,7 @@ It is a **risk-orientation tool** for high-load decision makers.
 After completing the assessment, a user must gain:
 
 - clarity about their current burnout stage,
-- understanding of *why* this state exists,
+- understanding of _why_ this state exists,
 - awareness of near-term risks,
 - a reason to reassess in the future.
 
@@ -58,9 +59,9 @@ The assessment is:
 
 The free result MUST include:
 
-1. Burnout Stage Classification  
-2. Primary Risk Vector  
-3. Short Interpretation  
+1. Burnout Stage Classification
+2. Primary Risk Vector
+3. Short Interpretation
 4. Return Trigger Explanation
 
 This ensures value without paywall frustration.
@@ -83,10 +84,11 @@ The assessment must be shareable because it is:
 
 - intellectually defensible,
 - non-embarrassing,
-- non-diagnostic,
-- language-neutral (no therapy tone).
+- non-classifying,
+- language-neutral / no structured support
 
 Sharing motivation:
+
 > “This explained something I couldn’t name.”
 
 ---
@@ -105,4 +107,3 @@ Sharing motivation:
 
 SoftFocus assessment is a **thinking tool**,  
 not a wellness activity.
-

@@ -12,22 +12,25 @@ Define a **stable, professional taxonomy**
 for burnout stages used across SoftFocus.
 
 This taxonomy is:
+
 - non-medical,
 - non-emotional,
-- non-therapeutic.
+- non-structured support
 
 ---
 
 ## Design Principles
 
 Stages represent:
+
 - sustainability of effort,
 - cost of maintaining performance,
 - risk of future degradation.
 
 They do NOT represent:
+
 - emotional states,
-- mental health diagnoses,
+- cognitive sustainability health diagnoses,
 - motivation levels.
 
 ---
@@ -91,7 +94,7 @@ High (near-term impact)
 
 This taxonomy is **language-locked**.
 Any change requires:
+
 - new version,
 - explicit supersession,
 - governance review.
-

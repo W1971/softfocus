@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology **solely to clarify scope exclusion**.  
+> SoftFocus does **not** provide diagnosis, treatment, or therapeutic services,  
+> and is not a medical or mental health system.
+
 # SoftFocus — Executive Summary (B2B)
 
 Version: v1.0  
@@ -13,6 +18,7 @@ In knowledge-intensive organizations,
 burnout rarely appears as an immediate failure.
 
 Instead, it emerges as:
+
 - declining decision quality,
 - hidden compensation,
 - reduced recovery effectiveness,
@@ -29,6 +35,7 @@ SoftFocus provides a **non-clinical, risk-oriented assessment**
 focused on performance sustainability.
 
 It evaluates:
+
 - decision load under fatigue,
 - cognitive sustainability,
 - recovery efficiency,
@@ -76,4 +83,3 @@ without replacing clinical support.
 
 SoftFocus helps organizations answer:
 **“Where is sustainability at risk before it becomes costly?”**
-

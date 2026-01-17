@@ -61,7 +61,7 @@ Paid report evaluates:
 - where it fails structurally.
 
 No lifestyle advice.
-No therapy framing.
+No structured support framing.
 
 ---
 
@@ -77,7 +77,7 @@ This is the **core professional value**.
 
 ## What Paid Report Still Does NOT Do
 
-- no diagnosis
+- no classification
 - no coaching
 - no prescriptions
 - no urgency tactics

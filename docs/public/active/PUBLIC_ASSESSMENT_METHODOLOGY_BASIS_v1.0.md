@@ -1,3 +1,8 @@
+> **Boundary Notice**  
+> This document references clinical terminology **only to define exclusion boundaries**.  
+> SoftFocus does **not** diagnose, treat, or provide therapeutic or medical services.  
+> It is not a mental health assessment.
+
 # What the SoftFocus Assessment Is Based On
 
 Version: v1.0  
@@ -26,6 +31,7 @@ established professional research in four areas:
 ## Occupational Burnout Research
 
 We use well-established insights showing that burnout:
+
 - develops gradually,
 - is driven by effort–recovery imbalance,
 - is often masked by compensation.
@@ -37,6 +43,7 @@ We do not use clinical diagnostic criteria.
 ## Human Factors & Cognitive Load Research
 
 Our questions reflect how:
+
 - decision quality degrades under fatigue,
 - attention fragments over time,
 - errors become more likely under sustained load.
@@ -48,6 +55,7 @@ This approach is widely used in safety-critical industries.
 ## Systems & Reliability Thinking
 
 We treat burnout risk like any other performance risk:
+
 - by looking for early signals,
 - by focusing on patterns,
 - by avoiding emotional labels.
@@ -77,6 +85,7 @@ not “scores” or “improvement badges”.
 The free assessment provides orientation.
 
 The paid report provides deeper analysis:
+
 - interactions between risk factors,
 - time-based scenarios,
 - interpretation of consequences.
@@ -87,4 +96,3 @@ The paid report provides deeper analysis:
 
 SoftFocus exists to provide clarity
 for people whose work depends on sustained thinking.
-

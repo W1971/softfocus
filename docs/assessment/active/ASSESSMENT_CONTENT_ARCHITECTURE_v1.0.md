@@ -24,7 +24,7 @@ Each question must:
 
 - reference observable behavior,
 - avoid emotional vocabulary,
-- avoid self-diagnosis prompts,
+- avoid self-classification prompts,
 - avoid moral framing.
 
 ---
@@ -32,9 +32,11 @@ Each question must:
 ## Approved Question Style
 
 Correct:
-- “In the past two weeks, how often have you had to make decisions while mentally exhausted?”
+
+- “In the past two weeks, how often have you had to make decisions while mentally fatigued?”
 
 Incorrect:
+
 - “Do you feel burned out?”
 - “Are you emotionally drained?”
 - “Do you hate your job?”
@@ -51,6 +53,7 @@ Questions should target:
 - sustainability of effort.
 
 Not:
+
 - feelings,
 - motivation,
 - personal values.
@@ -60,6 +63,7 @@ Not:
 ## Temporal Anchoring
 
 Every question must include:
+
 - a time window (e.g. 7–14 days),
 - a frequency or condition,
 - a neutral reference point.
@@ -69,12 +73,13 @@ Every question must include:
 ## Professional Tone Enforcement
 
 Language must resemble:
+
 - operational review,
 - post-incident analysis,
 - performance risk assessment.
 
 Never:
-- therapy session language,
+
+- intervention-oriented language,
 - coaching language,
 - inspirational tone.
-

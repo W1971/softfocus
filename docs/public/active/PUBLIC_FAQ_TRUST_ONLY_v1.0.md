@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology **solely to clarify scope exclusion**.  
+> SoftFocus does **not** provide diagnosis, treatment, or therapeutic services,  
+> and is not a medical or mental health system.
+
 # SoftFocus — Public FAQ
 
 Version: v1.0  
@@ -29,6 +34,7 @@ It is designed for awareness and orientation.
 ## 3. What does the assessment measure?
 
 It looks at patterns such as:
+
 - decision load under fatigue,
 - attention stability,
 - recovery effectiveness,
@@ -48,6 +54,7 @@ across different situations and roles.
 ## 5. What do I get after completing the assessment?
 
 You receive:
+
 - your current burnout stage,
 - your primary risk area,
 - an explanation of what this pattern means,
@@ -76,6 +83,7 @@ but to provide clarity about risk patterns.
 ## 8. How often should I retake it?
 
 Reassessment is meaningful when:
+
 - workload changes,
 - responsibility increases,
 - recovery stops working.
@@ -113,4 +121,3 @@ not pushing performance further.
 ## 12. What is the main question SoftFocus helps answer?
 
 “How sustainable is my current way of working?”
-

@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology solely to clarify scope and design intent.  
+> SoftFocus does not provide diagnosis, treatment, or therapeutic services  
+> and is not a medical or mental health system.
+
 # SoftFocus — Phase A: Structured Protocol
 
 Status: ACTIVE  
@@ -55,6 +60,7 @@ The structured protocol is:
 - non-motivational
 
 It works with:
+
 - cognitive load
 - recovery capacity
 - functional boundaries
@@ -126,7 +132,8 @@ Each layer addresses a specific structural dimension.
 **Purpose:**  
 Prevent further accumulation of cognitive load.
 
-**Focus:**  
+**Focus:**
+
 - containment, not reduction
 - predictability, not efficiency
 
@@ -140,7 +147,8 @@ Load stops increasing.
 **Purpose:**  
 Restore the functional effectiveness of recovery.
 
-**Focus:**  
+**Focus:**
+
 - recovery quality
 - recovery timing
 - recovery boundaries
@@ -155,7 +163,8 @@ Recovery produces measurable relief.
 **Purpose:**  
 Align functional output with sustainable capacity.
 
-**Focus:**  
+**Focus:**
+
 - output expectations
 - cognitive pacing
 - boundary clarity
@@ -198,6 +207,7 @@ The protocol uses:
 - system-level descriptions
 
 It avoids:
+
 - encouragement
 - reassurance
 - urgency
@@ -226,6 +236,7 @@ Future phases may:
 - localize content
 
 They must not:
+
 - alter core principles
 - introduce motivational framing
 - contradict Phase 1 assessment logic
@@ -237,6 +248,7 @@ They must not:
 Phase A defines the intervention logic layer.
 
 It is complete when:
+
 - its structure is fixed
 - its principles are locked
 - its relationship to assessment is unambiguous

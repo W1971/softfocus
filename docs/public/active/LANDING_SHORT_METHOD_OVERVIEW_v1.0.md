@@ -1,3 +1,8 @@
+> **Scope & Compliance Boundary**  
+> This document may reference clinical terminology **solely to clarify scope exclusion**.  
+> SoftFocus does **not** provide diagnosis, treatment, or therapeutic services,  
+> and is not a medical or mental health system.
+
 # A Different Way to Look at Burnout
 
 Version: v1.0  
@@ -16,6 +21,7 @@ decision-making, and responsibility over time.
 
 Instead of asking how you feel,
 SoftFocus looks at patterns such as:
+
 - how decisions are made under fatigue,
 - how stable attention is across the day,
 - whether recovery actually restores capacity,
@@ -35,6 +41,7 @@ It does not diagnose conditions or provide treatment.
 This is intentional.
 
 By staying non-clinical, the assessment remains:
+
 - non-stigmatizing,
 - safe to share,
 - useful at work,
@@ -49,4 +56,3 @@ The goal is clarity.
 
 SoftFocus helps answer a simple question:
 **How sustainable is my current way of working?**
-
