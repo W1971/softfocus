@@ -66,8 +66,50 @@ docs_layer() {
   find "$target" -type f | sed "s|$DOCS_DIR/||" | sort
 }
 
+docs_tree() {
+  layer="${1:-}"
+  base="$DOCS_DIR"
+
+  if [ -n "$layer" ]; then
+    base="$DOCS_DIR/$layer"
+    [ -d "$base" ] || { echo "Unknown docs layer: $layer"; exit 1; }
+  fi
+
+  echo "Docs tree: ${base#$DOCS_DIR/}"
+  echo "----------------------------"
+  find "$base" -type d | sed "s|$DOCS_DIR/||" | sort
+}
+
+docs_search() {
+  term="${1:-}"
+  if [ -z "$term" ]; then
+    echo "Usage: alias-softfocus docs search <term>"
+    exit 1
+  fi
+
+  echo "Searching docs for: \"$term\""
+  echo "--------------------------------"
+  grep -RIn "$term" "$DOCS_DIR" || echo "No matches found"
+}
+
 docs_cmd() {
-  docs_layer "${1:-}"
+  sub="${1:-}"
+  case "$sub" in
+    "")
+      docs_overview
+      ;;
+    tree)
+      shift || true
+      docs_tree "$@"
+      ;;
+    search)
+      shift
+      docs_search "$@"
+      ;;
+    *)
+      docs_layer "$sub"
+      ;;
+  esac
 }
 
 explain_cmd() {
@@ -83,19 +125,13 @@ explain_cmd() {
 alias-softfocus docs
 
 Purpose:
-  Provides a structured overview of project documentation by
-  responsibility layer.
+  Inspect and navigate project documentation as a system.
 
 Usage:
   alias-softfocus docs
   alias-softfocus docs <layer>
-
-Layers:
-  control     - system architecture, CI, alias, backend flows
-  frontend    - product, content, UX, protocol
-  business    - monetization, roadmap, B2B, release
-  governance  - rules, risk, compliance
-  internal    - internal-only reasoning
+  alias-softfocus docs tree [layer]
+  alias-softfocus docs search <term>
 TXT
       ;;
     *)
@@ -113,14 +149,6 @@ doctor_docs() {
   [ -f "$DOCS_DIR/README.md" ] \
     && echo "✔ docs/README.md present" \
     || echo "✖ docs/README.md missing"
-
-  for layer in control frontend business governance internal; do
-    if [ -d "$DOCS_DIR/$layer" ]; then
-      echo "✔ layer '$layer' exists"
-    else
-      echo "✖ layer '$layer' missing"
-    fi
-  done
 }
 
 doctor_cmd() {
@@ -131,7 +159,6 @@ doctor_cmd() {
     *)
       echo "Running SoftFocus diagnostics..."
       echo "✔ alias-softfocus available"
-      echo "✔ control-plane OK"
       ;;
   esac
 }
