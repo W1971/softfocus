@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+STATUS_DIR="$(dirname "$0")/../status"
+
+echo "# SoftFocus Project Status Report"
+echo
+echo "| Alias | State | Risk |"
+echo "|------|-------|------|"
+
+for f in "$STATUS_DIR"/*.status; do
+  alias="$(grep '^alias:' "$f" | awk '{print $2}')"
+  state="$(grep '^derived_state:' "$f" | awk '{print $2}')"
+  risk="$(grep '^risk_level:' "$f" | awk '{print $2}')"
+  echo "| $alias | $state | $risk |"
+done

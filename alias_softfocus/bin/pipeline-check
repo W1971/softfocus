@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+STAGE_SCRIPT="scripts/softfocus-stage.sh"
+
+run() {
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "[DRY_RUN] $*"
+  else
+    "$@"
+  fi
+}
+
+if [ ! -x "$STAGE_SCRIPT" ]; then
+  echo "ERROR: pipeline-check target missing or not executable: $STAGE_SCRIPT" >&2
+  exit 1
+fi
+
+run "$STAGE_SCRIPT" "$@"

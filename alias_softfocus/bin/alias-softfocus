@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
+STATUS_DIR="$BIN_DIR/../status"
+
+color() {
+  [ -t 1 ] || return 0
+  case "$1" in
+    red) echo -e "\033[31m$2\033[0m" ;;
+    yellow) echo -e "\033[33m$2\033[0m" ;;
+    green) echo -e "\033[32m$2\033[0m" ;;
+    *) echo "$2" ;;
+  esac
+}
+
+get_state() {
+  f="$STATUS_DIR/$1.status"
+  [ -f "$f" ] || { echo "UNKNOWN"; return; }
+  grep '^derived_state:' "$f" | awk '{print $2}'
+}
+
+list() {
+  echo "Available SoftFocus commands:"
+  for f in "$BIN_DIR"/*; do
+    [ -x "$f" ] || continue
+    name="$(basename "$f")"
+    [ "$name" = "alias-softfocus" ] && continue
+    state="$(get_state "$name")"
+    case "$state" in
+      READY) color green "  $name [$state]" ;;
+      LOW_CONFIDENCE) color yellow "  $name [$state]" ;;
+      FAIL) color red "  $name [$state]" ;;
+      *) echo "  $name [$state]" ;;
+    esac
+  done
+}
+
+run_cmd() {
+  name="$1"; shift
+  cmd="$BIN_DIR/$name"
+  [ -x "$cmd" ] || { echo "Unknown command: $name"; exit 1; }
+
+  state="$(get_state "$name")"
+  if [ "$state" = "FAIL" ]; then
+    color red "BLOCKED: $name is FAIL"
+    exit 1
+  fi
+
+  exec "$cmd" "$@"
+}
+
+explain() {
+  cat "$STATUS_DIR/$1.status"
+}
+
+doctor() {
+  for f in "$BIN_DIR"/*; do
+    [ -x "$f" ] || continue
+    name="$(basename "$f")"
+    [ -f "$STATUS_DIR/$name.status" ] || color yellow "WARN: $name missing status"
+  done
+}
+
+case "${1:-list}" in
+  list) list ;;
+  run) shift; run_cmd "$@" ;;
+  explain) shift; explain "$1" ;;
+  doctor) doctor ;;
+  *) echo "Usage: alias-softfocus {list|run|explain|doctor}" ;;
+esac

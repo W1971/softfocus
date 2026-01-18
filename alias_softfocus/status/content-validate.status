@@ -1,0 +1,5 @@
+alias: content-validate
+derived_state: READY
+risk_level: LOW
+last_validated_by:
+  - TS-READY-BASE-001

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ALIAS="$1"
+RUN_FILE="$2"
+OUT_DIR="$(dirname "$0")/../status"
+
+[ -n "$ALIAS" ] || { echo "Usage: generate-status <alias> <run.jsonl>"; exit 1; }
+[ -f "$RUN_FILE" ] || { echo "Missing run file: $RUN_FILE"; exit 1; }
+
+STATE="READY"
+RISK="LOW"
+
+grep -q '"event":"FAIL"' "$RUN_FILE" && STATE="FAIL" && RISK="HIGH"
+grep -q '"event":"LOW"' "$RUN_FILE" && [ "$STATE" != "FAIL" ] && STATE="LOW_CONFIDENCE" && RISK="MEDIUM"
+
+SCENARIOS=$(grep '"scenario"' "$RUN_FILE" | awk -F'"' '{print $4}' | sort -u)
+
+OUT="$OUT_DIR/$ALIAS.status"
+
+{
+  echo "alias: $ALIAS"
+  echo "derived_state: $STATE"
+  echo "risk_level: $RISK"
+  echo "last_validated_by:"
+  for s in $SCENARIOS; do
+    echo "  - $s"
+  done
+  echo "generated_at: $(date +%F)"
+} > "$OUT"
+
+echo "Generated $OUT"

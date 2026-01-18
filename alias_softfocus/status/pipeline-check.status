@@ -1,0 +1,6 @@
+alias: pipeline-check
+derived_state: LOW_CONFIDENCE
+risk_level: MEDIUM
+last_validated_by:
+  - TS-READY-LOW-001
+  - TS-READY-FAIL-001

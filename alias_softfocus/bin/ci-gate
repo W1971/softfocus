@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+STATUS_DIR="$(dirname "$0")/../status"
+FAIL=0
+
+for f in "$STATUS_DIR"/*.status; do
+  state="$(grep '^derived_state:' "$f" | awk '{print $2}')"
+  name="$(grep '^alias:' "$f" | awk '{print $2}')"
+
+  if [ "$state" = "FAIL" ]; then
+    echo "CI BLOCK: $name is FAIL"
+    FAIL=1
+  fi
+
+  if [ "$state" = "LOW_CONFIDENCE" ]; then
+    echo "CI BLOCK: $name is LOW_CONFIDENCE"
+    FAIL=1
+  fi
+done
+
+exit $FAIL

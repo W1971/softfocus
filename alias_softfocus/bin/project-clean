@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NAME="project-clean"
+STATUS_FILE="$(dirname "$0")/../status/$NAME.status"
+
+run() {
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "[DRY_RUN] $*"
+  else
+    "$@"
+  fi
+}
+
+if [ -f "$STATUS_FILE" ]; then
+  STATE="$(grep '^derived_state:' "$STATUS_FILE" | awk '{print $2}')"
+  if [ "$STATE" = "FAIL" ]; then
+    echo "ERROR: $NAME is in FAIL state. Execution blocked." >&2
+    exit 1
+  fi
+fi
+
+GOV_SCRIPT="scripts/governance/project-cleanup.sh"
+MAINT_SCRIPT="scripts/maintenance/project-cleanup.sh"
+
+for SCRIPT in "$GOV_SCRIPT" "$MAINT_SCRIPT"; do
+  [ -x "$SCRIPT" ] || { echo "Missing: $SCRIPT" >&2; exit 1; }
+done
+
+run "$GOV_SCRIPT" "$@"
+run "$MAINT_SCRIPT" "$@"

@@ -1,0 +1,6 @@
+alias: <alias-name>
+derived_state: READY | LOW_CONFIDENCE | FAIL
+risk_level: LOW | MEDIUM | HIGH
+last_validated_by:
+  - TS-*
+generated_at: YYYY-MM-DD
