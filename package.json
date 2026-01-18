@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
 
-    "content:lint": "node scripts/content-validator.js content",
+    "content:lint": "node backend/scripts/content-validator.js content",
     "audit:coverage": "node scripts/coverage-audit.ts",
 
     "deploy:preflight": "bash scripts/deploy/deploy-check-preflight.sh",
