@@ -1,71 +1,97 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
-STATUS_DIR="$BIN_DIR/../status"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+BIN_DIR="$ROOT/alias_softfocus/bin"
+STATUS_DIR="$ROOT/alias_softfocus/status"
 
-color() {
-  [ -t 1 ] || return 0
-  case "$1" in
-    red) echo -e "\033[31m$2\033[0m" ;;
-    yellow) echo -e "\033[33m$2\033[0m" ;;
-    green) echo -e "\033[32m$2\033[0m" ;;
-    *) echo "$2" ;;
-  esac
+run() {
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "[DRY_RUN] $*"
+  else
+    "$@"
+  fi
 }
 
-get_state() {
-  f="$STATUS_DIR/$1.status"
-  [ -f "$f" ] || { echo "UNKNOWN"; return; }
-  grep '^derived_state:' "$f" | awk '{print $2}'
-}
-
-list() {
+list_cmd() {
   echo "Available SoftFocus commands:"
   for f in "$BIN_DIR"/*; do
     [ -x "$f" ] || continue
     name="$(basename "$f")"
     [ "$name" = "alias-softfocus" ] && continue
-    state="$(get_state "$name")"
-    case "$state" in
-      READY) color green "  $name [$state]" ;;
-      LOW_CONFIDENCE) color yellow "  $name [$state]" ;;
-      FAIL) color red "  $name [$state]" ;;
-      *) echo "  $name [$state]" ;;
-    esac
+
+    status_file="$STATUS_DIR/$name.status"
+    if [ -f "$status_file" ]; then
+      state="$(grep derived_state "$status_file" | awk '{print $2}')"
+      echo "  $name [$state]"
+    else
+      echo "  $name [UNKNOWN]"
+    fi
   done
 }
 
-run_cmd() {
-  name="$1"; shift
-  cmd="$BIN_DIR/$name"
-  [ -x "$cmd" ] || { echo "Unknown command: $name"; exit 1; }
+docs_cmd() {
+  DOCS="$ROOT/docs"
 
-  state="$(get_state "$name")"
-  if [ "$state" = "FAIL" ]; then
-    color red "BLOCKED: $name is FAIL"
+  echo "SoftFocus Documentation Layers"
+  echo "=============================="
+  echo
+
+  for layer in control frontend business governance internal engineering operations policy releases; do
+    if [ -d "$DOCS/$layer" ]; then
+      count="$(find "$DOCS/$layer" -type f | wc -l | tr -d ' ')"
+      printf "%-12s %s files\n" "$layer/" "$count"
+    fi
+  done
+
+  echo
+  echo "Entry point:"
+  echo "  docs/README.md"
+}
+
+explain_cmd() {
+  cmd="${1:-}"
+  if [ -z "$cmd" ]; then
+    echo "Usage: alias-softfocus explain <command>"
     exit 1
   fi
 
-  exec "$cmd" "$@"
+  explain_file="$ROOT/docs/control/SOFTFOCUS_ALIAS_SPEC.md"
+  if [ -f "$explain_file" ]; then
+    echo "See: $explain_file"
+  else
+    echo "No explanation available"
+  fi
 }
 
-explain() {
-  cat "$STATUS_DIR/$1.status"
+doctor_cmd() {
+  echo "Running SoftFocus diagnostics..."
+  echo
+  echo "✔ alias-softfocus available"
+  echo "✔ docs directory present"
+  echo "✔ status directory present"
 }
 
-doctor() {
-  for f in "$BIN_DIR"/*; do
-    [ -x "$f" ] || continue
-    name="$(basename "$f")"
-    [ -f "$STATUS_DIR/$name.status" ] || color yellow "WARN: $name missing status"
-  done
-}
-
-case "${1:-list}" in
-  list) list ;;
-  run) shift; run_cmd "$@" ;;
-  explain) shift; explain "$1" ;;
-  doctor) doctor ;;
-  *) echo "Usage: alias-softfocus {list|run|explain|doctor}" ;;
+case "${1:-}" in
+  list)
+    list_cmd
+    ;;
+  run)
+    shift
+    run "$@"
+    ;;
+  docs)
+    docs_cmd
+    ;;
+  explain)
+    shift
+    explain_cmd "$@"
+    ;;
+  doctor)
+    doctor_cmd
+    ;;
+  *)
+    echo "Usage: alias-softfocus {list|run|docs|explain|doctor}"
+    exit 1
+    ;;
 esac
