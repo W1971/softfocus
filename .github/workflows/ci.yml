@@ -1,0 +1,27 @@
+name: SoftFocus CI
+
+on: [push, pull_request]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Backend CI gate + pipeline check
+        run: |
+          cd backend
+          alias_softfocus/bin/ci-gate
+          alias-softfocus run pipeline-check
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Frontend test + build
+        run: |
+          cd frontend
+          npm ci
+          npm test
+          npm run build

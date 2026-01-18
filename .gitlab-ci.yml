@@ -1,0 +1,18 @@
+stages:
+  - backend
+  - frontend
+
+backend:
+  stage: backend
+  script:
+    - cd backend
+    - alias_softfocus/bin/ci-gate
+    - alias-softfocus run pipeline-check
+
+frontend:
+  stage: frontend
+  script:
+    - cd frontend
+    - npm ci
+    - npm test
+    - npm run build
