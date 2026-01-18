@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+DOCS="$ROOT/docs"
+
+echo "SoftFocus Documentation Layers"
+echo "=============================="
+echo
+
+for layer in control frontend business governance internal operations policy releases; do
+  if [ -d "$DOCS/$layer" ]; then
+    count="$(find "$DOCS/$layer" -type f | wc -l | tr -d ' ')"
+    printf "%-12s %s files\n" "$layer/" "$count"
+  fi
+done
+
+echo
+echo "Entry point:"
+echo "  docs/README.md"
