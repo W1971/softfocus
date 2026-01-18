@@ -2,12 +2,12 @@
 
 ## CORE
 - project-clean: LOW_CONFIDENCE
-- content-validate: LOW_CONFIDENCE
+- content-validate: READY
 - pipeline-check: LOW_CONFIDENCE
-- backend-check: LOW_CONFIDENCE
+- backend-check: READY
 - frontend-build: LOW_CONFIDENCE
 - generate-status: LOW_CONFIDENCE
-- docs: LOW_CONFIDENCE
+- docs: READY
 
 ## OPTIONAL
 - frontend-test: LOW_CONFIDENCE
@@ -17,3 +17,4 @@
 
 ## EXPERIMENTAL
 - backend-clean: LOW_CONFIDENCE
+

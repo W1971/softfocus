@@ -1,53 +1,81 @@
 #!/usr/bin/env node
+
 import fs from "fs";
+import { execSync } from "child_process";
 import path from "path";
 
 const ROOT = process.cwd();
-const STATUS_DIR = path.join(ROOT, "alias_softfocus/status");
-const CLASSES_FILE = path.join(ROOT, "alias_softfocus/alias-classes.yaml");
+const RULES_PATH = path.join(ROOT, "alias_softfocus/status/rules.json");
 
-function parseClasses() {
-  const text = fs.readFileSync(CLASSES_FILE, "utf8");
-  const lines = text.split("\n");
+const rules = fs.existsSync(RULES_PATH)
+  ? JSON.parse(fs.readFileSync(RULES_PATH, "utf8"))
+  : {};
 
-  const classes = { CORE: [], OPTIONAL: [], EXPERIMENTAL: [] };
-  let current = null;
+const ALIASES = [
+  "project-clean",
+  "content-validate",
+  "pipeline-check",
+  "backend-check",
+  "frontend-build",
+  "generate-status",
+  "docs",
+  "frontend-test",
+  "project-check",
+  "ci-gate",
+  "export-report",
+  "backend-clean"
+];
 
-  for (const l of lines) {
-    const header = l.match(/^(\w+):\s*$/);
-    if (header) {
-      current = header[1];
-      continue;
-    }
+function runCommand(cmd) {
+  try {
+    execSync(cmd, { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
 
-    const item = l.match(/^\s*-\s*(\S+)/);
-    if (item && current && classes[current]) {
-      classes[current].push(item[1]);
-    }
+function deriveStatus(alias) {
+  const rule = rules[alias];
+  if (!rule || !rule.ready_if) {
+    return "LOW_CONFIDENCE";
   }
 
-  return classes;
+  for (const cmd of rule.ready_if) {
+    const ok = runCommand(`npm run ${cmd}`);
+    if (!ok) return "FAIL";
+  }
+
+  return "READY";
 }
 
-function readStatus(name) {
-  const f = path.join(STATUS_DIR, `${name}.status`);
-  if (!fs.existsSync(f)) return "UNKNOWN";
-  const m = fs.readFileSync(f, "utf8").match(/derived_state\s+(\w+)/);
-  return m ? m[1] : "UNKNOWN";
+const groups = {
+  CORE: [],
+  OPTIONAL: [],
+  EXPERIMENTAL: []
+};
+
+for (const alias of ALIASES) {
+  const status = deriveStatus(alias);
+
+  if (["project-clean", "content-validate", "pipeline-check", "backend-check", "frontend-build", "generate-status", "docs"].includes(alias)) {
+    groups.CORE.push({ alias, status });
+  } else if (["frontend-test", "project-check", "ci-gate", "export-report"].includes(alias)) {
+    groups.OPTIONAL.push({ alias, status });
+  } else {
+    groups.EXPERIMENTAL.push({ alias, status });
+  }
 }
 
-const classes = parseClasses();
-
-let out = [];
-out.push("# Project Status — SoftFocus\n");
+let out = `# Project Status — SoftFocus\n\n`;
 
 for (const section of ["CORE", "OPTIONAL", "EXPERIMENTAL"]) {
-  out.push(`## ${section}`);
-  for (const a of classes[section]) {
-    out.push(`- ${a}: ${readStatus(a)}`);
+  out += `## ${section}\n`;
+  for (const item of groups[section]) {
+    out += `- ${item.alias}: ${item.status}\n`;
   }
-  out.push("");
+  out += `\n`;
 }
 
-fs.writeFileSync(path.join(ROOT, "STATUS.md"), out.join("\n"));
+fs.writeFileSync("STATUS.md", out);
 console.log("✔ STATUS.md generated");

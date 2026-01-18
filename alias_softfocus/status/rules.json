@@ -1,0 +1,11 @@
+{
+  "docs": {
+    "ready_if": ["frontend:docs"]
+  },
+  "backend-check": {
+    "ready_if": ["backend:contract"]
+  },
+  "content-validate": {
+    "ready_if": ["content:lint"]
+  }
+}
