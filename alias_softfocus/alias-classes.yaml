@@ -1,0 +1,17 @@
+CORE:
+  - project-clean
+  - content-validate
+  - pipeline-check
+  - backend-check
+  - frontend-build
+  - generate-status
+  - docs
+
+OPTIONAL:
+  - frontend-test
+  - project-check
+  - ci-gate
+  - export-report
+
+EXPERIMENTAL:
+  - backend-clean

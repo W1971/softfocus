@@ -1,48 +1,19 @@
 # Project Status — SoftFocus
 
-## Architecture
-- Root structure stabilized
-- Frontend / Backend / Business / Docs separated
-- Documentation control-plane active
+## CORE
+- project-clean: LOW_CONFIDENCE
+- content-validate: LOW_CONFIDENCE
+- pipeline-check: LOW_CONFIDENCE
+- backend-check: LOW_CONFIDENCE
+- frontend-build: LOW_CONFIDENCE
+- generate-status: LOW_CONFIDENCE
+- docs: LOW_CONFIDENCE
 
-Status: READY
+## OPTIONAL
+- frontend-test: LOW_CONFIDENCE
+- project-check: LOW_CONFIDENCE
+- ci-gate: LOW_CONFIDENCE
+- export-report: LOW_CONFIDENCE
 
----
-
-## Backend
-- Alias system implemented
-- CI and pre-commit gates active
-- Legacy scripts archived
-
-Current phase: v1.1 (status automation, alias gating)
-
-Status: IN_PROGRESS
-
----
-
-## Frontend
-- Documentation complete
-- Product and protocol defined
-- Content validated
-
-Current phase: v1.1 (UI and content wiring)
-
-Status: IN_PROGRESS
-
----
-
-## Documentation
-- Structured by responsibility layers
-- CI and pre-commit enforced
-- Tagged as docs-v1.0
-
-Status: READY
-
----
-
-## Overall
-Project is in controlled execution phase.
-
-Next focus:
-- Backend v1.1
-- Frontend execution v1.1
+## EXPERIMENTAL
+- backend-clean: LOW_CONFIDENCE

@@ -12,10 +12,14 @@
 
     "content:lint": "node backend/scripts/content-validator.js content",
     "audit:coverage": "node scripts/coverage-audit.ts",
+    "alias:status": "node scripts/ci/generate-alias-status.js",
+     "ci:alias-gate": "node scripts/ci/check-alias-classes.js",
 
     "deploy:preflight": "bash scripts/deploy/deploy-check-preflight.sh",
     "deploy:production": "bash scripts/deploy/deploy-check-production.sh",
-    "release": "bash scripts/release.sh"
+    "release": "bash scripts/release.sh",
+    "status:generate": "node scripts/ci/generate-status-md.js"
+
   },
 
   "dependencies": {
