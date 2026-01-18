@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 BIN_DIR="$ROOT/alias_softfocus/bin"
 STATUS_DIR="$ROOT/alias_softfocus/status"
+DOCS_DIR="$ROOT/docs"
 
 run() {
   if [ "${DRY_RUN:-0}" = "1" ]; then
@@ -30,16 +31,14 @@ list_cmd() {
   done
 }
 
-docs_cmd() {
-  DOCS="$ROOT/docs"
-
+docs_overview() {
   echo "SoftFocus Documentation Layers"
   echo "=============================="
   echo
 
   for layer in control frontend business governance internal engineering operations policy releases; do
-    if [ -d "$DOCS/$layer" ]; then
-      count="$(find "$DOCS/$layer" -type f | wc -l | tr -d ' ')"
+    if [ -d "$DOCS_DIR/$layer" ]; then
+      count="$(find "$DOCS_DIR/$layer" -type f | wc -l | tr -d ' ')"
       printf "%-12s %s files\n" "$layer/" "$count"
     fi
   done
@@ -49,27 +48,92 @@ docs_cmd() {
   echo "  docs/README.md"
 }
 
+docs_layer() {
+  layer="${1:-}"
+  if [ -z "$layer" ]; then
+    docs_overview
+    return
+  fi
+
+  target="$DOCS_DIR/$layer"
+  if [ ! -d "$target" ]; then
+    echo "Unknown docs layer: $layer"
+    exit 1
+  fi
+
+  echo "Docs layer: $layer/"
+  echo "---------------------"
+  find "$target" -type f | sed "s|$DOCS_DIR/||" | sort
+}
+
+docs_cmd() {
+  docs_layer "${1:-}"
+}
+
 explain_cmd() {
-  cmd="${1:-}"
-  if [ -z "$cmd" ]; then
+  topic="${1:-}"
+  if [ -z "$topic" ]; then
     echo "Usage: alias-softfocus explain <command>"
     exit 1
   fi
 
-  explain_file="$ROOT/docs/control/SOFTFOCUS_ALIAS_SPEC.md"
-  if [ -f "$explain_file" ]; then
-    echo "See: $explain_file"
-  else
-    echo "No explanation available"
-  fi
+  case "$topic" in
+    docs)
+      cat <<'TXT'
+alias-softfocus docs
+
+Purpose:
+  Provides a structured overview of project documentation by
+  responsibility layer.
+
+Usage:
+  alias-softfocus docs
+  alias-softfocus docs <layer>
+
+Layers:
+  control     - system architecture, CI, alias, backend flows
+  frontend    - product, content, UX, protocol
+  business    - monetization, roadmap, B2B, release
+  governance  - rules, risk, compliance
+  internal    - internal-only reasoning
+TXT
+      ;;
+    *)
+      echo "No explanation available for: $topic"
+      ;;
+  esac
+}
+
+doctor_docs() {
+  echo "Running docs diagnostics..."
+  echo
+
+  [ -d "$DOCS_DIR" ] && echo "✔ docs directory present"
+
+  [ -f "$DOCS_DIR/README.md" ] \
+    && echo "✔ docs/README.md present" \
+    || echo "✖ docs/README.md missing"
+
+  for layer in control frontend business governance internal; do
+    if [ -d "$DOCS_DIR/$layer" ]; then
+      echo "✔ layer '$layer' exists"
+    else
+      echo "✖ layer '$layer' missing"
+    fi
+  done
 }
 
 doctor_cmd() {
-  echo "Running SoftFocus diagnostics..."
-  echo
-  echo "✔ alias-softfocus available"
-  echo "✔ docs directory present"
-  echo "✔ status directory present"
+  case "${1:-}" in
+    --docs)
+      doctor_docs
+      ;;
+    *)
+      echo "Running SoftFocus diagnostics..."
+      echo "✔ alias-softfocus available"
+      echo "✔ control-plane OK"
+      ;;
+  esac
 }
 
 case "${1:-}" in
@@ -81,14 +145,16 @@ case "${1:-}" in
     run "$@"
     ;;
   docs)
-    docs_cmd
+    shift || true
+    docs_cmd "$@"
     ;;
   explain)
     shift
     explain_cmd "$@"
     ;;
   doctor)
-    doctor_cmd
+    shift || true
+    doctor_cmd "$@"
     ;;
   *)
     echo "Usage: alias-softfocus {list|run|docs|explain|doctor}"
