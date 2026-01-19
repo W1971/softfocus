@@ -20,8 +20,8 @@ if [ -f "$STATUS_FILE" ]; then
   fi
 fi
 
-GOV_SCRIPT="scripts/governance/project-cleanup.sh"
-MAINT_SCRIPT="scripts/maintenance/project-cleanup.sh"
+GOV_SCRIPT="backend/scripts/maintenance/project-cleanup.sh"
+MAINT_SCRIPT="backend/scripts/maintenance/project-cleanup.sh"
 
 for SCRIPT in "$GOV_SCRIPT" "$MAINT_SCRIPT"; do
   [ -x "$SCRIPT" ] || { echo "Missing: $SCRIPT" >&2; exit 1; }

@@ -5,6 +5,14 @@ ALIAS="$1"
 RUN_FILE="$2"
 OUT_DIR="$(dirname "$0")/../status"
 
+if alias has rule:
+  run all ready_if commands
+  if all exit 0 → READY
+  if any exit != 0 → FAIL
+else:
+  LOW_CONFIDENCE
+
+
 [ -n "$ALIAS" ] || { echo "Usage: generate-status <alias> <run.jsonl>"; exit 1; }
 [ -f "$RUN_FILE" ] || { echo "Missing run file: $RUN_FILE"; exit 1; }
 

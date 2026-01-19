@@ -6,12 +6,48 @@ BIN_DIR="$ROOT/alias_softfocus/bin"
 STATUS_DIR="$ROOT/alias_softfocus/status"
 DOCS_DIR="$ROOT/docs"
 
-run() {
-  if [ "${DRY_RUN:-0}" = "1" ]; then
-    echo "[DRY_RUN] $*"
+is_ci() {
+  [ "${CI:-0}" = "true" ] || [ "${CI:-0}" = "1" ]
+}
+
+read_status() {
+  local name="$1"
+  local f="$STATUS_DIR/$name.status"
+  if [ -f "$f" ]; then
+    awk '/derived_state/ {print $2}' "$f"
   else
-    "$@"
+    echo "UNKNOWN"
   fi
+}
+
+gate_or_die() {
+  local name="$1"
+  local state
+  state="$(read_status "$name")"
+
+  if [ "$state" = "READY" ]; then
+    return 0
+  fi
+
+  if is_ci; then
+    echo "❌ CI BLOCK: '$name' status=$state"
+    exit 1
+  fi
+
+  if [ "${FORCE:-0}" = "1" ]; then
+    echo "⚠️  FORCED RUN: '$name' status=$state"
+    return 0
+  fi
+
+  echo "❌ BLOCKED: '$name' status=$state"
+  echo "Hint: run with FORCE=1 to override locally"
+  exit 1
+}
+
+run_cmd() {
+  local name="$1"; shift
+  gate_or_die "$name"
+  "$BIN_DIR/$name" "$@"
 }
 
 list_cmd() {
@@ -20,14 +56,8 @@ list_cmd() {
     [ -x "$f" ] || continue
     name="$(basename "$f")"
     [ "$name" = "alias-softfocus" ] && continue
-
-    status_file="$STATUS_DIR/$name.status"
-    if [ -f "$status_file" ]; then
-      state="$(grep derived_state "$status_file" | awk '{print $2}')"
-      echo "  $name [$state]"
-    else
-      echo "  $name [UNKNOWN]"
-    fi
+    state="$(read_status "$name")"
+    echo "  $name [$state]"
   done
 }
 
@@ -35,132 +65,36 @@ docs_overview() {
   echo "SoftFocus Documentation Layers"
   echo "=============================="
   echo
-
   for layer in control frontend business governance internal engineering operations policy releases; do
-    if [ -d "$DOCS_DIR/$layer" ]; then
-      count="$(find "$DOCS_DIR/$layer" -type f | wc -l | tr -d ' ')"
-      printf "%-12s %s files\n" "$layer/" "$count"
-    fi
+    [ -d "$DOCS_DIR/$layer" ] || continue
+    count="$(find "$DOCS_DIR/$layer" -type f | wc -l | tr -d ' ')"
+    printf "%-12s %s files\n" "$layer/" "$count"
   done
-
   echo
-  echo "Entry point:"
-  echo "  docs/README.md"
+  echo "Entry point: docs/README.md"
 }
 
-docs_layer() {
-  layer="${1:-}"
-  if [ -z "$layer" ]; then
-    docs_overview
-    return
-  fi
-
-  target="$DOCS_DIR/$layer"
-  if [ ! -d "$target" ]; then
-    echo "Unknown docs layer: $layer"
-    exit 1
-  fi
-
-  echo "Docs layer: $layer/"
-  echo "---------------------"
-  find "$target" -type f | sed "s|$DOCS_DIR/||" | sort
-}
-
-docs_tree() {
-  layer="${1:-}"
-  base="$DOCS_DIR"
-
-  if [ -n "$layer" ]; then
-    base="$DOCS_DIR/$layer"
-    [ -d "$base" ] || { echo "Unknown docs layer: $layer"; exit 1; }
-  fi
-
-  echo "Docs tree: ${base#$DOCS_DIR/}"
-  echo "----------------------------"
-  find "$base" -type d | sed "s|$DOCS_DIR/||" | sort
-}
-
-docs_search() {
-  term="${1:-}"
-  if [ -z "$term" ]; then
-    echo "Usage: alias-softfocus docs search <term>"
-    exit 1
-  fi
-
-  echo "Searching docs for: \"$term\""
-  echo "--------------------------------"
-  grep -RIn "$term" "$DOCS_DIR" || echo "No matches found"
-}
-
-docs_cmd() {
-  sub="${1:-}"
-  case "$sub" in
-    "")
-      docs_overview
-      ;;
-    tree)
-      shift || true
-      docs_tree "$@"
-      ;;
-    search)
-      shift
-      docs_search "$@"
-      ;;
-    *)
-      docs_layer "$sub"
-      ;;
-  esac
-}
+docs_cmd() { docs_overview; }
 
 explain_cmd() {
-  topic="${1:-}"
-  if [ -z "$topic" ]; then
-    echo "Usage: alias-softfocus explain <command>"
-    exit 1
-  fi
-
-  case "$topic" in
+  case "${1:-}" in
     docs)
       cat <<'TXT'
 alias-softfocus docs
-
-Purpose:
-  Inspect and navigate project documentation as a system.
-
-Usage:
-  alias-softfocus docs
-  alias-softfocus docs <layer>
-  alias-softfocus docs tree [layer]
-  alias-softfocus docs search <term>
+- Overview of documentation layers
+- Used as CI and pre-commit smoke-test
 TXT
       ;;
     *)
-      echo "No explanation available for: $topic"
+      echo "No explanation available"
       ;;
   esac
-}
-
-doctor_docs() {
-  echo "Running docs diagnostics..."
-  echo
-
-  [ -d "$DOCS_DIR" ] && echo "✔ docs directory present"
-
-  [ -f "$DOCS_DIR/README.md" ] \
-    && echo "✔ docs/README.md present" \
-    || echo "✖ docs/README.md missing"
 }
 
 doctor_cmd() {
-  case "${1:-}" in
-    --docs)
-      doctor_docs
-      ;;
-    *)
-      echo "Running SoftFocus diagnostics..."
-      echo "✔ alias-softfocus available"
-      ;;
-  esac
+  echo "Running SoftFocus diagnostics..."
+  [ -d "$DOCS_DIR" ] && echo "✔ docs present"
+  [ -d "$STATUS_DIR" ] && echo "✔ status dir present"
 }
 
 case "${1:-}" in
@@ -169,19 +103,19 @@ case "${1:-}" in
     ;;
   run)
     shift
-    run "$@"
+    name="${1:-}"; shift || true
+    [ -z "$name" ] && { echo "Usage: alias-softfocus run <command>"; exit 1; }
+    run_cmd "$name" "$@"
     ;;
   docs)
-    shift || true
-    docs_cmd "$@"
+    docs_cmd
     ;;
   explain)
     shift
     explain_cmd "$@"
     ;;
   doctor)
-    shift || true
-    doctor_cmd "$@"
+    doctor_cmd
     ;;
   *)
     echo "Usage: alias-softfocus {list|run|docs|explain|doctor}"

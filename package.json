@@ -3,25 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-
   "scripts": {
     "dev": "next dev",
     "build": "npm run content:lint && next build",
     "start": "next start",
     "lint": "next lint",
-
     "content:lint": "node backend/scripts/content-validator.js content",
     "audit:coverage": "node scripts/coverage-audit.ts",
     "alias:status": "node scripts/ci/generate-alias-status.js",
-     "ci:alias-gate": "node scripts/ci/check-alias-classes.js",
-
+    "ci:alias-gate": "node scripts/ci/check-alias-classes.js",
+    "frontend:docs": "node scripts/ci/check-frontend-docs.js",
+    "backend:contract": "node scripts/ci/check-backend-contract.js",
     "deploy:preflight": "bash scripts/deploy/deploy-check-preflight.sh",
     "deploy:production": "bash scripts/deploy/deploy-check-production.sh",
     "release": "bash scripts/release.sh",
     "status:generate": "node scripts/ci/generate-status-md.js"
-
   },
-
   "dependencies": {
     "@sparticuz/chromium": "^143.0.4",
     "better-sqlite3": "^12.6.0",
@@ -29,19 +26,18 @@
     "next": "^14.2.35",
     "pg": "^8.16.3",
     "puppeteer-core": "^24.35.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "resend": "^6.7.0",
     "stripe": "^20.1.2"
   },
-
   "devDependencies": {
-    "@types/node": "25.0.5",
+    "@types/node": "^25.0.5",
     "@types/pg": "^8.16.0",
-    "@types/react": "^18.2.79",
+    "@types/react": "^18.3.27",
     "@types/react-dom": "^18.2.25",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.35",
-    "typescript": "^5.4.5"
+    "typescript": "^5.9.3"
   }
 }
