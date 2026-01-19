@@ -1,0 +1,9 @@
+{
+  "events": [
+    { "name": "assessment_started", "props": ["locale", "variant"] },
+    { "name": "assessment_completed", "props": ["locale", "stage", "risk_vector"] },
+    { "name": "lead_opt_in", "props": ["locale", "source"] },
+    { "name": "product_view", "props": ["sku", "locale"] },
+    { "name": "purchase", "props": ["sku", "price_usd", "provider"] }
+  ]
+}

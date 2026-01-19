@@ -1,0 +1,62 @@
+{
+  "requiredFrontmatter": ["type", "locale", "path"],
+
+  "severity": {
+    "urgency": "FAIL",
+    "inspirational": "WARN",
+    "canonical_missing": {
+      "assessment": "FAIL",
+      "calculator": "FAIL",
+      "blog": "WARN"
+    }
+  },
+
+  "prohibitedPatterns": {
+    "urgency": [
+      "\\b(act now|don't wait|limited time|only today|last chance|hurry)\\b"
+    ],
+    "inspirational": [
+      "\\b(journey|your path|unlock|level up|you deserve)\\b"
+    ]
+  },
+
+  "canonicalTerms": {
+    "en-US": {
+      "assessment": [
+        "burnout",
+        "burnout stage",
+        "risk of burnout",
+        "cognitive load",
+        "mental fatigue"
+      ],
+      "calculator": [
+        "burnout",
+        "risk of burnout",
+        "cognitive load",
+        "recovery"
+      ],
+      "blog": [
+        "burnout",
+        "cognitive load"
+      ]
+    },
+    "ru-RU": {
+      "assessment": [
+        "выгорание",
+        "стадия выгорания",
+        "риск выгорания",
+        "когнитивная нагрузка",
+        "восстановление"
+      ],
+      "calculator": [
+        "выгорание",
+        "риск выгорания",
+        "восстановление"
+      ],
+      "blog": [
+        "выгорание",
+        "когнитивная нагрузка"
+      ]
+    }
+  }
+}

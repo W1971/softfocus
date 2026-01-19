@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "sku": "pdf-anti-burnout-30d",
+      "title_ru": "Анти-выгорание: система на 30 дней",
+      "type": "digital_pdf",
+      "price_usd": 20,
+      "fulfillment": { "mode": "link", "path": "backend/fulfillment/pdf-anti-burnout-30d.txt" }
+    },
+    {
+      "sku": "notion-wellbeing-dashboard",
+      "title_ru": "Notion-панель wellbeing",
+      "type": "digital_template",
+      "price_usd": 25,
+      "fulfillment": { "mode": "link", "path": "backend/fulfillment/notion-wellbeing-dashboard.txt" }
+    }
+  ]
+}
