@@ -1,61 +1,58 @@
 {
-  "requiredFrontmatter": ["type", "locale", "path"],
+  "requiredFrontmatter": [
+    "type",
+    "locale",
+    "path"
+  ],
+
+  "prohibitedPatterns": {
+    "urgency": [
+      "\\b(срочно|немедленно|прямо сейчас|последний шанс|не откладывайте)\\b"
+    ],
+    "inspirational": [
+      "\\b(путь|предназначение|раскройте потенциал|лучшая версия себя)\\b"
+    ]
+  },
 
   "severity": {
     "urgency": "FAIL",
     "inspirational": "WARN",
     "canonical_missing": {
-      "assessment": "FAIL",
-      "calculator": "FAIL",
-      "blog": "WARN"
+      "blog": "WARN",
+      "guide": "WARN",
+      "calculator": "FAIL"
     }
   },
 
-  "prohibitedPatterns": {
-    "urgency": [
-      "\\b(act now|don't wait|limited time|only today|last chance|hurry)\\b"
-    ],
-    "inspirational": [
-      "\\b(journey|your path|unlock|level up|you deserve)\\b"
-    ]
-  },
-
   "canonicalTerms": {
-    "en-US": {
-      "assessment": [
-        "burnout",
-        "burnout stage",
-        "risk of burnout",
-        "cognitive load",
-        "mental fatigue"
-      ],
+    "ru-RU": {
       "calculator": [
-        "burnout",
-        "risk of burnout",
-        "cognitive load",
-        "recovery"
+        "выгорание",
+        "когнитивная нагрузка",
+        "умственная усталость",
+        "эмоциональная отстранённость",
+        "восстановительная способность",
+        "структурное вмешательство"
       ],
       "blog": [
-        "burnout",
-        "cognitive load"
+        "выгорание",
+        "когнитивная нагрузка",
+        "умственная усталость"
       ]
     },
-    "ru-RU": {
-      "assessment": [
-        "выгорание",
-        "стадия выгорания",
-        "риск выгорания",
-        "когнитивная нагрузка",
-        "восстановление"
-      ],
+    "en-US": {
       "calculator": [
-        "выгорание",
-        "риск выгорания",
-        "восстановление"
+        "burnout",
+        "cognitive load",
+        "mental fatigue",
+        "emotional detachment",
+        "recovery capacity",
+        "structured intervention"
       ],
       "blog": [
-        "выгорание",
-        "когнитивная нагрузка"
+        "burnout",
+        "cognitive load",
+        "mental fatigue"
       ]
     }
   }

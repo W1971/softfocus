@@ -1,0 +1,16 @@
+{
+  "canonical-terminology": {
+    "calculator": "FAIL",
+    "assessment": "FAIL",
+    "guide": "LOW_CONFIDENCE",
+    "blog": "LOW_CONFIDENCE",
+    "meta": "LOW_CONFIDENCE"
+  },
+  "frontmatter": {
+    "calculator": "FAIL",
+    "assessment": "FAIL",
+    "guide": "FAIL",
+    "blog": "LOW_CONFIDENCE",
+    "meta": "LOW_CONFIDENCE"
+  }
+}

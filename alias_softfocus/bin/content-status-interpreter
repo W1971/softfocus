@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+import fs from "fs";
+import path from "path";
+
+const ROOT = process.cwd();
+const RUNS = path.join(ROOT, "tests", "runs");
+const RULES = path.join(ROOT, "alias_softfocus", "status", "content-severity.rules.json");
+
+if (!fs.existsSync(RULES)) {
+  console.error("Missing content-severity.rules.json");
+  process.exit(1);
+}
+
+const rules = JSON.parse(fs.readFileSync(RULES, "utf8"));
+
+let finalStatus = "READY";
+
+if (fs.existsSync(RUNS)) {
+  for (const run of fs.readdirSync(RUNS)) {
+    const file = path.join(RUNS, run, "run.jsonl");
+    if (!fs.existsSync(file)) continue;
+
+    const lines = fs.readFileSync(file, "utf8").trim().split("\n");
+    for (const l of lines) {
+      const e = JSON.parse(l);
+      if (e.alias !== "content-validate") continue;
+
+      if (e.severity === "FAIL") {
+        finalStatus = "FAIL";
+        break;
+      }
+      if (e.severity === "LOW_CONFIDENCE" && finalStatus !== "FAIL") {
+        finalStatus = "LOW_CONFIDENCE";
+      }
+    }
+  }
+}
+
+console.log(finalStatus);
