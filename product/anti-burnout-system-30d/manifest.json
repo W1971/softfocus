@@ -1,0 +1,13 @@
+{
+  "product_id": "anti-burnout-system-30d",
+  "version": "1.0.0",
+  "type": "digital",
+  "delivery": [
+    "delivery/pdf-guide.txt",
+    "delivery/notion-dashboard.txt"
+  ],
+  "entitlement": {
+    "mode": "one_time_purchase",
+    "revocable": false
+  }
+}

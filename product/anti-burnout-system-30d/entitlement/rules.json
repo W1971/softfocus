@@ -1,0 +1,8 @@
+{
+  "access": "granted",
+  "scope": "product",
+  "conditions": {
+    "payment": "confirmed",
+    "expiry": "none"
+  }
+}

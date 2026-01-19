@@ -1,0 +1,9 @@
+ANTI-BURNOUT SYSTEM — NOTION DASHBOARD
+
+Includes:
+- Daily recovery tracking
+- Load markers
+- Weekly reflection blocks
+- Return signal prompts
+
+Delivery format: Notion template

@@ -1,13 +1,9 @@
 # Anti-Burnout System — 30 Days
-Version: v1.0
-Status: DRAFT
 
-Purpose:
-Non-medical analytical system built on:
-- Sleep Calculator
-- Recovery Calculator
-- Cognitive Load Assessment
+Product type: digital
+Category: recovery / burnout prevention
 
-Delivery:
-Digital (PDF / Notion)
+This product provides a structured 30-day system
+to reduce burnout risk by restoring recovery capacity.
 
+Non-clinical. Educational. Product-grade.
