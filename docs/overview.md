@@ -1,146 +1,209 @@
+# SoftFocus — Overview, Architecture & Product Plan
 
-# SoftFocus — Обзор сайта, архитектуры и плана развития
-
-**Версия:** v1.2 (product-bridge-aware)  
-**Статус:** ACTIVE
-
----
-
-## 1. Что такое SoftFocus
-
-**SoftFocus** — русскоязычная аналитическая платформа,
-ориентированная на управление когнитивной нагрузкой,
-восстановлением и снижением риска выгорания.
-
-Проект:
-- принципиально немедицинский
-- аналитический, а не мотивационный
-- продуктовый, а не контентный
-
-SoftFocus — это система осмысления состояния,
-а не диагностика и не терапия.
+**Version:** v1.2  
+**Status:** ACTIVE  
+**Mode:** governance-aware, product-first
 
 ---
 
-## 2. Продуктовая логика проекта
+## 1. What SoftFocus Is
 
-SoftFocus строится как **продуктовая система**, состоящая из:
+**SoftFocus** is a Russian(multi)(En/Es/Ar)-language analytical platform focused on:
 
-1. Ассессментов  
-2. Калькуляторов  
-3. Цифровых продуктов восстановления  
+- cognitive load
+- early burnout signals
+- recovery capacity
+- sustainable productivity without pressure
 
-Каждый слой выполняет отдельную функцию
-и связан формализованными контрактами.
+The project is **explicitly non-clinical**:
 
----
+- no diagnosis
+- no therapy replacement
+- no medical claims
 
-## 3. Ассессменты и калькуляторы
-
-Ассессменты и калькуляторы:
-
-- имеют детерминированную логику
-- используют только наблюдаемое поведение
-- избегают эмоциональной и клинической лексики
-- являются самостоятельными продуктами
-
-Калькуляторы по строгости
-приравнены к ассессментам.
+SoftFocus is positioned as a **thinking and orientation tool**,  
+not a quiz, checklist, or motivational product.
 
 ---
 
-## 4. Recovery Calculator как вход в продукт
+## 2. Product Domains
 
-Калькулятор восстановления:
+SoftFocus is structured around **product-grade domains**, not content streams.
 
-- измеряет **recovery capacity**
-- фиксирует риск выгорания
-- не даёт советов
-- не продаёт напрямую
+### 2.1 Assessments (`/testy`)
 
-Результат калькулятора используется
-как вход в продуктовую систему.
+- Deterministic
+- Behavior-based
+- Product-level strictness
+- Standalone value without payment
 
----
+### 2.2 Calculators (`/kalkulyatory`)
 
-## 5. Y → Z bridge (Calculator → Product)
+- Sleep, recovery, compensation
+- **Inherit assessment-level strictness**
+- Deterministic scoring
+- Explainable interpretation
 
-Переход от калькулятора к продукту
-осуществляется через формализованный bridge:
+### 2.3 Guides (`/guides`)
 
-`docs/product/recovery-to-product-bridge.md`
+- Analytical explanations
+- Mechanism-focused
+- SEO-oriented
+- Reduced strictness (WARN-level)
 
-### Принцип
+### 2.4 Blog (`/blog`)
 
-- калькулятор фиксирует состояние
-- bridge интерпретирует сигнал
-- продукт активируется при необходимости
-
-### Сигналы
-
-| Состояние | Product signal |
-|----------|----------------|
-| Функциональное | none |
-| Ограниченное | optional |
-| Нестабильное | recommended |
-| Критическое | immediate |
+- Contextual and SEO content
+- Lowest strictness tier
+- Never product-critical
 
 ---
 
-## 6. Платный продукт
+## 3. Core Product Axis
 
-Целевой продукт первого контура:
+All products are aligned to a single canonical axis:
 
-- **Anti-Burnout System (30 дней)**
-- формат: цифровой
-- цель: структурное восстановление
-- без медицинских обещаний
+**burnout → recovery capacity → compensation**
 
-Продукт активируется
-только при соответствующем сигнале калькулятора.
+This axis is enforced via:
 
----
-
-## 7. Governance и контроль
-
-Проект использует governance-слой:
-
-- content-validator
-- product-gate
-- alias-систему
-
-Любой продуктовый переход:
-- детерминирован
-- проверяем
-- воспроизводим
+- content-validator rules
+- governance severity levels
+- CI gating
 
 ---
 
-## 8. Экономическая модель
+## 4. Governance Layer (Mandatory)
 
-Модель: пассивный / полу-пассивный продукт.
+### 4.1 Content Validator
 
-- ассессменты → вход
-- калькуляторы → квалификация
-- продукт → решение
+The `content-validator` is a **first-class architectural component**.
 
-Цель:
-**$4 000+ / месяц** без операционного давления.
+It enforces:
+
+- non-clinical boundaries
+- canonical terminology
+- audience discipline
+- product vs blog strictness
+
+Severity model:
+| Content Type | Canonical Missing |
+|-------------|-------------------|
+| assessment | FAIL |
+| calculator | FAIL |
+| guide/blog | WARN |
 
 ---
 
-## Резюме
+### 4.2 Boundary-Aware Validation
 
-SoftFocus — это:
+Documents may reference clinical terms **only if**:
 
-- аналитическая система
-- с формализованными переходами
-- продуктовой логикой
-- и управляемым ростом
+- located in PRODUCT or PUBLIC zones
+- explicit non-clinical boundary is present
 
-Проект существует как актив,
-а не как поток ручных решений.
+Violations block CI.
 
+---
+
+## 5. Y → Z Bridge: From Recovery to Product
+
+### 5.1 Y — Recovery Calculator
+
+The recovery calculator delivers:
+
+- recovery capacity scoring
+- burnout risk orientation
+- compensation signal detection
+
+It produces **structured, repeatable insight**, not advice.
+
+---
+
+### 5.2 Z2 — Product Entitlement Execution
+
+Paid products are governed as **entitlements**, not downloads.
+
+An entitlement is valid when:
+
+1. Delivery script executes
+2. An audit event is written to `run.jsonl`
+3. Severity = PASS
+4. No human override
+
+This creates:
+
+- auditable delivery
+- CI-verifiable monetization
+- passive, low-maintenance revenue flow
+
+---
+
+## 6. Alias System
+
+SoftFocus is operated via a **single control plane**: `alias-softfocus`.
+
+Aliases expose:
+
+- validation
+- readiness
+- delivery
+- governance state
+
+Statuses are derived automatically:
+
+- READY
+- LOW_CONFIDENCE
+- FAIL
+
+No manual status setting is allowed.
+
+---
+
+## 7. Economic Model
+
+Primary revenue:
+
+- one-time digital products ($15–30)
+
+Secondary revenue:
+
+- affiliate tools (non-clinical)
+
+Advertising:
+
+- only after ~50k monthly visitors
+- never core revenue
+
+---
+
+## 8. Long-Term Goal
+
+12-month target:
+
+**$4,000+ / month**, driven by:
+
+- product-grade assessments
+- recovery calculators
+- entitlement-based digital products
+- organic SEO
+
+---
+
+## Summary
+
+SoftFocus is not a blog.
+
+It is:
+
+- a governed analytical system
+- with deterministic products
+- formal validation
+- auditable monetization
+- and minimal operational overhead
+
+The project is built as an **asset**, not a workflow.
+E
 
 ## For the reference
 
