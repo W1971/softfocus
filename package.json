@@ -8,7 +8,7 @@
     "build": "npm run content:lint && next build",
     "start": "next start",
     "lint": "next lint",
-    "content:lint": "node backend/scripts/content-validator.js content",
+    "content:lint": "node backend/scripts/content-validator/validate-content.cjs content",
     "audit:coverage": "node scripts/coverage-audit.ts",
     "alias:status": "node scripts/ci/generate-alias-status.js",
     "ci:alias-gate": "node scripts/ci/check-alias-classes.js",
