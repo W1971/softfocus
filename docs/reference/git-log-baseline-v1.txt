@@ -1,0 +1,78 @@
+* 3513516 (HEAD -> main) tests: governance and product test scaffolding
+* 2606ec2 product: monetization and fulfillment scaffolding
+* 64e0e32 frontend: sleep calculator MVP and routing
+* 74b38d2 baseline(v1): governance-aware content and product gates
+* 2976a4e (origin/main) content: add locale-aware validator with severity levels
+* 18e09dd governance: extend CI, alias system, and pipeline statuses
+* 4f80cfe (tag: v1.2-status-closed) chore(status): close v1.2 with automatic READY derivation
+* b434890 (tag: v1.1-control) control: finalize v1.1 alias gating and status automation
+* 759c717 (tag: planning-v1.0) planning: start backend and frontend execution v1.1
+* ca85509 docs: fix frontend and backend plans and align alias documentation
+* 4a9b6af cli: add docs tree/search and stabilize heredoc creation
+* ceeee8b cli: fix alias-softfocus parser and enable docs subcommands
+* 6c95176 cli: add docs subcommand to alias-softfocus
+* 0728448 docs: finalize documentation structure by responsibility layers
+* 357c030 docs: finalize architecture v1.0 and alias status policy
+* cfb8252 chore: update pre-commit hooks for backend layout
+* 431dae8 chore: move backend automation under backend/
+* 6a5a4c8 ci: add GitHub Actions and GitLab CI pipelines
+* 4a74fbd chore: add maintenance scripts
+* d7562e0 chore: add root control-plane and documentation
+* ae26457 bootstrap: canonical repository structure
+* 42a04c9 (tag: softfocus-v1.0) Release v1.0: boundary-safe content, validator v1.4, governance-ready
+* cf24ab1 governance: formalize linear script execution model
+* 9efec3d (tag: docs-v1.5) docs: add B2B executive summary and industry packs
+* 5de9566 (tag: docs-v1.4) docs: add internal assessment standards and method canon
+* 40bfceb docs: add public trust and methodology content pack
+* 6d5d200 docs: add public identity boundaries, legal page and B2B pilot playbook
+* 275ee00 (tag: docs-v1.1) docs: add assessment product, content and ops documentation
+* c1fe712 (tag: docs-v1.0) docs: add canonical architecture, monetization and roadmap documents
+* c8f5a41 Phase E: add canonical protocol stack, localization, frontend wiring, and release artifacts
+* 6f8e00b governance: lock Phase D and add release enforcement framework
+* 97ceb1b governance: add documentation libraries and lock Phase C
+* be2460d governance: define entrypoint and Phase C entry rules
+* 7f0eb5b docs: add canonical project roadmap before Phase C
+* 1ce94de architecture: mark Phase B localization complete
+* 1d96cf4 ci: enforce user content advisory language guard
+* a47f6b5 localization: add RU assessment entry description
+* 822010b governance: add user content advisory language guard
+* 61c13d9 seo: add RU sitemap with hreflang
+* ea3e455 localization: add RU user result overview
+* 5f6841d localization: add RU user system overview
+* de5591a governance: add EN↔RU read-only diff report
+* a08cb53 ci: enforce EN↔RU structure parity check
+* 385d4e5 governance: add EN↔RU structure parity check
+* af5ccfd localization: add RU test logging and execution flow
+* f82eca2 localization: add RU testing strategy governance READY
+* f62caaa localization: add RU governance terms
+* 3731d35 localization: add RU governance entrypoint
+* d0f5a9f localization: add RU risk escalation policy
+* 61e50d2 localization: add RU Phase B kickoff document
+* 7ed7ff2 localization: add RU test governance policy
+* 14fe75e localization: add RU READY classification
+* 53fc772 localization: add RU terminology map (Phase B)
+* 7029902 architecture: start Phase B localization
+* 31a057f governance: archive obsolete bootstrap scripts and enforce active/archive cleanup
+* 2cc24fa docs: lock governance v1.1
+* 6938606 ci: enforce governance self-test as mandatory gate
+* 3c9aef4 governance: executable protocol with self-test (v1.1)
+* 4e3e4a3 docs: add deploy governance flow map (script-mapped) with svg
+* 9de46d9 docs: update internal scripts re-explanation with deploy readiness and linear governance
+* c207c7a docs: define release sitemap generation, RU reference locale, and noindex rules for Phase B drafts
+* cd03f99 docs: adapt roadmap and sitemap for Phase B and release layer
+* c8678e1 docs: update roadmap and sitemap after Phase 1 / A lock
+* a027697 docs: initialize product archive directory
+* 2ca65c6 chore: add automation framework, staged runners, and docs structure
+* ebcd37b docs: lock Phase 1 and Phase A as immutable core
+* 23e9e35 docs: define Phase C SEO audience expansion plan
+* 39e36fd docs: define Phase B localization execution plan
+* b601e40 docs: add Phase A protocol content draft
+* 05684b5 docs: define Phase C conversion layer logic
+* 57130e2 docs: define Phase B localization framework
+* 61ca449 docs: lock Phase A paid boundary copy
+* 1892c27 docs: add Phase A protocol module breakdown
+* d33a087 docs: add Phase A structured protocol logic
+* fec25ad docs: lock Phase 1 assessment contract and result logic
+* 81a2e02 chore: add canonical next.js config with protocol headers
+* 4c8305d chore: finalize scripts, gates, and build contract
+* 32922a6 chore: initialize clean repository without secrets
