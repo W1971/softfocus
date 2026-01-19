@@ -1,0 +1,36 @@
+{
+  "score_range": {
+    "min": 0,
+    "max": 100
+  },
+  "bands": [
+    {
+      "id": "critical",
+      "range": [0, 29],
+      "label": "Критически сниженная восстановительная способность",
+      "burnout_risk": "high",
+      "product_signal": "immediate"
+    },
+    {
+      "id": "unstable",
+      "range": [30, 49],
+      "label": "Нестабильная восстановительная способность",
+      "burnout_risk": "elevated",
+      "product_signal": "recommended"
+    },
+    {
+      "id": "strained",
+      "range": [50, 69],
+      "label": "Ограниченная восстановительная способность",
+      "burnout_risk": "moderate",
+      "product_signal": "optional"
+    },
+    {
+      "id": "stable",
+      "range": [70, 100],
+      "label": "Функциональная восстановительная способность",
+      "burnout_risk": "low",
+      "product_signal": "none"
+    }
+  ]
+}
