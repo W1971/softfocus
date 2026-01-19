@@ -1,0 +1,8 @@
+# SoftFocus crawl policy
+
+User-agent: *
+Allow: /testy/
+Allow: /kalkulyatory/
+Allow: /guides/
+
+Disallow: /blog/drafts/

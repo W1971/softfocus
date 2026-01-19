@@ -1,0 +1,22 @@
+{
+  "clusters": [
+    {
+      "id": "mental-non-med",
+      "label_ru": "Ментальное здоровье (не медицинское)",
+      "primary_intents_ru": ["стресс", "тревожность", "выгорание", "самопомощь"],
+      "monetization": ["pdf_guides", "journals_trackers", "affiliate_apps"]
+    },
+    {
+      "id": "sleep-recovery",
+      "label_ru": "Сон и восстановление",
+      "primary_intents_ru": ["как уснуть", "вечерняя рутина", "качество сна", "восстановление"],
+      "monetization": ["sleep_audio", "paid_checklists", "affiliate_sleep_apps"]
+    },
+    {
+      "id": "productivity-without-burnout",
+      "label_ru": "Продуктивность без выгорания",
+      "primary_intents_ru": ["энергия", "фокус", "мягкая продуктивность", "управление нагрузкой"],
+      "monetization": ["notion_templates", "planners", "mini_courses"]
+    }
+  ]
+}
