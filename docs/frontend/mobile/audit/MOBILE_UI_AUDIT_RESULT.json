@@ -1,0 +1,25 @@
+{
+  "audit_version": "v1",
+  "scope": "mobile-ui",
+  "status": "PASS",
+  "checked_against": [
+    "docs/frontend/mobile/ANTI_REQUIREMENTS_MOBILE_UI.md",
+    "docs/frontend/mobile/SoftFocus_Mobile_Policy.md",
+    "docs/frontend/mobile/MOBILE_V1_FREEZE_DECLARATION.md"
+  ],
+  "assertions": {
+    "no_numeric_scores": true,
+    "no_charts": true,
+    "single_column_layout": true,
+    "no_tabs_or_dashboards": true,
+    "no_primary_cta": true,
+    "no_required_interaction": true,
+    "no_modals": true,
+    "no_notifications": true,
+    "no_urgency_language": true,
+    "no_motivational_language": true,
+    "visible_without_scroll": true
+  },
+  "audited_by": "governance",
+  "human_override": false
+}
