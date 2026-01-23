@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoftFocus Mobile Result Screen",
+  "type": "object",
+  "required": [
+    "resultState",
+    "context",
+    "excerpt",
+    "referenceLink"
+  ],
+  "properties": {
+    "resultState": {
+      "type": "object",
+      "description": "Primary orientation anchor",
+      "required": ["label", "descriptor"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "descriptor": {
+          "type": "string",
+          "maxLength": 120
+        }
+      }
+    },
+    "context": {
+      "type": "string",
+      "description": "Neutral clarification, always visible",
+      "maxLength": 240
+    },
+    "excerpt": {
+      "type": "object",
+      "description": "Meaning without instruction",
+      "required": ["title", "items"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "maxLength": 120
+          }
+        }
+      }
+    },
+    "referenceLink": {
+      "type": "object",
+      "description": "Optional deep explanation",
+      "required": ["label", "target"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": ["What SoftFocus Gives"]
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^/.*"
+        }
+      }
+    },
+    "closingNote": {
+      "type": "string",
+      "description": "Optional neutral close",
+      "maxLength": 80
+    }
+  },
+  "additionalProperties": false
+}

@@ -204,7 +204,6 @@ It is:
 
 The project is built as an **asset**, not a workflow.
 
-
 ---
 
 ## Distribution and Depth Constraints
@@ -222,7 +221,6 @@ delivered via entitlement.
 These constraints ensure that the system remains linear, auditable,
 and product-first as it scales.
 
-
 cat <<'EOF' >> docs/overview.md
 
 ---
@@ -232,17 +230,20 @@ cat <<'EOF' >> docs/overview.md
 SoftFocus evolves through controlled lifecycle phases.
 
 ### Phase A — Operation & Observation
+
 The system is frozen.
 No content, product, or logic changes are permitted.
 The goal is to validate stability, search interpretation,
 and entitlement-based monetization under real conditions.
 
 ### Phase B — Minor Expansion (v1.x)
+
 Minor versions extend distribution only.
 They may add role-based entry points or language coverage
 without modifying product logic, calculators, or protocols.
 
 ### Phase C — Major Expansion (v2.x)
+
 Major versions introduce a new analytical axis.
 Existing product axes remain unchanged.
 Each new axis includes its own calculators, interpretation,
@@ -251,7 +252,6 @@ and protocol, governed by the same entitlement model.
 This lifecycle ensures that SoftFocus remains linear,
 auditable, and product-first as it evolves.
 EOF
-
 
 ## For the reference
 
@@ -276,145 +276,26 @@ backend/scripts/content-validator/emit-run-jsonl.js
 scripts/ci/pre-product-tests.sh
 alias_softfocus/bin/generate-status
 
-# 5_days_plan — SoftFocus (Post-Z2 Execution) (remove after complete this tasks)
-
-**Context:**  
-Baseline v1 fixed · Governance active · Recovery calculator (Y) delivered ·  
-Product entitlement execution (Z2) implemented and committed.
-
-**Objective of the next 5 days:**  
-Stabilize the system, close governance loops, and move from _“implemented”_ to _“operationally reliable”_ without expanding scope.
-
 ---
 
-## Day 1 — Stabilization & Hygiene (No New Features)
+## Operational Readiness (v1)
 
-**Goal:** Ensure the current state is clean, reproducible, and boring.
+SoftFocus v1 transitions from implementation to operation
+only after being formally declared **operationally ready**.
 
-### Tasks
+Operational readiness is defined by a dedicated normative document:
 
-- Run full local cycle:
-  - `npm run content:lint`
-  - `./scripts/ci/pre-product-tests.sh <run_id>`
-  - entitlement scenario (`TS-ENTITLEMENT-GRANT-001`)
-- Verify:
-  - `run.jsonl` entries are emitted correctly
-  - alias statuses are generated without manual intervention
-- Remove or explicitly park:
-  - leftover experimental scripts
-  - commented or unused CI helpers
-- Confirm:
-  - working tree clean after commit
-  - no hidden FAIL masked as WARN
+- `docs/control/OPERATIONAL_READINESS.md`
 
-**Deliverable**
+Until readiness is declared:
 
-- Zero failing checks
-- One clean baseline run recorded in `tests/runs/`
+- the system is considered under implementation
+- no asset-level assumptions are permitted
 
----
+After readiness declaration:
 
-## Day 2 — Governance Hardening (Read-Only Changes)
+- product logic is frozen
+- governance rules are stable
+- SoftFocus v1 is treated as an operational asset
 
-**Goal:** Make rules unambiguous and future-proof.
-
-### Tasks
-
-- Review `backend/config/content-rules.json`:
-  - confirm calculator ≡ assessment strictness everywhere
-  - confirm WARN vs FAIL behavior matches intent
-- Add or refine documentation:
-  - when WARN is acceptable
-  - when CI _must_ fail
-- Ensure every CORE alias has:
-  - a clear purpose
-  - a documented failure meaning
-
-**Deliverable**
-
-- Governance rules frozen for v1.x
-- No logic changes, only clarification
-
----
-
-## Day 3 — Recovery Calculator Validation (Product Reality Check)
-
-**Goal:** Validate that the recovery calculator actually behaves like a product.
-
-### Tasks
-
-- Manually walk through recovery calculator logic:
-  - edge cases (very low / very high scores)
-  - deterministic behavior check
-- Validate scoring → interpretation mapping:
-  - no motivational language
-  - no clinical leakage
-- Write a short internal note:
-  - “What this calculator explains well”
-  - “What it deliberately does not explain”
-
-**Deliverable**
-
-- Confidence that calculator insight matches product promise
-- No code changes unless a _clear_ defect is found
-
----
-
-## Day 4 — Product Entitlement Audit & Dry-Run
-
-**Goal:** Prove that monetization is auditable and boring.
-
-### Tasks
-
-- Run entitlement script multiple times with different RUN_IDs
-- Inspect:
-  - `run.jsonl` consistency
-  - absence of duplicate or ambiguous records
-- Simulate future payment source:
-  - stub environment variables
-  - confirm entitlement logic does not depend on UI
-- Document:
-  - what constitutes a _valid_ entitlement
-  - how revocation would work (even if unsupported)
-
-**Deliverable**
-
-- Entitlement flow understood end-to-end
-- No hidden coupling between delivery and UI
-
----
-
-## Day 5 — Freeze & Prepare Next Phase
-
-**Goal:** End the week with a clear stopping point and a clean handoff.
-
-### Tasks
-
-- Tag the repository (if not already):
-  - e.g. `v1.3.0-entitlement`
-- Write a short internal snapshot:
-  - what is done
-  - what is intentionally not done
-- Decide next direction (one only):
-  - **Z3:** payment source integration
-  - **Distribution:** SEO + entry points
-  - **Second calculator:** compensation / load
-
-**Deliverable**
-
-- Tagged, explainable system state
-- One clear next step, nothing half-started
-
----
-
-## Guiding Rules for These 5 Days
-
-- No new domains
-- No refactors “because it’s nicer”
-- No user accounts, dashboards, or funnels
-- If it can’t be audited, it doesn’t ship
-
----
-
-**Outcome after Day 5:**  
-SoftFocus is not just _built_, but **operable** — with governance, product logic, and monetization aligned and under control.
+This rule is mandatory and overrides informal interpretations.
