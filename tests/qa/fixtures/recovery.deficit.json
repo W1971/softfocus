@@ -1,0 +1,13 @@
+{
+  "name": "systemic-deficit",
+  "answers": {
+    "sleep": 3,
+    "compensation": 3,
+    "fatigue": 3,
+    "inertia": 2
+  },
+  "expected": {
+    "band": "critical",
+    "scoreRange": [0, 40]
+  }
+}

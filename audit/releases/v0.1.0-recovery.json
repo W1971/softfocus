@@ -1,0 +1,8 @@
+{
+  "version": "v0.1.0-recovery",
+  "date": "2026-01-24",
+  "scope": "recovery-calculator",
+  "qa": "PASS",
+  "core": "core/recovery/scoreRecovery.cjs",
+  "rfc": "RFC-RECOVERY-SCORING-v1"
+}

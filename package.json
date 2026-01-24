@@ -17,6 +17,7 @@
     "deploy:preflight": "bash scripts/deploy/deploy-check-preflight.sh",
     "deploy:production": "bash scripts/deploy/deploy-check-production.sh",
     "release": "bash scripts/release.sh",
+    "qa:recovery": "ts-node tests/qa/runRecoveryQA.cjs",
     "status:generate": "node scripts/ci/generate-status-md.js"
   },
   "dependencies": {
