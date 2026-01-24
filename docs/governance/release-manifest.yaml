@@ -1,0 +1,23 @@
+version: v1.0
+status: AUTHORIZED
+
+release:
+  id: "2026-01-calculators"
+  scope:
+    - kalkulyator-vosstanovleniya
+    - kalkulyator-sna
+
+qa:
+  required: true
+  suites:
+    - qa:recovery
+
+seo:
+  indexing:
+    kalkulyator-vosstanovleniya: true
+    kalkulyator-vosstanovleniya/scoring: false
+    kalkulyator-vosstanovleniya/model: false
+    kalkulyator-sna: true
+
+audit:
+  append_only: true
