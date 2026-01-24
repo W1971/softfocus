@@ -1,7 +1,7 @@
 policy_version: 1.0
 
 lifecycle:
-  current_phase: A
+  current_phase: B
 
   phases:
     A:
