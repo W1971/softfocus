@@ -1,1 +1,0 @@
-{"run_id":"test-run-001","scenario_id":"TS-CONTENT-VALIDATE-001","alias":"content-validate","script":"validate-content.cjs","target":"content","content_type":"system","rule":"pre-product-gate","result":"pass","details":{},"severity":"PASS","human_override":false}
