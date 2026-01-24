@@ -1,0 +1,18 @@
+name: Governance Gate
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run governance enforcement
+        run: |
+          bash scripts/governance/policy-eval.sh \
+            docs/governance/lifecycle-policy.yaml

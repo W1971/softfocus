@@ -1,0 +1,28 @@
+policy_version: 1.0
+
+lifecycle:
+  current_phase: A
+
+  phases:
+    A:
+      name: Architecture
+      requires:
+        - structure_locked
+        - audit_passed
+        - architecture_docs_present
+      allows_transition_to: B
+
+    B:
+      name: Localization
+      forbids:
+        - structure_change
+      requires:
+        - audit_passed
+      allows_transition_to: PRODUCTION
+
+    PRODUCTION:
+      name: Production
+      requires:
+        - audit_passed
+        - ci_enforced
+      deployment_allowed: true
