@@ -1,4 +1,4 @@
-# Frontend Plan — Status and Next Steps
+# Frontend Plan — Status and Observations
 
 ## Scope
 Frontend includes:

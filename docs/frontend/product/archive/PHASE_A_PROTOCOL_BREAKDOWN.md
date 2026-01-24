@@ -24,7 +24,7 @@ Each module:
 - can be understood independently
 - does not require completion tracking
 
-Modules describe *what is being worked on*, not *what to do*.
+Modules describe *what is being worked on*, not *how this is interpreted*.
 
 ---
 

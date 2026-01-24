@@ -90,7 +90,7 @@ User should feel:
 > “This explains consequences I hadn’t connected.”
 
 Not:
-> “This tells me what to do.”
+> “This tells me how this is interpreted.”
 
 ---
 

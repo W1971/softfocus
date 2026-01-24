@@ -122,7 +122,7 @@ The result screen contains:
 5. Optional transition to protocol context  
 
 The result explains what the state means.
-It does not tell the user what to do.
+It does not tell the user how this is interpreted.
 
 ---
 

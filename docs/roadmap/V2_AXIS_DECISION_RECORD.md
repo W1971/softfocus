@@ -1,81 +1,78 @@
 ---
-type: decision-record
-version: v2
-status: design-only
-scope: analytical-axis
+title: "SoftFocus v2 — Axis Decision Record"
+status: DESIGN-ONLY
+implementation: FORBIDDEN
+version: v2.0-design
 ---
 
-# v2 Analytical Axis — Decision Record
+## Decision
+
+Для SoftFocus v2 утверждена **одна аналитическая ось**:
+
+**Cognitive Load Variability**  
+(Изменчивость когнитивной нагрузки)
+
+---
+
+## Rationale
+
+v1 объясняет устойчивое истощение (burnout).
+v2 предназначен для состояний, где:
+
+- функциональность сохранена,
+- сон формально достаточен,
+- но ясность мышления нестабильна.
+
+Это не продолжение burnout
+и не его ранняя стадия.
+
+---
+
+## Canonical Definition
+
+**Cognitive Load Variability** —  
+это степень нестабильности когнитивной нагрузки во времени,
+при которой восстановление не может стабилизироваться.
+
+Ось описывает:
+- фрагментацию,
+- разрывы ритма,
+- потерю когерентности,
+
+но **не усталость и не истощение**.
+
+---
+
+## Architectural Separation
+
+v1 axis:
+burnout → recovery capacity → compensation
+
+v2 axis:
+load variability → coherence loss → fragmentation
+
+Оси:
+- не пересекаются
+- не суммируются
+- не отображаются одновременно
+
+---
+
+## Governance Constraints
+
+- ❌ Нет рекомендаций
+- ❌ Нет протоколов действий
+- ❌ Нет productivity-языка
+- ❌ Нет мотивационного фрейминга
+
+Допустим только объяснительный слой.
+
+---
 
 ## Status
 
-**DESIGN ONLY.**
-
-No axis is approved.
-No implementation is authorized.
-
----
-
-## Purpose
-
-This document defines the decision framework
-for selecting exactly one analytical axis for v2.
-
-It does not propose solutions.
-It does not define scope.
-It does not allow execution.
-
----
-
-## Constraints (Hard)
-
-An axis MAY be approved only if it:
-
-- is strictly non-clinical
-- explains states not covered by burnout
-- is expressible without advice
-- supports deterministic assessment
-- does not require behavior change
-- does not overlap with v1 axis
-
----
-
-## Explicit Exclusions
-
-The following are NOT acceptable axes:
-
-- motivation
-- resilience
-- productivity
-- discipline
-- wellbeing programs
-- lifestyle change
-- emotional intelligence
-
----
-
-## Candidate Axes (Exploratory Only)
-
-- Decision Saturation
-- Cognitive Load Variability
-- Temporal Compression
-- Chronic Context Switching
-
-These are candidates, not commitments.
-
----
-
-## Approval Rules
-
-- exactly one axis may be approved
-- approval requires explicit governance sign-off
-- approval creates a new protocol and entitlement
-- rejection creates no obligation to replace
-
----
-
-## Relationship to Phase A
-
-Axis selection MUST NOT begin
-until Phase A is explicitly closed.
+- Implementation: запрещена
+- UI: запрещён
+- CI gates: отсутствуют
+- Next step: design-only exploration
 

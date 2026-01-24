@@ -143,7 +143,7 @@ Not:
 
 - how motivated you are,
 - how resilient you “should be”,
-- or how to “fix yourself”.
+- or how to “reinterpret your condition”.
 
 ---
 

@@ -1,78 +1,53 @@
----
-type: lifecycle-declaration
-phase: A
-status: active
-scope: system
----
-
 # Phase A — Operation & Observation
 
-## Status
-
-**ACTIVE — Phase A has started.**
-
-SoftFocus v1 has entered the Operation & Observation phase.
+Status: ACTIVE  
+Scope: System-wide  
+Mutability: Locked
 
 ---
 
-## Purpose
+## Definition
 
-The purpose of Phase A is to:
+Phase A is observation-only.
 
-- validate system stability in real conditions
-- observe interpretation behavior
-- confirm governance enforcement
-- verify entitlement and audit flows
+The system may:
+- measure
+- classify
+- describe
+- audit
+- log
 
-No expansion is allowed.
-
----
-
-## What Is Frozen
-
-During Phase A, the following are frozen:
-
-- product logic
-- assessment models
-- calculators
-- mobile UI
-- governance rules
-- content-validator behavior
-- CI structure
+The system MUST NOT:
+- prescribe actions
+- optimize outcomes
+- encourage behavior change
+- introduce conversion mechanics
+- apply urgency or motivation
 
 ---
 
-## What Is Allowed
+## Allowed Outputs
 
-Only the following activities are permitted:
-
-- passive observation
-- log inspection
-- audit verification
-- documentation clarification without semantic change
-- bug fixes that reduce risk or ambiguity
+- neutral states
+- descriptive context
+- explanatory excerpts
+- reference links (non-CTA)
 
 ---
 
-## What Is Explicitly NOT Allowed
+## Forbidden During Phase A
 
-- new features
-- UX experiments
-- design changes
-- copy optimization
-- conversion tuning
-- new domains or axes
+- calls to action
+- recommendations
+- “next steps”
+- conversion copy
+- reminders or nudges
+- progress framing
 
 ---
 
-## Exit Criteria
+## Enforcement
 
-Phase A may be exited only if:
-
-- system remains stable
-- no governance violations occur
-- no hidden FAIL states appear
-- operational confidence is achieved
-
-Exit requires an explicit declaration.
-
+Any artifact violating these rules
+invalidates Phase A
+and MUST fail CI.

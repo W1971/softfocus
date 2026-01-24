@@ -10,7 +10,7 @@ must explicitly avoid.
 - Numeric scores or percentages
 - Charts, graphs, or visual analytics
 - Comparative language (average, above/below)
-- Calls to action (Next step, Do this, Fix now)
+- Calls to action (imperative phrasing, directive language)
 - Gamification or progress indicators
 - Multi-step flows on the result screen
 
