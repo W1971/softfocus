@@ -1,1 +1,12 @@
 derived_state LOW_CONFIDENCE
+
+# inside scripts/generate-status.sh
+./scripts/ci/check-v2-design-only.sh
+STATUS_V2=$?
+
+if [[ "$STATUS_V2" -ne 0 ]]; then
+  echo "v2-design-check: FAIL" >> "$STATUS_FILE"
+  exit 1
+else
+  echo "v2-design-check: PASS" >> "$STATUS_FILE"
+fi

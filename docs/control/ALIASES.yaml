@@ -101,3 +101,13 @@ aliases:
       - scripts/softfocus-stage.sh
     notes: Deprecated; retained for reference only
 
+
+v2-design-check:
+  scope: governance
+  purpose: Enforce v2 DESIGN_ONLY boundary
+  status: READY
+  risk_level: HIGH
+  scripts:
+    - scripts/ci/check-v2-design-only.sh
+  scenarios:
+    - TS-V2-DESIGN-LOCK-001

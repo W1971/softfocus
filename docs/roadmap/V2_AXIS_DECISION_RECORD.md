@@ -1,8 +1,15 @@
+STATUS: DESIGN_ONLY
+SCOPE: GOVERNANCE
+IMPLEMENTATION: FORBIDDEN
+
 ---
+
 title: "SoftFocus v2 — Axis Decision Record"
 status: DESIGN-ONLY
 implementation: FORBIDDEN
 version: v2.0-design
+---
+
 ---
 
 ## Decision
@@ -74,5 +81,6 @@ load variability → coherence loss → fragmentation
 - Implementation: запрещена
 - UI: запрещён
 - CI gates: отсутствуют
-- Next step: design-only exploration
+- This document authorizes no subsequent actions.
+
 

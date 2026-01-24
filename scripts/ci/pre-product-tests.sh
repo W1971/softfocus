@@ -17,3 +17,5 @@ echo "-> alias status generation"
 alias_softfocus/bin/generate-status "$RUN_ID"
 
 echo "PASSED: pre-product tests (${RUN_ID})"
+
+./scripts/ci/run-alias-tests.sh

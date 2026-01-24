@@ -1,3 +1,8 @@
+STATUS: DESIGN_ONLY
+SCOPE: ROADMAP
+IMPLEMENTATION: FORBIDDEN
+
+
 # SoftFocus v2 — Analytical Axis Planning (Design Only)
 
 ## Status

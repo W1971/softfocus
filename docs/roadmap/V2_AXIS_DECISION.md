@@ -1,3 +1,9 @@
+---
+STATUS: DESIGN_ONLY
+SCOPE: GOVERNANCE
+IMPLEMENTATION: FORBIDDEN
+---
+
 # SoftFocus v2 — Axis Decision Record
 
 ## Purpose

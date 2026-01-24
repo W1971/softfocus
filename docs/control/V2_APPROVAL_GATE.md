@@ -94,3 +94,13 @@ LOW_CONFIDENCE означает:
 - любые попытки реализации v2 должны блокироваться CI
 - статус v2 обязан оставаться DESIGN_ONLY
 
+## Naming Clarification
+
+This document intentionally replaces any notion of
+"V2_IMPLEMENTATION_APPROVAL".
+
+v2 is DESIGN_ONLY.
+
+There is no implementation approval artifact by design.
+Any future authorization for execution must introduce
+a new, explicit governance document and CI gate.

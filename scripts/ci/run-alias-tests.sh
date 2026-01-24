@@ -20,3 +20,15 @@ for t in tests/alias/*.test.sh; do
 done
 
 echo "✔ alias-level tests PASS"
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "== Alias-level Tests =="
+
+for test in tests/alias/*.test.sh; do
+  echo "-> $test"
+  bash "$test"
+done
+
+echo "✔ alias-level tests PASS"
