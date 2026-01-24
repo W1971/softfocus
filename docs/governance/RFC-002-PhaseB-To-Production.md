@@ -1,6 +1,6 @@
 # RFC-002: Phase B → Production Transition
 
-Status: DRAFT  
+Status: ACTIVE
 Version: 1.0  
 Audience: Core maintainers, auditors, CI systems
 
