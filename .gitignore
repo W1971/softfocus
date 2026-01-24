@@ -15,3 +15,6 @@ package-lock.json
 tests/runs/RUN-*/
 tests/runs/RUN-*/
 archive/
+
+# CI runtime artifacts
+tests/runs/
