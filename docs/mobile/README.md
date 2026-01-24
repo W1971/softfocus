@@ -3,18 +3,18 @@ type: reference-layer
 status: non-canonical
 ---
 
-# docs/mobile — Reference Layer
+# docs/mobile — Reference Only
 
-This directory is **NOT canonical**.
+This directory is NOT canonical.
 
 All authoritative mobile specifications live in:
 
 → docs/frontend/mobile/
 
-Files in this directory exist for:
-- historical context
-- internal coordination
-- legacy references
+Files here exist for:
+- legacy context
+- internal discussion
+- historical reference
 
 They MUST NOT:
 - define policy
@@ -23,4 +23,3 @@ They MUST NOT:
 
 If a conflict exists,
 docs/frontend/mobile/ always wins.
-

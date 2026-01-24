@@ -1,25 +1,13 @@
 {
-  "audit_version": "v1",
-  "scope": "mobile-ui",
+  "audit_id": "MOBILE-V1-DESIGN-AUDIT",
+  "version": "v1.0",
   "status": "PASS",
+  "human_override": false,
   "checked_against": [
-    "docs/frontend/mobile/ANTI_REQUIREMENTS_MOBILE_UI.md",
-    "docs/frontend/mobile/SoftFocus_Mobile_Policy.md",
-    "docs/frontend/mobile/MOBILE_V1_FREEZE_DECLARATION.md"
+    "ANTI_REQUIREMENTS_MOBILE_UI.md",
+    "SoftFocus_Mobile_Policy.md",
+    "MOBILE_V1_FREEZE_DECLARATION.md",
+    "MOBILE_DESIGN_BRIEF.md"
   ],
-  "assertions": {
-    "no_numeric_scores": true,
-    "no_charts": true,
-    "single_column_layout": true,
-    "no_tabs_or_dashboards": true,
-    "no_primary_cta": true,
-    "no_required_interaction": true,
-    "no_modals": true,
-    "no_notifications": true,
-    "no_urgency_language": true,
-    "no_motivational_language": true,
-    "visible_without_scroll": true
-  },
-  "audited_by": "governance",
-  "human_override": false
+  "notes": "Mobile UI conforms to orientation-only, non-action, non-clinical design. No violations detected."
 }

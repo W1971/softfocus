@@ -11,3 +11,4 @@
 - Initial sleep-based recovery assessment
 - Deterministic scoring
 - Non-medical positioning
+v1.5.0 Phase A + Mobile v1 freeze completed successfully.
