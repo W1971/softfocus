@@ -1,0 +1,103 @@
+aliases:
+  project-clean:
+    scope: scripts
+    purpose: Structural hygiene and maintenance
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - scripts/maintenance/*
+      - scripts/audit/*
+    scenarios:
+      - TS-GOVERNANCE-SELF-001
+
+  content-validate:
+    scope: scripts
+    purpose: Content validation and audience policy
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - backend/scripts/content-validator/*
+    scenarios:
+      - TS-READY-BASE-001
+
+  pipeline-check:
+    scope: scripts
+    purpose: Stage readiness and linear execution gating
+    status: READY
+    risk_level: MEDIUM
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - scripts/ci/*
+    scenarios:
+      - TS-READY-BASE-010
+
+  generate-status:
+    scope: scripts
+    purpose: Derive system readiness from signals
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - alias_softfocus/bin/generate-status
+
+  phase-a-observation:
+    scope: documentation
+    purpose: Enforce Phase A observation-only constraints
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    ci_gates:
+      - scripts/ci/check-phase-a-observation-only.sh
+
+  mobile-v1-governance:
+    scope: frontend/mobile
+    purpose: Enforce Mobile v1 freeze and simplicity
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    ci_gates:
+      - scripts/ci/check-mobile-design.sh
+
+  v2-governance:
+    scope: roadmap
+    purpose: Govern SoftFocus v2 as a design-only axis
+    status: DESIGN_ONLY
+    risk_level: MEDIUM
+    execution: FORBIDDEN
+    affects_readiness: false
+    ci_gates:
+      - scripts/ci/check-v2-governance.sh
+    notes: |
+      v2 is design-only. Any implementation requires V2 approval gate signoff.
+
+  release-controller:
+    scope: scripts
+    purpose: Release eligibility and tagging
+    status: READY
+    risk_level: MEDIUM
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - scripts/release/*
+    scenarios:
+      - TS-RELEASE-001
+
+  pipeline-guard:
+    scope: scripts
+    purpose: Legacy stage framework (deprecated)
+    status: LOW_CONFIDENCE
+    risk_level: MEDIUM
+    execution: RESTRICTED
+    affects_readiness: true
+    scripts:
+      - scripts/softfocus-stage.sh
+    notes: Deprecated; retained for reference only
+
