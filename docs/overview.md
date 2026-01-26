@@ -1,79 +1,104 @@
 # SoftFocus — Overview, Architecture & Product Plan
 
-**Version:** v1.2  
-**Status:** ACTIVE  
-**Mode:** governance-aware, product-first
+**Version:** v1.3  
+**Status:** ACTIVE (Operational Transition)  
+**Mode:** governance-aware, product-first, deterministic
 
 ---
 
 ## 1. What SoftFocus Is
 
-**SoftFocus** is a Russian(multi)(En/Es/Ar)-language analytical platform focused on:
+**SoftFocus** is a multilingual analytical platform  
+(RU primary; EN / ES / AR planned) focused on:
 
-- cognitive load
-- early burnout signals
-- recovery capacity
-- sustainable productivity without pressure
+- cognitive load under sustained effort
+- early burnout risk signals
+- recovery capacity degradation
+- compensation patterns that mask decline
 
 The project is **explicitly non-clinical**:
 
 - no diagnosis
-- no therapy replacement
-- no medical claims
+- no therapy
+- no medical claims or norms
 
-SoftFocus is positioned as a **thinking and orientation tool**,  
-not a quiz, checklist, or motivational product.
+SoftFocus is a **thinking and orientation system**.  
+It is not a quiz, checklist, coaching flow, or motivational product.
 
 ---
 
-## 2. Product Domains
+## 2. Product Domains (Current State)
 
-SoftFocus is structured around **product-grade domains**, not content streams.
+SoftFocus is structured around **product-grade domains**, each with explicit governance severity.
 
 ### 2.1 Assessments (`/testy`)
 
+**Status:** ACTIVE (v1)
+
 - Deterministic
-- Behavior-based
-- Product-level strictness
-- Standalone value without payment
+- Behavior- and pattern-based
+- Canonical terminology enforced
+- Standalone analytical value without payment
+
+Assessments are the **primary analytical entry point**.
+
+---
 
 ### 2.2 Calculators (`/kalkulyatory`)
 
+**Status:** ACTIVE (Recovery Calculator v1 frozen)
+
 - Sleep, recovery, compensation
-- **Inherit assessment-level strictness**
+- Inherit assessment-level strictness
 - Deterministic scoring
-- Explainable interpretation
+- Explainable, non-adaptive interpretation
+
+The **Recovery Calculator** is the first calculator formally frozen under governance.
+
+---
 
 ### 2.3 Guides (`/guides`)
+
+**Status:** LIMITED (distribution layer)
 
 - Analytical explanations
 - Mechanism-focused
 - SEO-oriented
 - Reduced strictness (WARN-level)
 
-### 2.4 Blog (`/blog`)
-
-- Contextual and SEO content
-- Lowest strictness tier
-- Never product-critical
+Guides **do not define logic** and never override product interpretation.
 
 ---
 
-## 3. Core Product Axis
+### 2.4 Blog (`/blog`)
 
-All products are aligned to a single canonical axis:
+**Status:** OPTIONAL
+
+- Contextual and SEO-only content
+- Lowest strictness tier
+- Never product-critical
+- Can be disabled without system impact
+
+---
+
+## 3. Core Product Axis (Frozen)
+
+All analytical products align to a single canonical axis:
 
 **burnout → recovery capacity → compensation**
 
-This axis is enforced via:
+This axis is **frozen for v1** and enforced through:
 
 - content-validator rules
 - governance severity levels
-- CI gating
+- CI and Release Gate checks
+- RFC-based change control
+
+Any modification requires a new RFC and version bump.
 
 ---
 
-## 4. Governance Layer (Mandatory)
+## 4. Governance Layer (Mandatory, Active)
 
 ### 4.1 Content Validator
 
@@ -84,62 +109,86 @@ It enforces:
 - non-clinical boundaries
 - canonical terminology
 - audience discipline
-- product vs blog strictness
+- strict separation of product vs distribution content
 
 Severity model:
+
 | Content Type | Canonical Missing |
 |-------------|-------------------|
-| assessment | FAIL |
-| calculator | FAIL |
-| guide/blog | WARN |
+| assessment  | FAIL              |
+| calculator | FAIL              |
+| guide/blog | WARN              |
+
+FAIL blocks CI and release.
 
 ---
 
 ### 4.2 Boundary-Aware Validation
 
-Documents may reference clinical terms **only if**:
+Documents may reference clinical terminology **only** if:
 
+- explicitly scoped as exclusionary
+- a non-clinical boundary is present
 - located in PRODUCT or PUBLIC zones
-- explicit non-clinical boundary is present
 
-Violations block CI.
-
----
-
-## 5. Y → Z Bridge: From Recovery to Product
-
-### 5.1 Y — Recovery Calculator
-
-The recovery calculator delivers:
-
-- recovery capacity scoring
-- burnout risk orientation
-- compensation signal detection
-
-It produces **structured, repeatable insight**, not advice.
+Violations block CI and Release Gate.
 
 ---
 
-### 5.2 Z2 — Product Entitlement Execution
+## 5. Analytical Core: Recovery Scoring (v1)
 
-Paid products are governed as **entitlements**, not downloads.
+### 5.1 Recovery Scoring v1 (Frozen)
 
-An entitlement is valid when:
+**Status:** FROZEN, RELEASED
+
+- Deterministic core implementation
+- Runtime-safe, non-frontend-owned logic
+- QA-covered with golden fixtures
+- Governed by RFC and checksum
+
+Artifacts:
+
+- `scripts/core/recovery/scoreRecovery.cjs`
+- `tests/qa/runRecoveryQA.cjs`
+- `docs/governance/RFC-RECOVERY-SCORING-v1.md`
+
+This scoring model is the **single source of truth** for recovery analysis in v1.
+
+---
+
+### 5.2 Interpretation & UI
+
+- Mobile: orientation-only, low-cognitive-load
+- Desktop: analytical detail, penalty breakdown
+- No adaptive logic
+- No behavior shaping
+
+UI is a **pure consumer** of the frozen scoring core.
+
+---
+
+## 6. Product Entitlement Model
+
+### 6.1 Entitlements (Z-layer)
+
+Paid products are delivered as **entitlements**, not files.
+
+An entitlement is valid only when:
 
 1. Delivery script executes
-2. An audit event is written to `run.jsonl`
+2. An audit event is written (`run.jsonl`)
 3. Severity = PASS
-4. No human override
+4. No manual override
 
-This creates:
+This ensures:
 
 - auditable delivery
 - CI-verifiable monetization
-- passive, low-maintenance revenue flow
+- low operational overhead
 
 ---
 
-## 6. Alias System
+## 7. Alias Control Plane
 
 SoftFocus is operated via a **single control plane**: `alias-softfocus`.
 
@@ -156,11 +205,63 @@ Statuses are derived automatically:
 - LOW_CONFIDENCE
 - FAIL
 
-No manual status setting is allowed.
+Manual status setting is not permitted.
 
 ---
 
-## 7. Economic Model
+## 8. Current Lifecycle Stage
+
+### Phase A — Operation & Observation (ACTIVE)
+
+**Current state:**
+
+- Recovery Scoring v1 frozen
+- Release Gate passed
+- Governance rules enforced
+- Product logic locked
+
+Goals:
+
+- validate real-world stability
+- observe search interpretation
+- confirm entitlement-based monetization
+- detect governance friction
+
+No logic, scoring, or axis changes are permitted in Phase A.
+
+---
+
+## 9. Planned Lifecycle Progression
+
+### Phase B — Minor Expansion (v1.x)
+
+**Planned:**
+
+- language expansion (EN → ES → AR)
+- role-based distribution overlays
+- SEO surface extension
+
+Constraints:
+
+- no changes to scoring logic
+- no new analytical axes
+- no protocol modification
+
+---
+
+### Phase C — Major Expansion (v2.x)
+
+**Future (RFC-required):**
+
+- introduction of a new analytical axis
+- independent calculators and scoring
+- separate protocol, same entitlement model
+
+Existing axes remain frozen and supported.
+
+---
+
+## 10. Economic Model
 
 Primary revenue:
 
@@ -168,7 +269,7 @@ Primary revenue:
 
 Secondary revenue:
 
-- affiliate tools (non-clinical)
+- non-clinical affiliate tools
 
 Advertising:
 
@@ -177,124 +278,37 @@ Advertising:
 
 ---
 
-## 8. Long-Term Goal
-
-12-month target:
-
-**$4,000+ / month**, driven by:
-
-- product-grade assessments
-- recovery calculators
-- entitlement-based digital products
-- organic SEO
-
----
-
 ## Summary
 
-SoftFocus is not a blog.
-
-It is:
+SoftFocus is:
 
 - a governed analytical system
-- with deterministic products
-- formal validation
+- with deterministic, frozen product logic
+- formal validation and release control
 - auditable monetization
-- and minimal operational overhead
+- minimal operational overhead
 
-The project is built as an **asset**, not a workflow.
-
----
-
-## Distribution and Depth Constraints
-
-SoftFocus growth is governed by explicit architectural boundaries.
-
-Role-based pages function exclusively as distribution overlays and are
-constrained by the Role Page Specification. They do not introduce new
-products, assessments, or role-specific logic.
-
-Depth content, including the Structured Recovery Protocol, is governed
-by the Protocol Access Boundary and exists only as post-assessment material
-delivered via entitlement.
-
-These constraints ensure that the system remains linear, auditable,
-and product-first as it scales.
-
-cat <<'EOF' >> docs/overview.md
+The project is built and operated as a **long-term asset**,  
+not as a content workflow or growth experiment.
 
 ---
 
-## Lifecycle: A → B → C
+## Operational Readiness
 
-SoftFocus evolves through controlled lifecycle phases.
+SoftFocus v1 transitions from implementation to operation only after formal declaration.
 
-### Phase A — Operation & Observation
-
-The system is frozen.
-No content, product, or logic changes are permitted.
-The goal is to validate stability, search interpretation,
-and entitlement-based monetization under real conditions.
-
-### Phase B — Minor Expansion (v1.x)
-
-Minor versions extend distribution only.
-They may add role-based entry points or language coverage
-without modifying product logic, calculators, or protocols.
-
-### Phase C — Major Expansion (v2.x)
-
-Major versions introduce a new analytical axis.
-Existing product axes remain unchanged.
-Each new axis includes its own calculators, interpretation,
-and protocol, governed by the same entitlement model.
-
-This lifecycle ensures that SoftFocus remains linear,
-auditable, and product-first as it evolves.
-EOF
-
-## For the reference
-
-## Связанные нормативные файлы (обновление ожиданий)
-
-- Чтобы v1.1 governance-aware был воспроизводимым, считаются обязательными следующие документы и скрипты:
-
-## Документация
-
-docs/overview.md ← этот файл
-docs/control/CI_ALIAS_POLICY.md
-docs/control/ALIAS_CLASSIFICATION.md
-docs/control/GOVERNANCE_ENTRYPOINT.md
-docs/product/ASSESSMENT_AS_PRODUCT.md (если есть / или планируется)
-
-## Governance / CI
-
-backend/config/content-rules.json
-backend/scripts/content-validator.js
-backend/scripts/content-validator/validate-content.cjs
-backend/scripts/content-validator/emit-run-jsonl.js
-scripts/ci/pre-product-tests.sh
-alias_softfocus/bin/generate-status
-
----
-
-## Operational Readiness (v1)
-
-SoftFocus v1 transitions from implementation to operation
-only after being formally declared **operationally ready**.
-
-Operational readiness is defined by a dedicated normative document:
+Operational readiness is defined by:
 
 - `docs/control/OPERATIONAL_READINESS.md`
 
 Until readiness is declared:
 
-- the system is considered under implementation
-- no asset-level assumptions are permitted
+- the system remains under observation
+- no asset-level guarantees are assumed
 
-After readiness declaration:
+After declaration:
 
-- product logic is frozen
+- product logic remains frozen
 - governance rules are stable
 - SoftFocus v1 is treated as an operational asset
 

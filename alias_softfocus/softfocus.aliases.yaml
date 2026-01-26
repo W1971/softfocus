@@ -6,9 +6,9 @@ aliases:
     status: READY
     risk_level: LOW
     scripts:
-      - scripts/maintenance/*
-      - scripts/audit/*
-      - scripts/version-bump.sh
+      - backend/scripts/maintenance/*
+      - backend/scripts/audit/*
+      - backend/scripts/version-bump.sh
     scenarios:
       - TS-GOVERNANCE-SELF-001
 
@@ -18,8 +18,8 @@ aliases:
     status: READY
     risk_level: LOW
     scripts:
-      - scripts/validate-content.js
-      - scripts/check-audience-coverage.js
+      - backend/scripts/content-validator/validate-content.cjs
+      - backend/scripts/audience-checker/check-audience-coverage.js
     scenarios:
       - TS-READY-BASE-001
 
@@ -29,8 +29,9 @@ aliases:
     status: LOW_CONFIDENCE
     risk_level: MEDIUM
     scripts:
-      - scripts/softfocus-stage.sh
-      - scripts/stage-runner-linear*
+      - backend/scripts/softfocus-stage.sh
+      - backend/scripts/stage-runner-linear.sh
+      - backend/scripts/stage-runner-linear-v3.sh
     scenarios:
       - TS-READY-BASE-010
       - TS-READY-LOW-001
@@ -43,7 +44,7 @@ aliases:
     status: READY
     risk_level: MEDIUM
     scripts:
-      - scripts/release/*
+      - backend/scripts/release/*
     scenarios:
       - TS-RELEASE-001
 
@@ -53,8 +54,8 @@ aliases:
     status: ACTIVE
     risk_level: LOW
     scripts:
-      - tests/scenarios/*
-      - tests/helpers/*
+      - backend/tests/scenarios/*
+      - backend/tests/helpers/*
 
   logging_contract:
     scope: tests
@@ -62,8 +63,8 @@ aliases:
     status: ACTIVE
     risk_level: LOW
     scripts:
-      - tests/docs/*
-      - tests/templates/*
+      - backend/tests/docs/*
+      - backend/tests/templates/*
 
   reference_runs:
     scope: tests
@@ -71,4 +72,4 @@ aliases:
     status: ACTIVE
     risk_level: LOW
     scripts:
-      - tests/runs/EXAMPLE_RUN_000
+      - backend/tests/runs/EXAMPLE_RUN_000

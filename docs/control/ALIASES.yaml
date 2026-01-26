@@ -1,4 +1,11 @@
+meta:
+  version: v1.0
+  scope: control-plane
+  status: ACTIVE
+  description: Canonical alias registry for alias-softfocus
+
 aliases:
+
   project-clean:
     scope: scripts
     purpose: Structural hygiene and maintenance
@@ -7,14 +14,14 @@ aliases:
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - scripts/maintenance/*
-      - scripts/audit/*
+      - backend/scripts/maintenance/*
+      - backend/scripts/audit/*
     scenarios:
       - TS-GOVERNANCE-SELF-001
 
   content-validate:
     scope: scripts
-    purpose: Content validation and audience policy
+    purpose: Content validation and audience discipline
     status: READY
     risk_level: LOW
     execution: ALLOWED
@@ -32,51 +39,39 @@ aliases:
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - scripts/ci/*
+      - backend/scripts/softfocus-stage.sh
     scenarios:
       - TS-READY-BASE-010
 
-  generate-status:
+  backend-check:
     scope: scripts
-    purpose: Derive system readiness from signals
+    purpose: Backend governance and integrity verification
+    status: READY
+    risk_level: MEDIUM
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - backend/scripts/governance/full-governance-run.sh
+
+  frontend-build:
+    scope: frontend
+    purpose: Deterministic frontend build verification
+    status: READY
+    risk_level: MEDIUM
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - alias_softfocus/bin/frontend-build
+
+  generate-status:
+    scope: control-plane
+    purpose: Derive system readiness from alias states
     status: READY
     risk_level: LOW
     execution: ALLOWED
     affects_readiness: true
     scripts:
       - alias_softfocus/bin/generate-status
-
-  phase-a-observation:
-    scope: documentation
-    purpose: Enforce Phase A observation-only constraints
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    ci_gates:
-      - scripts/ci/check-phase-a-observation-only.sh
-
-  mobile-v1-governance:
-    scope: frontend/mobile
-    purpose: Enforce Mobile v1 freeze and simplicity
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    ci_gates:
-      - scripts/ci/check-mobile-design.sh
-
-  v2-governance:
-    scope: roadmap
-    purpose: Govern SoftFocus v2 as a design-only axis
-    status: DESIGN_ONLY
-    risk_level: MEDIUM
-    execution: FORBIDDEN
-    affects_readiness: false
-    ci_gates:
-      - scripts/ci/check-v2-governance.sh
-    notes: |
-      v2 is design-only. Any implementation requires V2 approval gate signoff.
 
   release-controller:
     scope: scripts
@@ -86,9 +81,51 @@ aliases:
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - scripts/release/*
+      - backend/scripts/release/*
     scenarios:
       - TS-RELEASE-001
+
+  phase-a-observation:
+    scope: documentation
+    purpose: Enforce Phase A observation-only constraints
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    ci_gates:
+      - backend/scripts/ci/check-phase-a-observation-only.sh
+
+  mobile-v1-governance:
+    scope: frontend/mobile
+    purpose: Enforce Mobile v1 freeze and simplicity
+    status: READY
+    risk_level: LOW
+    execution: ALLOWED
+    affects_readiness: true
+    ci_gates:
+      - backend/scripts/ci/check-mobile-design.sh
+
+  v2-design-check:
+    scope: governance
+    purpose: Enforce v2 DESIGN_ONLY boundary
+    status: READY
+    risk_level: HIGH
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - backend/scripts/ci/check-v2-design-only.sh
+    scenarios:
+      - TS-V2-DESIGN-LOCK-001
+
+  v2-governance:
+    scope: roadmap
+    purpose: Govern SoftFocus v2 as a design-only analytical axis
+    status: DESIGN_ONLY
+    risk_level: MEDIUM
+    execution: FORBIDDEN
+    affects_readiness: false
+    notes: |
+      v2 is design-only. Any implementation requires a v2 approval gate.
 
   pipeline-guard:
     scope: scripts
@@ -96,18 +133,7 @@ aliases:
     status: LOW_CONFIDENCE
     risk_level: MEDIUM
     execution: RESTRICTED
-    affects_readiness: true
+    affects_readiness: false
     scripts:
-      - scripts/softfocus-stage.sh
+      - backend/scripts/softfocus-stage.sh
     notes: Deprecated; retained for reference only
-
-
-v2-design-check:
-  scope: governance
-  purpose: Enforce v2 DESIGN_ONLY boundary
-  status: READY
-  risk_level: HIGH
-  scripts:
-    - scripts/ci/check-v2-design-only.sh
-  scenarios:
-    - TS-V2-DESIGN-LOCK-001
