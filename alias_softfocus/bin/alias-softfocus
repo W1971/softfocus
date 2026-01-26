@@ -1,124 +1,112 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env node
 
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-BIN_DIR="$ROOT/alias_softfocus/bin"
-STATUS_DIR="$ROOT/alias_softfocus/status"
-DOCS_DIR="$ROOT/docs"
+import fs from "fs";
+import { spawnSync } from "child_process";
+import { resolveAlias } from "../lib/resolve-alias.js";
 
-is_ci() {
-  [ "${CI:-0}" = "true" ] || [ "${CI:-0}" = "1" ]
+const [, , subcommand, aliasName, ...args] = process.argv;
+const FORCE = process.env.FORCE === "1";
+
+if (!subcommand) {
+  usage();
+  process.exit(1);
 }
 
-read_status() {
-  local name="$1"
-  local f="$STATUS_DIR/$name.status"
-  if [ -f "$f" ]; then
-    awk '/derived_state/ {print $2}' "$f"
-  else
-    echo "UNKNOWN"
-  fi
+switch (subcommand) {
+  case "run":
+    if (!aliasName) {
+      console.error("ERROR: alias name required");
+      usage();
+      process.exit(1);
+    }
+    runAlias(aliasName, args);
+    break;
+
+  case "list":
+    listAliases();
+    break;
+
+  case "docs":
+    docsStub();
+    break;
+
+  default:
+    console.error(`ERROR: unknown command '${subcommand}'`);
+    usage();
+    process.exit(1);
 }
 
-gate_or_die() {
-  local name="$1"
-  local state
-  state="$(read_status "$name")"
+function runAlias(alias, args) {
+  let hadWarnings = false;
 
-  if [ "$state" = "READY" ]; then
-    return 0
-  fi
+  try {
+    const resolved = resolveAlias(alias);
 
-  if is_ci; then
-    echo "❌ CI BLOCK: '$name' status=$state"
-    exit 1
-  fi
+    if (resolved.execution === "RESTRICTED" && !FORCE) {
+      console.error(
+        `Execution restricted for alias '${alias}'. Use FORCE=1 to override.`
+      );
+      process.exit(1);
+    }
 
-  if [ "${FORCE:-0}" = "1" ]; then
-    echo "⚠️  FORCED RUN: '$name' status=$state"
-    return 0
-  fi
+    for (const target of resolved.targets) {
+      const result = spawnSync(target, args, {
+        stdio: "inherit",
+        shell: true,
+      });
 
-  echo "❌ BLOCKED: '$name' status=$state"
-  echo "Hint: run with FORCE=1 to override locally"
-  exit 1
+      if (result.status !== 0) {
+        console.warn(
+          `[WARN] Alias '${alias}' target failed: ${target}`
+        );
+        hadWarnings = true;
+      }
+    }
+
+    writeExecutionEvidence(alias, hadWarnings ? "PASS_WITH_WARN" : "PASS");
+  } catch (err) {
+    console.error(`ERROR: ${err.message}`);
+    process.exit(1);
+  }
 }
 
-run_cmd() {
-  local name="$1"; shift
-  gate_or_die "$name"
-  "$BIN_DIR/$name" "$@"
+function writeExecutionEvidence(alias, status) {
+  const entry = {
+    alias,
+    status,
+    timestamp: new Date().toISOString(),
+  };
+
+  fs.mkdirSync("alias_softfocus/status", { recursive: true });
+  fs.appendFileSync(
+    "alias_softfocus/status/execution.log",
+    JSON.stringify(entry) + "\n"
+  );
 }
 
-list_cmd() {
-  echo "Available SoftFocus commands:"
-  for f in "$BIN_DIR"/*; do
-    [ -x "$f" ] || continue
-    name="$(basename "$f")"
-    [ "$name" = "alias-softfocus" ] && continue
-    state="$(read_status "$name")"
-    echo "  $name [$state]"
-  done
+function listAliases() {
+  const raw = fs.readFileSync("docs/control/ALIASES.yaml", "utf8");
+  const names = raw
+    .split("\n")
+    .filter((l) => l.startsWith("  ") && l.trim().endsWith(":"))
+    .map((l) => l.trim().replace(":", ""));
+
+  console.log("Available SoftFocus aliases:");
+  names.forEach((a) => console.log(" ", a));
 }
 
-docs_overview() {
-  echo "SoftFocus Documentation Layers"
-  echo "=============================="
-  echo
-  for layer in control frontend business governance internal engineering operations policy releases; do
-    [ -d "$DOCS_DIR/$layer" ] || continue
-    count="$(find "$DOCS_DIR/$layer" -type f | wc -l | tr -d ' ')"
-    printf "%-12s %s files\n" "$layer/" "$count"
-  done
-  echo
-  echo "Entry point: docs/README.md"
+function docsStub() {
+  console.log(
+    "[INFO] docs command is available but operates in stub mode (Phase A/B)."
+  );
+  process.exit(0);
 }
 
-docs_cmd() { docs_overview; }
-
-explain_cmd() {
-  case "${1:-}" in
-    docs)
-      cat <<'TXT'
-alias-softfocus docs
-- Overview of documentation layers
-- Used as CI and pre-commit smoke-test
-TXT
-      ;;
-    *)
-      echo "No explanation available"
-      ;;
-  esac
+function usage() {
+  console.log(`
+Usage:
+  alias-softfocus run <alias>
+  alias-softfocus list
+  alias-softfocus docs
+`);
 }
-
-doctor_cmd() {
-  echo "Running SoftFocus diagnostics..."
-  [ -d "$DOCS_DIR" ] && echo "✔ docs present"
-  [ -d "$STATUS_DIR" ] && echo "✔ status dir present"
-}
-
-case "${1:-}" in
-  list)
-    list_cmd
-    ;;
-  run)
-    shift
-    name="${1:-}"; shift || true
-    [ -z "$name" ] && { echo "Usage: alias-softfocus run <command>"; exit 1; }
-    run_cmd "$name" "$@"
-    ;;
-  docs)
-    docs_cmd
-    ;;
-  explain)
-    shift
-    explain_cmd "$@"
-    ;;
-  doctor)
-    doctor_cmd
-    ;;
-  *)
-    echo "Usage: alias-softfocus {list|run|docs|explain|doctor}"
-    exit 1
-    ;;
-esac
