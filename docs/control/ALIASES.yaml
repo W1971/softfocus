@@ -1,9 +1,3 @@
-meta:
-  version: v1.0
-  scope: control-plane
-  status: ACTIVE
-  description: Canonical alias registry for alias-softfocus
-
 aliases:
 
   project-clean:
@@ -14,8 +8,8 @@ aliases:
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - backend/scripts/maintenance/*
-      - backend/scripts/audit/*
+      - scripts/maintenance/*
+      - scripts/audit/*
     scenarios:
       - TS-GOVERNANCE-SELF-001
 
@@ -39,13 +33,13 @@ aliases:
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - backend/scripts/softfocus-stage.sh
+      - scripts/ci/*
     scenarios:
       - TS-READY-BASE-010
 
   backend-check:
     scope: scripts
-    purpose: Backend governance and integrity verification
+    purpose: Governance and backend readiness verification
     status: READY
     risk_level: MEDIUM
     execution: ALLOWED
@@ -54,8 +48,8 @@ aliases:
       - backend/scripts/governance/full-governance-run.sh
 
   frontend-build:
-    scope: frontend
-    purpose: Deterministic frontend build verification
+    scope: scripts
+    purpose: Frontend production build verification
     status: READY
     risk_level: MEDIUM
     execution: ALLOWED
@@ -64,68 +58,31 @@ aliases:
       - alias_softfocus/bin/frontend-build
 
   generate-status:
-    scope: control-plane
-    purpose: Derive system readiness from alias states
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - alias_softfocus/bin/generate-status
-
-  release-controller:
     scope: scripts
-    purpose: Release eligibility and tagging
-    status: READY
-    risk_level: MEDIUM
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - backend/scripts/release/*
-    scenarios:
-      - TS-RELEASE-001
-
-  phase-a-observation:
-    scope: documentation
-    purpose: Enforce Phase A observation-only constraints
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    ci_gates:
-      - backend/scripts/ci/check-phase-a-observation-only.sh
-
-  mobile-v1-governance:
-    scope: frontend/mobile
-    purpose: Enforce Mobile v1 freeze and simplicity
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    ci_gates:
-      - backend/scripts/ci/check-mobile-design.sh
-
-  v2-design-check:
-    scope: governance
-    purpose: Enforce v2 DESIGN_ONLY boundary
+    purpose: Phase B deterministic readiness aggregation
     status: READY
     risk_level: HIGH
     execution: ALLOWED
     affects_readiness: true
     scripts:
-      - backend/scripts/ci/check-v2-design-only.sh
-    scenarios:
-      - TS-V2-DESIGN-LOCK-001
+      - alias_softfocus/bin/generate-status
+    notes: >
+      Phase B only. Deterministic, blocking.
+      PASS_WITH_WARN is treated as FAIL.
+      Replaces Phase A bash stub entirely.
 
   v2-governance:
     scope: roadmap
-    purpose: Govern SoftFocus v2 as a design-only analytical axis
+    purpose: Govern SoftFocus v2 as design-only axis
     status: DESIGN_ONLY
     risk_level: MEDIUM
     execution: FORBIDDEN
     affects_readiness: false
+    ci_gates:
+      - scripts/ci/check-v2-governance.sh
     notes: |
-      v2 is design-only. Any implementation requires a v2 approval gate.
+      v2 is design-only.
+      Any implementation requires explicit V2 approval gate.
 
   pipeline-guard:
     scope: scripts
@@ -135,5 +92,5 @@ aliases:
     execution: RESTRICTED
     affects_readiness: false
     scripts:
-      - backend/scripts/softfocus-stage.sh
-    notes: Deprecated; retained for reference only
+      - scripts/softfocus-stage.sh
+    notes: Deprecated. Ignored by generate-status v2.
