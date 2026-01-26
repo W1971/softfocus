@@ -1,34 +1,27 @@
-import { CalculatorDocument } from "../../types/calculator/CalculatorDocument";
+import { CalculatorDocument } from "@/frontend/types/calculator/CalculatorDocument";
 
 export const recoveryScoringRU: CalculatorDocument = {
-  title: "Логика скоринга восстановления",
-  locale: "ru-RU",
-  path: "/kalkulyator-vosstanovleniya/scoring",
-  type: "calculator",
-  disclaimer: "non-medical",
+  title: "Принципы расчёта восстановления",
+  description:
+    "Описание логики интерпретации ответов и формирования итогового сигнала восстановления.",
   sections: [
     {
-      heading: "Базовый принцип",
-      body: [
-        "Итоговый балл = 100 − сумма штрафов.",
-        "Рост нагрузки и компенсации снижает recovery capacity.",
-      ],
+      id: "base-principle",
+      title: "Базовый принцип",
+      content:
+        "Итоговый показатель формируется как снижение от условного максимума. Рост нагрузки и дефицит восстановления уменьшают доступную recovery capacity.",
     },
     {
-      heading: "Компоненты скоринга",
-      body: [
-        "Сон (0–30)",
-        "Компенсация (0–25)",
-        "Накопление усталости (0–25)",
-        "Инерция (0–20)",
-      ],
+      id: "penalties",
+      title: "Штрафные факторы",
+      content:
+        "Повышенная утомляемость, снижение концентрации и замедление восстановления усиливают отрицательный вклад в итоговую оценку.",
     },
     {
-      heading: "Интерпретация",
-      body: [
-        "Баллы не являются медицинской оценкой.",
-        "Интерпретируются только в контексте нагрузки.",
-      ],
+      id: "interpretation",
+      title: "Интерпретация результата",
+      content:
+        "Результат отражает текущий баланс между нагрузкой и восстановлением и предназначен для наблюдения динамики во времени.",
     },
   ],
 };

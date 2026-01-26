@@ -1,38 +1,27 @@
-import { CalculatorDocument } from "../../types/calculator/CalculatorDocument";
+import { CalculatorDocument } from "@/frontend/types/calculator/CalculatorDocument";
 
 export const recoveryQuestionsRU: CalculatorDocument = {
-  title: "Калькулятор восстановления — вопросы оценки",
-  locale: "ru-RU",
-  path: "/kalkulyator-vosstanovleniya",
-  type: "calculator",
-  intent: "high",
-  tone: "analytical",
-  disclaimer: "non-medical",
+  title: "Вопросы оценки восстановления",
+  description:
+    "Набор вопросов для самооценки уровня восстановления и накопленной нагрузки.",
   sections: [
     {
-      heading: "Шкала ответов",
-      body: [
-        "0 — сигнал отсутствует",
-        "1 — эпизодически",
-        "2 — регулярно",
-        "3 — устойчиво / структурно",
-        "Период оценки: последние 14 дней",
-      ],
+      id: "scale",
+      title: "Шкала ответов",
+      content:
+        "0 — сигнал отсутствует. 1 — эпизодически. 2 — регулярно. 3 — постоянно.",
     },
     {
-      heading: "Раздел A — Латентность восстановления",
-      body: [
-        "Сон не восстанавливает ясность мышления.",
-        "Работа начинается с усталости.",
-        "Восстановление занимает больше времени.",
-      ],
+      id: "instructions",
+      title: "Как отвечать",
+      content:
+        "Отвечайте, опираясь на своё состояние за последние 2–3 недели, а не на единичные эпизоды.",
     },
     {
-      heading: "Раздел B — Остаточная усталость",
-      body: [
-        "Усталость сохраняется после отдыха.",
-        "Концентрация ухудшается раньше ожидаемого.",
-      ],
+      id: "note",
+      title: "Важно",
+      content:
+        "Оценка субъективна и предназначена для самонаблюдения, а не для клинической диагностики.",
     },
   ],
 };

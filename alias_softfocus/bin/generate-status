@@ -1,25 +1,96 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env node
+/**
+ * generate-status v2
+ * Phase B — deterministic, blocking readiness aggregator
+ */
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: generate-status <RUN_ID>"
-  exit 1
-fi
+import fs from "fs";
+import path from "path";
+import yaml from "js-yaml";
 
-RUN_ID="$1"
+const RUN_ID = process.argv[2];
 
-# Minimal valid governance signal
-export RUN_ID
-export SCENARIO_ID="TS-CONTENT-VALIDATE-001"
-export TARGET="content"
-export CONTENT_TYPE="system"
-export RULE="pre-product-gate"
-export RESULT="pass"
-export SEVERITY="PASS"
-export DETAILS="{}"
+const ALIASES_PATH = "docs/control/ALIASES.yaml";
+const EXECUTION_LOG_PATH = "alias_softfocus/status/execution.log";
+const OUTPUT_PATH = "alias_softfocus/status/derived-status.json";
 
-ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+failIf(!RUN_ID, "RUN_ID is required");
+failIf(!fs.existsSync(ALIASES_PATH), "ALIASES.yaml missing");
+failIf(!fs.existsSync(EXECUTION_LOG_PATH), "execution.log missing");
 
-node "${ROOT_DIR}/backend/scripts/content-validator/emit-run-jsonl.js" >/dev/null
+/* ---------- Load ALIASES.yaml ---------- */
 
-echo "PASSED: alias status generated for run ${RUN_ID}"
+const aliasesRaw = fs.readFileSync(ALIASES_PATH, "utf8");
+const aliasesYaml = yaml.load(aliasesRaw);
+
+if (!aliasesYaml || !aliasesYaml.aliases) {
+  fail("Invalid ALIASES.yaml structure");
+}
+
+const controlledAliases = Object.entries(aliasesYaml.aliases)
+  .filter(([, v]) => v.affects_readiness === true)
+  .map(([k]) => k);
+
+failIf(
+  controlledAliases.length === 0,
+  "No aliases affect readiness (misconfiguration)"
+);
+
+/* ---------- Load execution.log ---------- */
+
+const executionLines = fs
+  .readFileSync(EXECUTION_LOG_PATH, "utf8")
+  .trim()
+  .split("\n")
+  .map((l) => JSON.parse(l));
+
+/* ---------- Evaluate each alias ---------- */
+
+for (const alias of controlledAliases) {
+  const records = executionLines.filter(
+    (r) => r.alias === alias && r.run_id === RUN_ID
+  );
+
+  if (records.length === 0) {
+    fail(`Missing execution evidence for alias '${alias}'`);
+  }
+
+  const last = records[records.length - 1];
+
+  if (last.status !== "PASS") {
+    fail(
+      `Alias '${alias}' reported status '${last.status}' (Phase B forbids WARN)`
+    );
+  }
+}
+
+/* ---------- SUCCESS ---------- */
+
+const result = {
+  run_id: RUN_ID,
+  phase: "B",
+  status: "READY",
+  checked_aliases: controlledAliases,
+  timestamp: new Date().toISOString(),
+};
+
+fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
+fs.writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2));
+
+console.log(`RUN_ID: ${RUN_ID}`);
+console.log(`Aliases checked: ${controlledAliases.length}`);
+console.log("Result: READY");
+
+process.exit(0);
+
+/* ---------- Helpers ---------- */
+
+function fail(message) {
+  console.error(`FAIL: ${message}`);
+  process.exit(1);
+}
+
+function failIf(condition, message) {
+  if (condition) fail(message);
+}
+

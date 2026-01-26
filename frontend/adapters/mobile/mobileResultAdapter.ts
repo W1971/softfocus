@@ -1,9 +1,24 @@
-import { MobileResultScreen } from "../../types/mobile/MobileResultScreen";
-import { SoftFocusMobileResult } from "../../types/mobile/SoftFocusMobileResult";
+import { SoftFocusMobileResult } from "@/frontend/types/mobile/SoftFocusMobileResult";
 
-export function adaptToMobileResultScreen(
+export interface MobileResultViewModel {
+  resultState: {
+    label: string;
+    descriptor: string;
+  };
+  context: string;
+  excerpt: {
+    title: string;
+    items: string[]; // Phase B: variable-length, ordered
+  };
+  referenceLink: {
+    label: string;
+    href: string;
+  };
+}
+
+export function adaptMobileResult(
   result: SoftFocusMobileResult
-): MobileResultScreen {
+): MobileResultViewModel {
   return {
     resultState: {
       label: result.stage.label,
@@ -16,8 +31,7 @@ export function adaptToMobileResultScreen(
     },
     referenceLink: {
       label: "What SoftFocus Gives",
-      target: "/what-softfocus-gives",
+      href: "/what-softfocus-gives",
     },
-    closingNote: result.closingNote,
   };
 }

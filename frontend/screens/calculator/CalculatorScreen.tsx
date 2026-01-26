@@ -1,4 +1,5 @@
-import { CalculatorDocument } from "../../types/calculator/CalculatorDocument";
+import React from "react";
+import type { CalculatorDocument } from "@/frontend/types/calculator/CalculatorDocument";
 
 type Props = {
   calculator: CalculatorDocument;
@@ -6,21 +7,18 @@ type Props = {
 
 export function CalculatorScreen({ calculator }: Props) {
   return (
-    <main style={{ padding: 24, maxWidth: 720 }}>
-      <h1>{calculator.title}</h1>
+    <main>
+      <header>
+        <h1>{calculator.title}</h1>
+        <p>{calculator.description}</p>
+      </header>
 
-      {calculator.sections.map((section, i) => (
-        <section key={i}>
-          <h2>{section.heading}</h2>
-          {section.body.map((line, j) => (
-            <p key={j}>{line}</p>
-          ))}
+      {calculator.sections.map((section) => (
+        <section key={section.id}>
+          <h2>{section.title}</h2>
+          <p>{section.content}</p>
         </section>
       ))}
-
-      {calculator.disclaimer && (
-        <small>{calculator.disclaimer}</small>
-      )}
     </main>
   );
 }

@@ -1,34 +1,27 @@
-import { CalculatorDocument } from "../../types/calculator/CalculatorDocument";
+import { CalculatorDocument } from "@/frontend/types/calculator/CalculatorDocument";
 
 export const sleepCalculatorEN: CalculatorDocument = {
-  title: "Sleep Calculator: Recovery and Deficit",
-  locale: "en-US",
-  path: "/kalkulyator-sna",
-  type: "calculator",
-  intent: "high",
-  tone: "analytical",
-  disclaimer: "non-medical",
+  title: "Sleep-Based Recovery Assessment",
+  description:
+    "A calculator that interprets recovery signals based on sleep duration and quality patterns.",
   sections: [
     {
-      heading: "Purpose",
-      body: [
-        "Assess recovery state based on sleep patterns.",
-        "Describe recovery deficit, not health condition.",
-      ],
+      id: "purpose",
+      title: "Purpose",
+      content:
+        "This calculator assesses recovery state based on sleep patterns. It describes recovery deficit and sustainability risk, not medical or health conditions.",
     },
     {
-      heading: "What you receive",
-      body: [
-        "Burnout stage from a recovery perspective.",
-        "Primary risk under current cognitive load.",
-      ],
+      id: "inputs",
+      title: "Inputs",
+      content:
+        "Inputs include average sleep duration, perceived sleep quality, and consistency over recent weeks.",
     },
     {
-      heading: "Limitations",
-      body: [
-        "Not a medical tool.",
-        "Does not replace clinical support.",
-      ],
+      id: "interpretation",
+      title: "How to Interpret Results",
+      content:
+        "Results reflect how effectively sleep supports cognitive and physiological recovery under current load.",
     },
   ],
 };

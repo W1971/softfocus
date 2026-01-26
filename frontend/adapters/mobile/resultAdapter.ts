@@ -1,19 +1,17 @@
-import { SoftFocusMobileResult } from "../../types/mobile/SoftFocusMobileResult";
+import type { SoftFocusMobileResult } from "@/frontend/types/mobile/SoftFocusMobileResult";
 
 export type MobileResultViewModel = {
   headline: string;
   stageLabel: string;
   stageExplanation: string;
-  primaryAction: string;
 };
 
 export function adaptMobileResult(
   result: SoftFocusMobileResult
 ): MobileResultViewModel {
   return {
-    headline: result.summary.title,
+    headline: result.stage.label,
     stageLabel: result.stage.label,
-    stageExplanation: result.stage.explanation,
-    primaryAction: result.recommendation.primary,
+    stageExplanation: result.stage.descriptor,
   };
 }
