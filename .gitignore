@@ -1,20 +1,34 @@
-# Node / Next.js
+# --- Runtime / execution ---
+backend/tests/runs/
+machine-readiness/
+alias_softfocus/status/*.jsonl
+alias_softfocus/status/*.log
+
+# --- Local & temp ---
+.DS_Store
+*.log
+*.tmp
+*.bak
+
+# --- Node / build ---
 node_modules/
 .next/
+out/
+dist/
 
-# Logs
-*.log
+# --- Env / secrets ---
+.env
+.env.*
+*.key
+*.pem
 
-# OS
-.DS_Store
+# --- OS / editor ---
+.vscode/
+.idea/
+*.swp
 
-# Lockfiles (project decision)
-package-lock.json
-.wip/
-.wip/
-tests/runs/RUN-*/
-tests/runs/RUN-*/
-archive/
-
-# CI runtime artifacts
-tests/runs/
+# --- Accidental content ---
+YAML/
+модем
+на
+проверить
