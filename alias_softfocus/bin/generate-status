@@ -11,56 +11,51 @@ import yaml from "js-yaml";
 const RUN_ID = process.argv[2];
 
 const ALIASES_PATH = "docs/control/ALIASES.yaml";
-const EXECUTION_LOG_PATH = "alias_softfocus/status/execution.log";
+const RUNS_BASE = "tests/runs";
 const OUTPUT_PATH = "alias_softfocus/status/derived-status.json";
 
-failIf(!RUN_ID, "RUN_ID is required");
-failIf(!fs.existsSync(ALIASES_PATH), "ALIASES.yaml missing");
-failIf(!fs.existsSync(EXECUTION_LOG_PATH), "execution.log missing");
+if (!RUN_ID) fail("RUN_ID is required");
 
-/* ---------- Load ALIASES.yaml ---------- */
+const RUN_DIR = path.join(RUNS_BASE, RUN_ID);
+const RUN_LOG = path.join(RUN_DIR, "run.jsonl");
 
-const aliasesRaw = fs.readFileSync(ALIASES_PATH, "utf8");
-const aliasesYaml = yaml.load(aliasesRaw);
+failIf(!fs.existsSync(ALIASES_PATH), "ALIASES file missing");
+failIf(!fs.existsSync(RUN_LOG), `run.jsonl missing for RUN_ID=${RUN_ID}`);
 
-if (!aliasesYaml || !aliasesYaml.aliases) {
-  fail("Invalid ALIASES.yaml structure");
-}
+/* ---------- Load aliases ---------- */
+
+const aliasesYaml = yaml.load(fs.readFileSync(ALIASES_PATH, "utf8"));
+failIf(!aliasesYaml || !aliasesYaml.aliases, "Invalid aliases schema");
 
 const controlledAliases = Object.entries(aliasesYaml.aliases)
-  .filter(([, v]) => v.affects_readiness === true)
+  .filter(([, v]) => v && v.affects_readiness === true)
   .map(([k]) => k);
 
-failIf(
-  controlledAliases.length === 0,
-  "No aliases affect readiness (misconfiguration)"
-);
+failIf(controlledAliases.length === 0, "No readiness aliases defined");
 
-/* ---------- Load execution.log ---------- */
+/* ---------- Load run evidence ---------- */
 
-const executionLines = fs
-  .readFileSync(EXECUTION_LOG_PATH, "utf8")
+const records = fs
+  .readFileSync(RUN_LOG, "utf8")
   .trim()
   .split("\n")
   .map((l) => JSON.parse(l));
 
-/* ---------- Evaluate each alias ---------- */
+/* ---------- Evaluate ---------- */
 
 for (const alias of controlledAliases) {
-  const records = executionLines.filter(
+  const hits = records.filter(
     (r) => r.alias === alias && r.run_id === RUN_ID
   );
 
-  if (records.length === 0) {
+  if (hits.length === 0) {
     fail(`Missing execution evidence for alias '${alias}'`);
   }
 
-  const last = records[records.length - 1];
+  const last = hits[hits.length - 1];
 
   if (last.status !== "PASS") {
-    fail(
-      `Alias '${alias}' reported status '${last.status}' (Phase B forbids WARN)`
-    );
+    fail(`Alias '${alias}' status=${last.status}`);
   }
 }
 
@@ -85,12 +80,11 @@ process.exit(0);
 
 /* ---------- Helpers ---------- */
 
-function fail(message) {
-  console.error(`FAIL: ${message}`);
+function fail(msg) {
+  console.error(`FAIL: ${msg}`);
   process.exit(1);
 }
 
-function failIf(condition, message) {
-  if (condition) fail(message);
+function failIf(cond, msg) {
+  if (cond) fail(msg);
 }
-

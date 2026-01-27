@@ -1,96 +1,12 @@
 aliases:
-
-  project-clean:
-    scope: scripts
-    purpose: Structural hygiene and maintenance
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - scripts/maintenance/*
-      - scripts/audit/*
-    scenarios:
-      - TS-GOVERNANCE-SELF-001
-
   content-validate:
     scope: scripts
-    purpose: Content validation and audience discipline
-    status: READY
-    risk_level: LOW
-    execution: ALLOWED
     affects_readiness: true
     scripts:
-      - backend/scripts/content-validator/*
-    scenarios:
-      - TS-READY-BASE-001
-
-  pipeline-check:
-    scope: scripts
-    purpose: Stage readiness and linear execution gating
-    status: READY
-    risk_level: MEDIUM
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - scripts/ci/*
-    scenarios:
-      - TS-READY-BASE-010
-
-  backend-check:
-    scope: scripts
-    purpose: Governance and backend readiness verification
-    status: READY
-    risk_level: MEDIUM
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - backend/scripts/governance/full-governance-run.sh
+      - backend/scripts/content-validator/content-validate-run.sh
 
   frontend-build:
     scope: scripts
-    purpose: Frontend production build verification
-    status: READY
-    risk_level: MEDIUM
-    execution: ALLOWED
     affects_readiness: true
     scripts:
       - alias_softfocus/bin/frontend-build
-
-  generate-status:
-    scope: scripts
-    purpose: Phase B deterministic readiness aggregation
-    status: READY
-    risk_level: HIGH
-    execution: ALLOWED
-    affects_readiness: true
-    scripts:
-      - alias_softfocus/bin/generate-status
-    notes: >
-      Phase B only. Deterministic, blocking.
-      PASS_WITH_WARN is treated as FAIL.
-      Replaces Phase A bash stub entirely.
-
-  v2-governance:
-    scope: roadmap
-    purpose: Govern SoftFocus v2 as design-only axis
-    status: DESIGN_ONLY
-    risk_level: MEDIUM
-    execution: FORBIDDEN
-    affects_readiness: false
-    ci_gates:
-      - scripts/ci/check-v2-governance.sh
-    notes: |
-      v2 is design-only.
-      Any implementation requires explicit V2 approval gate.
-
-  pipeline-guard:
-    scope: scripts
-    purpose: Legacy stage framework (deprecated)
-    status: LOW_CONFIDENCE
-    risk_level: MEDIUM
-    execution: RESTRICTED
-    affects_readiness: false
-    scripts:
-      - scripts/softfocus-stage.sh
-    notes: Deprecated. Ignored by generate-status v2.

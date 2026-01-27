@@ -1,17 +1,26 @@
 aliases:
   project-clean:
     target: scripts/maintenance/*
+
   content-validate:
     target: backend/scripts/content-validator/*
+
   pipeline-check:
     target: scripts/ci/*
+
   backend-check:
     target: backend/scripts/governance/full-governance-run.sh
+
   frontend-build:
     target: alias_softfocus/bin/frontend-build
+
   generate-status:
     target: alias_softfocus/bin/generate-status
+
   v2-governance:
     target: scripts/ci/check-v2-governance.sh
+
   pipeline-guard:
-    target: scripts/softfocus-stage.sh
+    target:
+      - scripts/softfocus-stage.sh
+      - backend/scripts/guards/root-route-guard.sh
