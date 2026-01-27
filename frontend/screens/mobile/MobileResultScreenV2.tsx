@@ -1,23 +1,23 @@
-import { SoftFocusMobileResult } from "../../types/mobile/SoftFocusMobileResult";
-import { adaptMobileResult } from "../../adapters/mobile/resultAdapter";
-import { mobileResultCopy } from "../../content/mobile/resultCopy";
+import { SoftFocusMobileResult } from "@/frontend/types/mobile/SoftFocusMobileResult";
+import { adaptMobileResult } from "@/frontend/adapters/mobile/resultAdapter";
+import { mobileResultCopy } from "@/frontend/content/mobile/resultCopy";
 
 type Props = {
   result: SoftFocusMobileResult;
 };
 
-export function MobileResultScreenV2({ result }: Props) {
+export default function MobileResultScreenV2({ result }: Props) {
   const viewModel = adaptMobileResult(result);
-  const cta =
-    mobileResultCopy[result.stage.level as keyof typeof mobileResultCopy]?.cta ??
-    viewModel.primaryAction;
+
+  const cta = mobileResultCopy.cta.primary;
 
   return (
-    <div>
+    <section>
       <h1>{viewModel.headline}</h1>
-      <h2>{viewModel.stageLabel}</h2>
+
       <p>{viewModel.stageExplanation}</p>
+
       <button>{cta}</button>
-    </div>
+    </section>
   );
 }

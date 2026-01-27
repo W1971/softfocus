@@ -1,24 +1,21 @@
-import { CalculatorDocument } from "../../types/calculator/CalculatorDocument";
+import { CalculatorDocument } from "@/frontend/types/calculator/CalculatorDocument";
 
 export const recoveryModelRU: CalculatorDocument = {
   title: "Модель интерпретации восстановления",
-  locale: "ru-RU",
-  path: "/kalkulyator-vosstanovleniya/model",
-  type: "calculator",
-  disclaimer: "non-medical",
+  description:
+    "Интерпретационная модель, объясняющая результаты оценки восстановления без клинической диагностики.",
   sections: [
     {
-      heading: "Ключевая ось",
-      body: [
-        "выгорание → восстановительная способность → компенсация",
-      ],
+      id: "overview",
+      title: "Общее описание",
+      content:
+        "Модель восстановления SoftFocus предназначена для оценки устойчивости и риска истощения в условиях длительной когнитивной нагрузки.",
     },
     {
-      heading: "Продуктовый сигнал",
-      body: [
-        "Низкая recovery capacity указывает на риск выгорания.",
-        "Компенсация без восстановления усиливает истощение.",
-      ],
+      id: "principles",
+      title: "Ключевые принципы",
+      content:
+        "Модель не диагностирует и не лечит. Она описывает наблюдаемые паттерны нагрузки и восстановления.",
     },
   ],
 };

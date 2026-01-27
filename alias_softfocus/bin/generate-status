@@ -1,25 +1,90 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env node
+/**
+ * generate-status v2
+ * Phase B — deterministic, blocking readiness aggregator
+ */
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: generate-status <RUN_ID>"
-  exit 1
-fi
+import fs from "fs";
+import path from "path";
+import yaml from "js-yaml";
 
-RUN_ID="$1"
+const RUN_ID = process.argv[2];
 
-# Minimal valid governance signal
-export RUN_ID
-export SCENARIO_ID="TS-CONTENT-VALIDATE-001"
-export TARGET="content"
-export CONTENT_TYPE="system"
-export RULE="pre-product-gate"
-export RESULT="pass"
-export SEVERITY="PASS"
-export DETAILS="{}"
+const ALIASES_PATH = "docs/control/ALIASES.yaml";
+const RUNS_BASE = "tests/runs";
+const OUTPUT_PATH = "alias_softfocus/status/derived-status.json";
 
-ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+if (!RUN_ID) fail("RUN_ID is required");
 
-node "${ROOT_DIR}/backend/scripts/content-validator/emit-run-jsonl.js" >/dev/null
+const RUN_DIR = path.join(RUNS_BASE, RUN_ID);
+const RUN_LOG = path.join(RUN_DIR, "run.jsonl");
 
-echo "PASSED: alias status generated for run ${RUN_ID}"
+failIf(!fs.existsSync(ALIASES_PATH), "ALIASES file missing");
+failIf(!fs.existsSync(RUN_LOG), `run.jsonl missing for RUN_ID=${RUN_ID}`);
+
+/* ---------- Load aliases ---------- */
+
+const aliasesYaml = yaml.load(fs.readFileSync(ALIASES_PATH, "utf8"));
+failIf(!aliasesYaml || !aliasesYaml.aliases, "Invalid aliases schema");
+
+const controlledAliases = Object.entries(aliasesYaml.aliases)
+  .filter(([, v]) => v && v.affects_readiness === true)
+  .map(([k]) => k);
+
+failIf(controlledAliases.length === 0, "No readiness aliases defined");
+
+/* ---------- Load run evidence ---------- */
+
+const records = fs
+  .readFileSync(RUN_LOG, "utf8")
+  .trim()
+  .split("\n")
+  .map((l) => JSON.parse(l));
+
+/* ---------- Evaluate ---------- */
+
+for (const alias of controlledAliases) {
+  const hits = records.filter(
+    (r) => r.alias === alias && r.run_id === RUN_ID
+  );
+
+  if (hits.length === 0) {
+    fail(`Missing execution evidence for alias '${alias}'`);
+  }
+
+  const last = hits[hits.length - 1];
+
+  if (last.status !== "PASS") {
+    fail(`Alias '${alias}' status=${last.status}`);
+  }
+}
+
+/* ---------- SUCCESS ---------- */
+
+const result = {
+  run_id: RUN_ID,
+  phase: "B",
+  status: "READY",
+  checked_aliases: controlledAliases,
+  timestamp: new Date().toISOString(),
+};
+
+fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
+fs.writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2));
+
+console.log(`RUN_ID: ${RUN_ID}`);
+console.log(`Aliases checked: ${controlledAliases.length}`);
+console.log("Result: READY");
+
+process.exit(0);
+
+/* ---------- Helpers ---------- */
+
+function fail(msg) {
+  console.error(`FAIL: ${msg}`);
+  process.exit(1);
+}
+
+function failIf(cond, msg) {
+  if (cond) fail(msg);
+}

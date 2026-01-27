@@ -1,74 +1,26 @@
 aliases:
+  project-clean:
+    target: scripts/maintenance/*
 
-  project_cleaner:
-    scope: scripts
-    purpose: Structural hygiene and maintenance
-    status: READY
-    risk_level: LOW
-    scripts:
-      - scripts/maintenance/*
-      - scripts/audit/*
-      - scripts/version-bump.sh
-    scenarios:
-      - TS-GOVERNANCE-SELF-001
+  content-validate:
+    target: backend/scripts/content-validator/*
 
-  content_governor:
-    scope: scripts
-    purpose: Content validation and audience policy
-    status: READY
-    risk_level: LOW
-    scripts:
-      - scripts/validate-content.js
-      - scripts/check-audience-coverage.js
-    scenarios:
-      - TS-READY-BASE-001
+  pipeline-check:
+    target: scripts/ci/*
 
-  pipeline_guard:
-    scope: scripts
-    purpose: Stage readiness and execution gating
-    status: LOW_CONFIDENCE
-    risk_level: MEDIUM
-    scripts:
+  backend-check:
+    target: backend/scripts/governance/full-governance-run.sh
+
+  frontend-build:
+    target: alias_softfocus/bin/frontend-build
+
+  generate-status:
+    target: alias_softfocus/bin/generate-status
+
+  v2-governance:
+    target: scripts/ci/check-v2-governance.sh
+
+  pipeline-guard:
+    target:
       - scripts/softfocus-stage.sh
-      - scripts/stage-runner-linear*
-    scenarios:
-      - TS-READY-BASE-010
-      - TS-READY-LOW-001
-      - TS-READY-FAIL-001
-    notes: Legacy stage framework
-
-  release_controller:
-    scope: scripts
-    purpose: Release eligibility and gating
-    status: READY
-    risk_level: MEDIUM
-    scripts:
-      - scripts/release/*
-    scenarios:
-      - TS-RELEASE-001
-
-  test_oracle:
-    scope: tests
-    purpose: Behavioral verification
-    status: ACTIVE
-    risk_level: LOW
-    scripts:
-      - tests/scenarios/*
-      - tests/helpers/*
-
-  logging_contract:
-    scope: tests
-    purpose: Log format and observability contract
-    status: ACTIVE
-    risk_level: LOW
-    scripts:
-      - tests/docs/*
-      - tests/templates/*
-
-  reference_runs:
-    scope: tests
-    purpose: Canonical example runs
-    status: ACTIVE
-    risk_level: LOW
-    scripts:
-      - tests/runs/EXAMPLE_RUN_000
+      - backend/scripts/guards/root-route-guard.sh

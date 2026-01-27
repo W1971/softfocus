@@ -1,5 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+RUN_ID="${1:-}"
+
+echo "[frontend-build] START"
+
+if [[ -z "$RUN_ID" ]]; then
+  echo "[frontend-build] WARN: RUN_ID not provided, evidence skipped"
+else
+  export RUN_ID
+  export SCENARIO_ID="TS-FRONTEND-BUILD-001"
+fi
+
+echo "[frontend-build] RUN_ID=${RUN_ID:-<none>}"
+
+# Build frontend
 cd frontend
-npm run build "$@"
+npm run build
+cd -
+
+# Emit governance evidence (ONLY if RUN_ID exists)
+if [[ -n "$RUN_ID" ]]; then
+  node backend/scripts/content-validator/emit-run-jsonl.js >/dev/null
+  echo "[frontend-build] execution evidence written"
+fi
+
+echo "[frontend-build] PASS"
+
+if [[ -n "${RUN_ID:-}" ]]; then
+  mkdir -p "tests/runs/$RUN_ID"
+  echo "{\"run_id\":\"$RUN_ID\",\"alias\":\"frontend-build\",\"status\":\"PASS\"}" \
+    >> "tests/runs/$RUN_ID/run.jsonl"
+  echo "[frontend-build] alias-level evidence written"
+else
+  echo "[frontend-build] WARN: RUN_ID not set, alias evidence skipped"
+fi
