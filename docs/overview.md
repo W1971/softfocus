@@ -359,3 +359,6 @@ After declaration:
 - SoftFocus v1 is treated as an **operational asset**
 
 This rule is mandatory and overrides informal interpretations.
+
+Routing decisions (including the root route) are governed by
+docs/control/ROOT_ROUTE_POLICY.md.

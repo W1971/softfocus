@@ -1,73 +1,75 @@
-# RFC — Phase C: Cognitive Load Accumulation Axis
+# RFC — Phase C Analytical Axis: Cognitive Load
 
-**RFC ID:** RFC-PHASE-C-COGNITIVE-LOAD-v1  
-**Status:** DRAFT  
-**Phase:** C  
-**Date:** 2026-01-26
+RFC ID: RFC-PHASE-C-COGNITIVE-LOAD-v1  
+Status: DRAFT  
+Author: <name>  
+Date: 2026-01-26
 
 ---
 
 ## 1. Purpose
 
-Introduce a new analytical axis focused on
-**cognitive load accumulation under sustained effort**.
+This RFC proposes **Cognitive Load** as a candidate analytical axis
+for Phase C of SoftFocus.
 
-This axis is fully independent from:
-- burnout
+This document is **definition- and boundary-only**.
+No executable logic is authorized by this RFC.
+
+---
+
+## 2. Scope Definition
+
+The Cognitive Load axis aims to analyze:
+
+- sustained mental effort
+- task-switching overhead
+- decision density
+- attention fragmentation
+
+This axis is conceptually distinct from:
+
+- burnout states
 - recovery capacity
-- compensation patterns (v1)
+- compensation mechanisms
 
 ---
 
-## 2. Rationale
+## 3. Explicit Non-Goals
 
-Operational observation of Phase A/B indicates that
-cognitive overload often precedes measurable recovery degradation.
+The Cognitive Load axis MUST NOT:
 
-This axis enables:
-- earlier orientation
-- different signal types
-- separate user entry points
-
----
-
-## 3. Scope
-
-### In Scope
-- New scoring model (v2 only)
-- Separate calculator family
-- Independent interpretation protocol
-- Versioned UI and copy
-
-### Out of Scope
-- Any modification of Recovery Scoring v1
-- Reinterpretation of v1 results
-- Shared scoring primitives
+- diagnose medical or psychological conditions
+- infer recovery, burnout, or compensation scores
+- reuse or extend Recovery Scoring v1
+- act as an input to any v1 calculator
 
 ---
 
-## 4. Architecture Constraints
+## 4. Relationship to v1
 
-- Hard namespace separation (`v2/`)
-- No shared scoring files with v1
-- Independent QA fixtures
-- Same entitlement & audit model
+- No shared scoring logic
+- No shared normalization scales
+- No shared result interpretation
+- No backward inference into v1 outputs
+
+v1 and Cognitive Load may coexist
+but never co-evolve.
 
 ---
 
-## 5. Risks & Mitigations
+## 5. Risks
 
 | Risk | Mitigation |
 |----|----|
-| Axis confusion | Explicit versioned copy |
-| Governance bleed | RFC-gated changes only |
-| Scope creep | Single-axis limit |
+| Semantic overlap with burnout | Strict vocabulary separation |
+| User misinterpretation | Versioned copy and framing |
+| Accidental coupling | Separate namespace and CI guards |
 
 ---
 
-## 6. Decision Required
+## 6. Status
 
-Approval to:
-- Enter Phase C
-- Create v2 analytical namespace
-- Begin Cognitive Load axis work
+DRAFT.
+
+This RFC does not authorize implementation.
+It exists to anchor Phase C design discussions.
