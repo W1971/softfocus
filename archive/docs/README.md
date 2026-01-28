@@ -1,86 +1,39 @@
-# SoftFocus Documentation
+# Documentation Archive — SoftFocus
 
-This directory contains all project documentation, organized by
-responsibility layer. Each layer answers a different question.
+This directory contains **archived documentation**.
 
----
+Archived documents are:
+- historical
+- superseded
+- non-canonical
+- preserved for traceability only
 
-## 🧠 control/
-**How the system works**
+## Rules
 
-Architecture, backend workflows, CI, alias system, and execution flows.
+- Files in `archive/docs/` **must not** be referenced by:
+  - runtime code
+  - CI checks
+  - SEO indexes
+  - active governance rules
 
-Typical audience:
-- engineers
-- maintainers
-- CI / release automation
+- Moving a document here means:
+  - it no longer defines system behavior
+  - it no longer participates in validation
+  - it is retained strictly for audit or history
 
-Key documents:
-- ARCHITECTURE.md
-- CI.md
-- SOFTFOCUS_ALIAS_SPEC.md
+## Source of Truth
 
----
+All canonical and active documentation lives in:
 
-## 🎨 frontend/
-**What the user sees and experiences**
+- `docs/overview.md`
+- `docs/control/`
+- `docs/governance/`
+- `docs/product/`
+- `docs/seo/`
 
-Product specs, content, protocols, UX, localization, SEO, and public materials.
-
-Typical audience:
-- product
-- content
-- frontend engineers
-- SEO
-
----
-
-## 💼 business/
-**Why and how the project operates commercially**
-
-Monetization, B2B, roadmap, releases, and strategy.
-
-Typical audience:
-- founders
-- business
-- partners
+If a document is required for system correctness,
+**it does not belong here**.
 
 ---
 
-## ⚖️ governance/
-**Rules, risk, and compliance**
-
-Governance policies, risk escalation, validation rules, and audits.
-
-Typical audience:
-- maintainers
-- reviewers
-- auditors
-
----
-
-## 🔒 internal/
-**Internal-only reasoning**
-
-Engineering constitution, internal notes, and non-public rationale.
-
----
-
-## 🛠 operations/
-**Operational execution**
-
-Release operations and operational policies.
-
----
-
-## 📜 policy/
-**Formal policies**
-
-Maintenance and execution policies.
-
----
-
-## 📦 releases/
-**Historical releases**
-
-Release artifacts and historical records.
+Archive is immutable by default.
