@@ -1,0 +1,45 @@
+name: Project Bundle (Mandatory)
+
+on:
+  push:
+    branches: [ phase-c, main ]
+  pull_request:
+
+jobs:
+  project-bundle:
+    name: Generate Project Bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify bundle generator exists
+        run: |
+          test -x scripts/bundles/generate_project_bundle.sh
+
+      - name: Generate project bundle
+        run: |
+          scripts/bundles/generate_project_bundle.sh
+
+      - name: Verify latest.md exists
+        run: |
+          test -f artifacts/bundles/latest.md
+
+      - name: Upload bundle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-bundle
+          path: artifacts/bundles/
+
+      - name: Guard latest.md (read-only in PR)
+        run: |
+          scripts/ci/guard_latest_md.sh
+
+      - name: Guard docs/overview.md (canonical)
+        run: |
+          scripts/ci/guard_overview_md.sh
+
+      - name: Bundle diff signal (previous vs latest)
+        run: |
+          scripts/ci/bundle_diff_signal.sh
