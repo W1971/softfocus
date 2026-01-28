@@ -32,3 +32,6 @@ YAML/
 модем
 на
 проверить
+# Generated audit artifacts
+artifacts/bundles/
+artifacts/*.diff
