@@ -1,7 +1,7 @@
 # SoftFocus — Overview, Architecture & Product Plan  
 **(Operational Update & Forward Roadmap)**
 
-**Version:** v1.4  
+**Version:** v1.5.0  
 **Status:** ACTIVE (Operational, Phase B readiness achieved)  
 **Mode:** governance-aware, product-first, deterministic
 
