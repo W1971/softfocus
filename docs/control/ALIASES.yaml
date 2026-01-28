@@ -10,3 +10,30 @@ aliases:
     affects_readiness: true
     scripts:
       - alias_softfocus/bin/frontend-build
+
+  monetization-dry-run:
+    scope: governance
+    purpose: Enforce Phase C monetization readiness
+    status: DRY_RUN_ALLOWED
+    risk_level: HIGH
+    execution: MANUAL_ONLY
+    scripts:
+      - backend/scripts/governance/checklists/monetization-dry-run.check.sh
+    blocks:
+      - monetization
+      - production-release
+    manual_override: forbidden
+
+  approve-monetization:
+    scope: governance
+    purpose: Explicit approval to enable monetization
+    status: LOCKED
+    risk_level: CRITICAL
+    execution: MANUAL_ONLY
+    scripts:
+      - backend/scripts/governance/approve-monetization.sh
+    requires:
+      - monetization-dry-run: PASS
+    blocks:
+      - production-release
+    manual_override: forbidden

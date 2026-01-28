@@ -24,3 +24,7 @@ aliases:
     target:
       - scripts/softfocus-stage.sh
       - backend/scripts/guards/root-route-guard.sh
+
+
+  monetization-dry-run:
+    target: backend/scripts/governance/checklists/monetization-dry-run.check.sh
