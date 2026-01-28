@@ -72,3 +72,24 @@ Burnout рассматривается не как диагноз,
 при текущей нагрузке.
 
 → [Калькулятор сна и восстановления](/kalkulyator-sna)
+
+---
+
+## SEO Entry Mapping (Non-Canonical)
+
+This index is referenced by SEO entry points,
+but does not depend on them.
+
+SEO-facing guides:
+- introduce questions
+- surface confusion
+- frame problems
+
+Canonical explanations:
+- define terms
+- stabilize meaning
+- resolve interpretation
+
+Interpretation rule:
+If an SEO page and this index diverge,
+this index is authoritative.
