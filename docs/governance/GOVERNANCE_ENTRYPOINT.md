@@ -93,3 +93,11 @@ is not referenced directly or indirectly
 from this entrypoint,
 it is **not governance-authorized**.
 
+
+---
+
+## Active Invariants
+
+- SEO vs Canonical Explanation Separation  
+  → docs/governance/invariants/SEO_CANONICAL_SEPARATION.md
+

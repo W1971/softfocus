@@ -37,3 +37,8 @@ aliases:
     blocks:
       - production-release
     manual_override: forbidden
+
+# Alias Security Contract
+# All executable aliases must comply with:
+# docs/control/aliases/ALIAS_SECURITY_CONTRACT.md
+

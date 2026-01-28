@@ -119,15 +119,29 @@ Changes require:
 - governance approval
 - version update
 
+---
+
+## Planning Horizon
+
+### 1 Week
+- Enforce hierarchy in new docs
+- Reject misplaced documents
+
+### 1 Month
+- Audit existing docs against hierarchy
+- Downgrade or archive weak documents
+
+### 6 Months
+- Reduce total document count if possible
+- Prefer clarity over completeness
 
 ---
 
-## Naming note: docs/frontend vs /frontend
+## Naming Note: docs/frontend vs /frontend
 
 SoftFocus uses two layers that share the name "frontend":
 
 - docs/frontend/ — specification and governance documentation
-  (contracts, policies, mobile rules, schemas)
 - /frontend/ — runtime implementation and buildable code
 
 Interpretation rule:
