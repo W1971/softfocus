@@ -1,55 +1,50 @@
-# SoftFocus — External Audit Entry Point
+# SoftFocus — Audit Entry
 
-This repository supports deterministic external audit.
-
-## What SoftFocus Is
-SoftFocus is a non-clinical analytical system that evaluates
-whether recovery is closed under sustained cognitive load.
-
-It does NOT provide:
-- diagnosis
-- recommendations
-- behavioral guidance
-- norms or targets
-
-## Canonical Sources
-Meaning is defined only by:
-
-- docs/overview.md
-- docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md
-
-SEO, UI, and translations are non-authoritative.
-
-## How to Run the Audit
-
-```bash
-scripts/audit/run_external_audit.sh
-Exit codes:
-0 — PASS
-10 — CONDITIONAL (warnings only)
-20 — FAIL (canonical or governance violation)
-Audit Mode
-Read-only
-No build required
-No runtime execution
-Repository inspection only
-Interpretation Rule
-If audit results require explanation or justification,
-the system must be considered unsafe.
-This file is authoritative for auditors.
+This directory contains all materials required for
+external or internal audit of SoftFocus (Phase C).
 
 ---
 
-## Latest Canonical Bundle
+## Primary Audit Entry
 
-Auditors should **always start here**:
+### 1. Audit Handoff (Human-Readable)
+- `AUDIT_HANDOFF.md`
 
+This document explains:
+- system scope and non-clinical boundaries
+- canonical document precedence
+- audit procedure and exit codes
+- governance constraints
+
+---
+
+### 2. Generated Project Bundle (Machine-Traceable)
 - `artifacts/bundles/latest.md`
 
-This file is:
-- generated automatically
-- updated on every CI run
-- timestamped (UTC)
-- protected from manual edits
+This file:
+- is generated automatically
+- is timestamped (UTC)
+- includes git metadata
+- includes SHA256 checksum
+- is the authoritative snapshot of project state
 
-If this file is missing or outdated, the audit must be considered invalid.
+---
+
+## Verification Order (Recommended)
+
+1. Read `AUDIT_HANDOFF.md`
+2. Open `artifacts/bundles/latest.md`
+3. (Optional) Run `scripts/audit/run_external_audit.sh`
+4. Compare results against baseline tag:
+   - `phase-c-clean-baseline`
+
+---
+
+## Important Notes
+
+- Do NOT edit generated artifacts manually
+- All canonical meaning is defined by:
+  - `docs/overview.md`
+  - `docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md`
+- SEO or guide content must not redefine meaning
+
