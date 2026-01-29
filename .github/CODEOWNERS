@@ -1,0 +1,10 @@
+# Global defaults
+* @softfocus/core-maintainers
+
+# Canonical entry points (strict review)
+docs/overview.md            @softfocus/governance
+docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md @softfocus/governance
+
+# Root landing page (semantic boundary)
+app/page.tsx                @softfocus/governance
+app/en/page.tsx             @softfocus/governance
