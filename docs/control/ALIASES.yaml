@@ -51,3 +51,14 @@ aliases:
       - scripts/tools/end_of_phase_snapshot.sh
     blocks: []
     manual_override: forbidden
+
+  maintenance-guard:
+    scope: governance
+    purpose: Enforce Maintenance Mode after Phase D completion
+    status: READY
+    risk_level: HIGH
+    execution: MANUAL_ONLY
+    scripts:
+      - scripts/governance/maintenance-mode/check-maintenance-mode.sh
+    affects_readiness: true
+    manual_override: forbidden
