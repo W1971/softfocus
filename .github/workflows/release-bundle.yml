@@ -1,4 +1,4 @@
-name: Release Bundle
+name: Release Bundle (End-of-Phase Snapshot)
 
 on:
   push:
@@ -7,17 +7,20 @@ on:
       - 'phase-*'
 
 jobs:
-  generate-bundle:
+  end-of-phase-snapshot:
+    name: End-of-Phase Snapshot
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Generate project bundle
+      - name: Generate end-of-phase project bundle
         run: |
-          chmod +x scripts/bundles/generate_project_bundle.sh
-          scripts/bundles/generate_project_bundle.sh
+          chmod +x scripts/tools/end_of_phase_snapshot.sh
+          scripts/tools/end_of_phase_snapshot.sh
 
-      - name: Upload bundle artifacts
+      - name: Upload project bundle artifacts
         uses: actions/upload-artifact@v4
         with:
           name: project-bundle
