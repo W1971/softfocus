@@ -362,3 +362,14 @@ This rule is mandatory and overrides informal interpretations.
 
 Routing decisions (including the root route) are governed by
 docs/control/ROOT_ROUTE_POLICY.md.
+
+---
+
+## Project Phase Status
+
+- Current phase: **Phase D**
+- Phase D status: **COMPLETE**
+- Project mode: **Maintenance Mode**
+
+Phase D is formally closed and archived.
+All subsequent changes must comply with Maintenance Mode constraints.
