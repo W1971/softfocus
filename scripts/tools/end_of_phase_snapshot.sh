@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Purpose:
+# Generate an immutable project snapshot at the end of a lifecycle phase.
+# Used for archival, audit, and governance verification.
+
 set -euo pipefail
 
 VERSION_FILE="release/VERSION.md"
