@@ -30,19 +30,13 @@ export default function HomePageEN() {
       </section>
 
       <section>
-        <h2>Analytical tools</h2>
+        <h2>How the system works</h2>
 
         <p>
-          SoftFocus tools show whether recovery closes
-          under current load.
+          SoftFocus helps clarify what is happening
+          before any analytical tools are introduced.
         </p>
 
-        <Link href="/kalkulyator-sna">
-          Sleep &amp; Recovery Calculator
-        </Link>
-      </section>
-
-      <section>
         <Link href="/guides/explanations">
           Canonical SoftFocus Explanations
         </Link>

@@ -9,6 +9,12 @@ export function CalculatorScreen({ calculator }: Props) {
   return (
     <main>
       <header>
+        <p>
+          Этот инструмент представляет аналитическую модель.
+          Он предназначен для углублённого анализа
+          и не является рекомендацией или следующим шагом.
+        </p>
+
         <h1>{calculator.title}</h1>
         <p>{calculator.description}</p>
       </header>

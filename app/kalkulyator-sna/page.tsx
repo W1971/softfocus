@@ -3,6 +3,12 @@ import { sleepCalculatorEN } from "@/frontend/content/calculators/sleepCalculato
 export default function SleepCalculatorPage() {
   return (
     <main>
+      <p>
+        Этот калькулятор является аналитической глубиной.
+        Он не предназначен для первичного входа
+        и используется после понимания модели SoftFocus.
+      </p>
+
       <h1>{sleepCalculatorEN.title}</h1>
 
       {sleepCalculatorEN.sections.map((section) => (
