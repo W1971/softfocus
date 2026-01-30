@@ -38,7 +38,16 @@ aliases:
       - production-release
     manual_override: forbidden
 
-# Alias Security Contract
-# All executable aliases must comply with:
-# docs/control/aliases/ALIAS_SECURITY_CONTRACT.md
-
+  snapshot:
+    scope: governance
+    purpose: >
+      Generate an immutable end-of-phase project snapshot bundle
+      for audit, archival, and governance verification.
+    status: READY
+    risk_level: LOW
+    execution: MANUAL_ONLY
+    affects_readiness: false
+    scripts:
+      - scripts/tools/end_of_phase_snapshot.sh
+    blocks: []
+    manual_override: forbidden

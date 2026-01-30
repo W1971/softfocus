@@ -8,7 +8,7 @@ set -euo pipefail
 VERSION_FILE="release/VERSION.md"
 BUNDLE_DIR="artifacts/bundles"
 DATE="$(date -u +%Y-%m-%d)"
-TIMESTAMP="$(date -u +%Y-%m-%d %H:%M UTC)"
+TIMESTAMP="$(date -u '+%Y-%m-%d %H:%M')"
 VERSION="unknown"
 
 if [ -f "$VERSION_FILE" ]; then
