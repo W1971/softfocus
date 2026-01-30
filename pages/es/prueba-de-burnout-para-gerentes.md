@@ -44,6 +44,6 @@ Esta evaluación no es clínica.
 No proporciona diagnóstico ni tratamiento
 y no sustituye la atención médica o psicológica.
 
-## Siguiente paso
+## Evaluación
 
 [Realizar la evaluación de burnout](/es/tests/burnout-test)

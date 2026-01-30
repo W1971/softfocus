@@ -46,6 +46,6 @@ This assessment is non-clinical.
 It does not provide diagnosis or treatment
 and does not replace medical or psychological care.
 
-## Next step
+## Assessment
 
 [Take the burnout assessment](/en/tests/burnout-test)
