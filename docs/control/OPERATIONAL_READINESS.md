@@ -1,130 +1,159 @@
-# Operational Readiness — SoftFocus v1
+# SoftFocus — Operational Readiness v1
 
-**Status:** NORMATIVE  
-**Applies to:** SoftFocus v1.x  
-**Effective from:** declaration event
-
----
-
-## 1. Purpose
-
-This document defines the exact conditions under which **SoftFocus v1**
-is considered **operationally ready**.
-
-Operational readiness marks the transition from:
-- implementation → operation
-- project → asset
-
-Once declared, SoftFocus v1 is treated as a stable, governed system.
+**Status:** DECLARED  
+**Version:** v1.0  
+**Scope:** System-wide  
+**Effective date:** upon merge  
+**Mutability:** Frozen for v1.x
 
 ---
 
-## 2. Definition of Operational Readiness
+## Purpose
 
-SoftFocus v1 is considered **operationally ready** if and only if
-**all conditions below are satisfied simultaneously**.
+This document declares SoftFocus v1
+as an operationally ready analytical system.
 
-This status is binary.
-Partial readiness does not exist.
+From this point forward:
+- product logic is frozen
+- UX flow is fixed
+- governance rules are enforced
+- the system is treated as a long-term asset
 
----
-
-## 3. Required Conditions (All Mandatory)
-
-### 3.1 Governance
-
-- Content governance rules are active
-- `content-validator` executes without FAIL
-- Non-clinical boundaries are enforced
-- Severity handling (PASS / WARN / FAIL) matches specification
-
-### 3.2 Product Logic
-
-- At least one product-grade assessment or calculator is active
-- All scoring is deterministic
-- Interpretation is explainable
-- No motivational, advisory, or clinical language is present
-
-### 3.3 Entitlement Execution
-
-- Entitlement delivery executes without manual intervention
-- Each execution emits a record to `run.jsonl`
-- Records are:
-  - timestamped
-  - uniquely identifiable
-  - non-ambiguous
-- Severity of entitlement execution is PASS
-
-### 3.4 Control Plane
-
-- `alias-softfocus` is the single execution entry point
-- Alias statuses are generated automatically
-- No manual status overrides exist
-- Core aliases resolve to READY or LOW_CONFIDENCE only
-
-### 3.5 Distribution Boundary
-
-- Distribution pages do not modify product logic
-- Role-based or SEO pages act as overlays only
-- No calculators, assessments, or protocols are embedded in distribution layers
+No informal interpretation overrides this document.
 
 ---
 
-## 4. Explicit Non-Goals
+## Declared Operational State
 
-Operational readiness **does NOT imply**:
+SoftFocus v1 satisfies all conditions
+required for controlled operation.
 
-- product–market fit
-- traffic volume
-- revenue level
-- payment provider integration
-- user growth or engagement metrics
+### Confirmed:
 
-These signals are intentionally excluded.
-
----
-
-## 5. Freeze Semantics
-
-Once SoftFocus v1 is declared operationally ready:
-
-- Product logic is frozen
-- Calculators and assessments are immutable
-- Governance rules are stable for v1.x
-- CI rules are not relaxed
-- Only distribution-layer changes are permitted
-
-Any change to product logic requires a new major version.
+- Deterministic analytical core
+- Frozen recovery scoring logic
+- Canonical analytical axis:
+  burnout → recovery → compensation
+- Non-clinical boundary enforced
+- Governance-aware content validation
+- Auditable monetization readiness
+- UX flow locked and enforced
 
 ---
 
-## 6. Relationship to Lifecycle Phases
+## Canonical UX Flow (Frozen)
 
-- Phase A (Operation & Observation) begins only after readiness declaration
-- Phase B (Minor Expansion) may occur without modifying product logic
-- Phase C (Major Expansion) requires a new analytical axis (v2.x)
+The only allowed user flow is:
 
----
+pSEO Entry (role + locale)
+        ↓
+Unified Burnout Assessment
+        ↓
+Canonical Interpretation Layer (mandatory)
+        ↓
+Optional Analytical Depth (Calculators)
 
-## 7. Relationship to v2
-
-Version v2 **cannot be initiated** unless:
-
-- SoftFocus v1 is formally declared operationally ready
-- This document is satisfied in full
-
-v2 documents may exist in DESIGN ONLY state prior to readiness,
-but grant no execution authority.
+No alternative flows are permitted.
 
 ---
 
-## 8. Declaration Event
+## UX Enforcement Rules
 
-Operational readiness is declared when:
+### Entry
+- Landing pages do not lead to calculators
+- No step-based or action-oriented CTAs
+- No promises of change or improvement
 
-- All conditions in Section 3 are met
-- CI passes without exception
-- A tagged release is created
-- No pending FAIL or masked WARN exists
+### Interpretation
+- Mandatory after assessment
+- Central meaning anchor
+- Required before analytical depth
 
-After declaration, SoftFocus v1 is an operational asset.
+### Calculators
+- Secondary analytical tools
+- Not entry points
+- No behavioral guidance
+- No “next step” framing
+
+---
+
+## Calculator Alignment Confirmation
+
+All calculators and result screens:
+
+- Use orientation-only language
+- Avoid advice or recommendations
+- Avoid progress or improvement framing
+- Present scores as analytical indices
+- Present penalties as contributing factors
+
+CTA elements are not permitted
+in result or calculator screens.
+
+---
+
+## Content & Language Freeze
+
+For SoftFocus v1.x:
+
+- Terminology is frozen
+- Canonical explanations are authoritative
+- pSEO pages may be added only if:
+  - they follow the canonical template
+  - they do not introduce new concepts
+  - they do not alter interpretation
+
+Any deviation requires an RFC
+and a version increment.
+
+---
+
+## Governance Authority
+
+This document overrides:
+- frontend preferences
+- content experimentation
+- growth or SEO optimizations
+- informal UX decisions
+
+If implementation diverges,
+implementation must be corrected.
+
+---
+
+## Allowed Changes After Declaration
+
+Permitted without RFC:
+- bug fixes
+- copy typo fixes
+- infrastructure maintenance
+- language translations (content-only)
+
+Not permitted without RFC:
+- new analytical axes
+- changes to scoring logic
+- UX flow modifications
+- behavioral or advisory content
+
+---
+
+## Operational Mode
+
+After this declaration:
+
+- SoftFocus v1 is treated as an operational asset
+- Feature work is paused
+- Changes are governance-gated
+- Phase B expansion is limited to surface only
+
+---
+
+## Exit Conditions
+
+SoftFocus remains in this state until:
+- a new RFC explicitly opens Phase C
+- or the project is formally sunset
+
+Until then,
+this operational state is binding.
+

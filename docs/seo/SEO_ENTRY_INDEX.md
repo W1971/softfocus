@@ -101,3 +101,20 @@ Rules:
 
 This separation prevents semantic drift
 between discovery and interpretation.
+
+---
+
+## Phase D — Wave 3 (Role Pages)
+
+### Sales / Support / Finance
+
+EN / ES / RU / AR role-specific analytical entry points.
+
+Purpose:
+- role-contextual framing of burnout risk
+- non-clinical, non-advisory orientation
+- controlled entry into canonical assessment
+
+All links resolve to:
+→ /tests/burnout-test (locale-aware)
+
