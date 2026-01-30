@@ -1,0 +1,24 @@
+name: Release Bundle
+
+on:
+  push:
+    tags:
+      - 'v*'
+      - 'phase-*'
+
+jobs:
+  generate-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate project bundle
+        run: |
+          chmod +x scripts/bundles/generate_project_bundle.sh
+          scripts/bundles/generate_project_bundle.sh
+
+      - name: Upload bundle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-bundle
+          path: artifacts/bundles/
