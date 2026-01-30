@@ -4,6 +4,7 @@ set -euo pipefail
 VERSION_FILE="release/VERSION.md"
 BUNDLE_DIR="artifacts/bundles"
 DATE="$(date -u +%Y-%m-%d)"
+TIMESTAMP="$(date -u +%Y-%m-%d %H:%M UTC)"
 VERSION="unknown"
 
 if [ -f "$VERSION_FILE" ]; then
@@ -13,20 +14,25 @@ fi
 OUT="$BUNDLE_DIR/project_bundle_v${VERSION}_${DATE}.md"
 
 DOCS=(
+  "README.md"
+  "docs/overview.md"
   "docs/PROJECT_DOCS_HIERARCHY.md"
   "docs/PROJECT_DOCUMENTATION_OVERVIEW.md"
+  "docs/control/OPERATIONAL_READINESS.md"
   "docs/seo/SEO_ENTRY_INDEX.md"
   "docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md"
-  "docs/overview.md"
+  "docs/phase-d/PHASE_D_ARCHIVE.md"
+  "docs/operations/MAINTENANCE_MODE.md"
 )
+
 
 mkdir -p "$BUNDLE_DIR"
 : > "$OUT"
 
 echo "# SoftFocus — Project Bundle" >> "$OUT"
 echo "" >> "$OUT"
-echo "- Version: $VERSION" >> "$OUT"
-echo "- Generated: $DATE (UTC)" >> "$OUT"
+echo "- Generated (UTC): $TIMESTAMP" >> "$OUT"
+echo "- Snapshot date: $DATE" >> "$OUT"
 echo "" >> "$OUT"
 echo "---" >> "$OUT"
 
