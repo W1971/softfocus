@@ -1,0 +1,41 @@
+# Alias Scope Map
+# Defines which parts of the repository each alias is responsible for.
+# Used by generate-status and CI aggregation.
+
+aliases:
+  project-clean:
+    targets:
+      - scripts/maintenance/*
+
+  content-validate:
+    targets:
+      - backend/scripts/content-validator/*
+
+  pipeline-check:
+    targets:
+      - scripts/ci/*
+
+  backend-check:
+    targets:
+      - backend/scripts/governance/full-governance-run.sh
+
+  frontend-build:
+    targets:
+      - alias_softfocus/bin/frontend-build
+
+  generate-status:
+    targets:
+      - alias_softfocus/bin/generate-status
+
+  v2-governance:
+    targets:
+      - scripts/ci/check-v2-governance.sh
+
+  pipeline-guard:
+    targets:
+      - scripts/softfocus-stage.sh
+      - backend/scripts/guards/root-route-guard.sh
+
+  monetization-dry-run:
+    targets:
+      - backend/scripts/governance/checklists/monetization-dry-run.check.sh
