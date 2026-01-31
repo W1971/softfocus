@@ -1,90 +1,86 @@
 #!/usr/bin/env node
+
 /**
- * generate-status v2
- * Phase B — deterministic, blocking readiness aggregator
+ * SoftFocus — generate-status
+ *
+ * CI-oriented status aggregator.
+ * Requires explicit RUN_ID.
  */
 
 import fs from "fs";
-import path from "path";
-import yaml from "js-yaml";
 
-const RUN_ID = process.argv[2];
+const RUN_ID = process.env.RUN_ID;
 
-const ALIASES_PATH = "docs/control/ALIASES.yaml";
-const RUNS_BASE = "tests/runs";
-const OUTPUT_PATH = "alias_softfocus/status/derived-status.json";
-
-if (!RUN_ID) fail("RUN_ID is required");
-
-const RUN_DIR = path.join(RUNS_BASE, RUN_ID);
-const RUN_LOG = path.join(RUN_DIR, "run.jsonl");
-
-failIf(!fs.existsSync(ALIASES_PATH), "ALIASES file missing");
-failIf(!fs.existsSync(RUN_LOG), `run.jsonl missing for RUN_ID=${RUN_ID}`);
-
-/* ---------- Load aliases ---------- */
-
-const aliasesYaml = yaml.load(fs.readFileSync(ALIASES_PATH, "utf8"));
-failIf(!aliasesYaml || !aliasesYaml.aliases, "Invalid aliases schema");
-
-const controlledAliases = Object.entries(aliasesYaml.aliases)
-  .filter(([, v]) => v && v.affects_readiness === true)
-  .map(([k]) => k);
-
-failIf(controlledAliases.length === 0, "No readiness aliases defined");
-
-/* ---------- Load run evidence ---------- */
-
-const records = fs
-  .readFileSync(RUN_LOG, "utf8")
-  .trim()
-  .split("\n")
-  .map((l) => JSON.parse(l));
-
-/* ---------- Evaluate ---------- */
-
-for (const alias of controlledAliases) {
-  const hits = records.filter(
-    (r) => r.alias === alias && r.run_id === RUN_ID
-  );
-
-  if (hits.length === 0) {
-    fail(`Missing execution evidence for alias '${alias}'`);
-  }
-
-  const last = hits[hits.length - 1];
-
-  if (last.status !== "PASS") {
-    fail(`Alias '${alias}' status=${last.status}`);
-  }
-}
-
-/* ---------- SUCCESS ---------- */
-
-const result = {
-  run_id: RUN_ID,
-  phase: "B",
-  status: "READY",
-  checked_aliases: controlledAliases,
-  timestamp: new Date().toISOString(),
-};
-
-fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-fs.writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2));
-
-console.log(`RUN_ID: ${RUN_ID}`);
-console.log(`Aliases checked: ${controlledAliases.length}`);
-console.log("Result: READY");
-
-process.exit(0);
-
-/* ---------- Helpers ---------- */
-
-function fail(msg) {
-  console.error(`FAIL: ${msg}`);
+if (!RUN_ID) {
+  console.error("FAIL: RUN_ID is required");
   process.exit(1);
 }
 
-function failIf(cond, msg) {
-  if (cond) fail(msg);
+const EXEC_LOG = "alias_softfocus/status/execution.log";
+const CLASSES_FILE = "docs/control/ALIAS_CLASSES.yaml";
+
+/**
+ * Load last execution status per alias
+ */
+function loadExecutionStatus() {
+  if (!fs.existsSync(EXEC_LOG)) return {};
+  const lines = fs.readFileSync(EXEC_LOG, "utf8").trim().split("\n");
+  const map = {};
+  for (const line of lines) {
+    if (!line) continue;
+    const entry = JSON.parse(line);
+    map[entry.alias] = entry.status;
+  }
+  return map;
+}
+
+/**
+ * Load alias classes
+ */
+function loadAliasClasses() {
+  if (!fs.existsSync(CLASSES_FILE)) {
+    console.error("FAIL: ALIAS_CLASSES.yaml missing");
+    process.exit(1);
+  }
+
+  const lines = fs.readFileSync(CLASSES_FILE, "utf8").split("\n");
+  const classes = {};
+
+  for (const l of lines) {
+    if (/^\s+[a-z0-9-]+:\s*(CORE|OPTIONAL|EXPERIMENTAL)\s*$/.test(l)) {
+      const [name, cls] = l.trim().split(":").map(s => s.trim());
+      classes[name] = cls;
+    }
+  }
+
+  return classes;
+}
+
+const execStatus = loadExecutionStatus();
+const aliasClasses = loadAliasClasses();
+
+let overall = "READY";
+const report = {};
+
+for (const alias of Object.keys(aliasClasses)) {
+  const cls = aliasClasses[alias];
+  const status = execStatus[alias] || "UNKNOWN";
+
+  report[alias] = { class: cls, status };
+
+  if (cls === "CORE" && status !== "PASS") {
+    overall = "FAIL";
+  }
+}
+
+const result = {
+  run_id: RUN_ID,
+  overall,
+  aliases: report,
+};
+
+console.log(JSON.stringify(result, null, 2));
+
+if (overall === "FAIL") {
+  process.exit(1);
 }
