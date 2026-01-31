@@ -1,0 +1,17 @@
+type: stage-audit
+stage: 1
+name: mobile-visual-layer
+
+checklist:
+  path: docs/mobile/MOBILE_VISUAL_LAYER_CHECKLIST.md
+  checksum: ce09c2253642b8a4ce7ffe73451c59c68341ac158ed18aeb9123e79d0f8fc747
+
+artifact:
+  scope: mobile
+  paths:
+    - mobile/
+    - frontend/screens/mobile/
+
+commit: 78043e667629acf1c032938ab499afd81adde54e
+
+result: PASS
