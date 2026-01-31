@@ -1,0 +1,23 @@
+type: mobile-ui-audit
+version: v1
+
+checklist:
+  path: docs/mobile/MOBILE_UI_AUDIT_CHECKLIST.md
+  checksum: e3b0c44298fc1c149afbf4c8996fb924...
+
+artifact:
+  scope: mobile-ui
+  paths:
+    - frontend/screens/mobile/
+  commit: 1a2b3c4d5e
+
+audit:
+  date: 2026-01-23
+  auditor: product-governance
+  result: PASS
+
+notes:
+  - no onboarding present
+  - no progress indicators
+  - no implied next step
+  - exit feels complete
