@@ -24,9 +24,16 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies
+      - name: Install dependencies (best effort)
         run: |
           npm ci || true
+
+      - name: Verify Stage-3 audit artifact exists
+        run: |
+          if [ ! -f docs/mobile/audit/stage-3.latest.yaml ]; then
+            echo "❌ Missing Stage-3 audit artifact"
+            exit 1
+          fi
 
       - name: Run Stage-3 Interaction Gate
         env:
