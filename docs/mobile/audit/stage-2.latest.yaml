@@ -1,0 +1,17 @@
+type: stage-audit
+stage: 2
+name: mobile-semantic-ui
+
+checklist:
+  path: docs/mobile/MOBILE_SEMANTIC_UI_CHECKLIST.md
+  checksum: 9d0d9bc196883b32290019d42748dafa54c5895a3f943af7fc481ddf72a51787
+
+artifact:
+  scope: mobile
+  paths:
+    - mobile/
+    - frontend/screens/mobile/
+
+commit: 452c6e987b4bd5ab8d7865e5836bb700eece9e6f
+
+result: PASS
