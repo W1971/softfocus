@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+case "$1" in
+  stage-1)
+    ./scripts/gates/check-stage.sh stage-1 docs/mobile/audit/stage-1.latest.yaml
+    ;;
+  stage-2)
+    ./scripts/gates/check-stage.sh stage-2 docs/mobile/audit/stage-2.latest.yaml
+    ;;
+  stage-3)
+    ./scripts/gates/check-stage.sh stage-3 docs/mobile/audit/stage-3.latest.yaml
+    ;;
+  *)
+    echo "Unknown command"
+    exit 1
+    ;;
+esac
