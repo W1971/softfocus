@@ -3,7 +3,7 @@ version: v1
 
 checklist:
   path: docs/mobile/MOBILE_UI_AUDIT_CHECKLIST.md
-  checksum: INVALIDCHECKSUM
+  checksum: def349473df529efbdcd7ab39c3c0d0da26cfceb90fa6910efd8594ec774cc94
 
 artifact:
   scope: mobile-ui
