@@ -12,6 +12,6 @@ artifact:
     - mobile/
     - frontend/screens/mobile/
 
-commit: 78043e667629acf1c032938ab499afd81adde54e
+commit: a6a4670e000d948e4ba28cb728653d43cbf5b857
 
 result: PASS
