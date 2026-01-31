@@ -1,18 +1,58 @@
 #!/usr/bin/env node
 
+/**
+ * SoftFocus Canonical Alias CLI
+ *
+ * Supported:
+ *   alias-softfocus stage-1
+ *   alias-softfocus stage-2
+ *   alias-softfocus stage-3
+ *   alias-softfocus bundle
+ *
+ * Advanced:
+ *   alias-softfocus run <alias>
+ *   alias-softfocus list
+ *   alias-softfocus docs
+ */
+
 import fs from "fs";
 import { spawnSync } from "child_process";
 import { resolveAlias } from "../lib/resolve-alias.js";
 
-const [, , subcommand, aliasName, ...args] = process.argv;
+const [, , rawCommand, rawAlias, ...rawArgs] = process.argv;
 const FORCE = process.env.FORCE === "1";
 
-if (!subcommand) {
+/**
+ * Shorthand commands mapped to `run <alias>`
+ */
+const SHORTHANDS = new Set([
+  "stage-1",
+  "stage-2",
+  "stage-3",
+  "bundle",
+]);
+
+let command = rawCommand;
+let aliasName = rawAlias;
+let args = rawArgs;
+
+/**
+ * Rewrite shorthand:
+ *   alias-softfocus stage-2
+ * → alias-softfocus run stage-2
+ */
+if (SHORTHANDS.has(rawCommand)) {
+  command = "run";
+  aliasName = rawCommand;
+  args = rawAlias ? [rawAlias, ...rawArgs] : rawArgs;
+}
+
+if (!command) {
   usage();
   process.exit(1);
 }
 
-switch (subcommand) {
+switch (command) {
   case "run":
     if (!aliasName) {
       console.error("ERROR: alias name required");
@@ -31,10 +71,14 @@ switch (subcommand) {
     break;
 
   default:
-    console.error(`ERROR: unknown command '${subcommand}'`);
+    console.error(`ERROR: unknown command '${command}'`);
     usage();
     process.exit(1);
 }
+
+/* ===================== */
+/* Execution Logic       */
+/* ===================== */
 
 function runAlias(alias, args) {
   let hadWarnings = false;
@@ -56,9 +100,7 @@ function runAlias(alias, args) {
       });
 
       if (result.status !== 0) {
-        console.warn(
-          `[WARN] Alias '${alias}' target failed: ${target}`
-        );
+        console.warn(`[WARN] Alias '${alias}' target failed: ${target}`);
         hadWarnings = true;
       }
     }
@@ -84,12 +126,18 @@ function writeExecutionEvidence(alias, status) {
   );
 }
 
+/* ===================== */
+/* Utility Commands      */
+/* ===================== */
+
 function listAliases() {
   const raw = fs.readFileSync("docs/control/ALIASES.yaml", "utf8");
+
   const names = raw
     .split("\n")
-    .filter((l) => l.startsWith("  ") && l.trim().endsWith(":"))
-    .map((l) => l.trim().replace(":", ""));
+    .map((l) => l.trimEnd())
+    .filter((l) => /^[a-z0-9-]+:\s*$/.test(l))
+    .map((l) => l.replace(":", ""));
 
   console.log("Available SoftFocus aliases:");
   names.forEach((a) => console.log(" ", a));
@@ -102,9 +150,22 @@ function docsStub() {
   process.exit(0);
 }
 
+/* ===================== */
+/* Help                  */
+/* ===================== */
+
 function usage() {
   console.log(`
 Usage:
+  alias-softfocus <command>
+
+Commands:
+  stage-1   Run visual UI gate
+  stage-2   Run semantic UI gate
+  stage-3   Run interaction gate
+  bundle    Generate project bundle
+
+Advanced:
   alias-softfocus run <alias>
   alias-softfocus list
   alias-softfocus docs
