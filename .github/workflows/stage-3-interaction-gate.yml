@@ -1,0 +1,35 @@
+name: Stage-3 Interaction UI Gate
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "mobile/**"
+      - "frontend/screens/mobile/**"
+      - "docs/mobile/**"
+      - "scripts/gates/**"
+      - "docs/control/ALIASES.yaml"
+
+jobs:
+  stage-3-gate:
+    name: Stage-3 Interaction Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm ci || true
+
+      - name: Run Stage-3 Interaction Gate
+        env:
+          CI: "1"
+        run: |
+          ./scripts/gates/check-stage.sh stage-3 docs/mobile/audit/stage-3.latest.yaml
