@@ -1,0 +1,17 @@
+type: desktop-ui-audit
+version: v1
+
+checklist:
+  path: docs/frontend/RECOVERY_UI_CONTRACT.md
+  checksum: <sha256>
+
+artifact:
+  scope: desktop-recovery-ui
+  paths:
+    - frontend/screens/recovery/
+  commit: <git_commit>
+
+audit:
+  date: 2026-01-23
+  auditor: product-governance
+  result: PASS

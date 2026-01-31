@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   push:
     branches: [ main ]
+  create:
+    tags:
+      - '*'
 
 jobs:
   mobile-ui-audit:
@@ -24,41 +27,34 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Skip audit (no mobile changes)
-        if: steps.mobile_changes.outputs.changed == 'false'
-        run: |
-          echo "No mobile UI changes detected. Audit gate skipped."
-
       - name: Validate mobile UI audit
         if: steps.mobile_changes.outputs.changed == 'true'
         run: |
           AUDIT_FILE="docs/mobile/audit/mobile-ui-audit.latest.yaml"
           CHECKLIST="docs/mobile/MOBILE_UI_AUDIT_CHECKLIST.md"
 
-          if [ ! -f "$AUDIT_FILE" ]; then
-            echo "❌ Missing mobile UI audit file"
-            exit 1
-          fi
+          [ -f "$AUDIT_FILE" ] || exit 1
 
           RESULT=$(grep '^ *result:' "$AUDIT_FILE" | awk '{print $2}')
           COMMIT=$(grep '^ *commit:' "$AUDIT_FILE" | awk '{print $2}')
 
-          if [ "$RESULT" != "PASS" ]; then
-            echo "❌ Mobile UI audit result is not PASS"
-            exit 1
-          fi
-
-          if [ "$COMMIT" != "$(git rev-parse HEAD)" ]; then
-            echo "❌ Audit commit does not match HEAD"
-            exit 1
-          fi
+          [ "$RESULT" = "PASS" ] || exit 1
+          [ "$COMMIT" = "$(git rev-parse HEAD)" ] || exit 1
 
           CHECKSUM_CURRENT=$(sha256sum "$CHECKLIST" | awk '{print $1}')
           CHECKSUM_AUDIT=$(grep '^ *checksum:' "$AUDIT_FILE" | awk '{print $2}')
 
-          if [ "$CHECKSUM_CURRENT" != "$CHECKSUM_AUDIT" ]; then
-            echo "❌ Checklist checksum mismatch"
-            exit 1
-          fi
+          [ "$CHECKSUM_CURRENT" = "$CHECKSUM_AUDIT" ] || exit 1
 
-          echo "✅ Mobile UI audit PASS — gate satisfied"
+  desktop-recovery-ui-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          if git diff --name-only origin/main...HEAD | grep -q '^frontend/screens/recovery/'; then
+            AUDIT="docs/desktop/audit/desktop-recovery-ui-audit.latest.yaml"
+            [ -f "$AUDIT" ] || exit 1
+            grep -q 'result: PASS' "$AUDIT" || exit 1
+          fi

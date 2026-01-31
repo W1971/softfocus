@@ -157,3 +157,8 @@ SoftFocus remains in this state until:
 Until then,
 this operational state is binding.
 
+
+## Mobile UI Governance Gate
+
+Mobile UI changes are blocked by a mandatory CI audit gate.
+See: docs/control/MOBILE_UI_AUDIT_GATE_POLICY.md
