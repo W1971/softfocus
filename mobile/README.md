@@ -1,16 +1,16 @@
----
-type: mobile-carcass
-stage: 0
-reference: frontend/screens/mobile
-audit: not-required
----
+# SoftFocus Mobile App — Carcass (Stage-1)
 
-# SoftFocus Mobile — Carcass
+This directory contains the structural skeleton of the SoftFocus mobile app.
 
-This directory is a native mobile implementation skeleton.
+Scope:
+- screen presence
+- navigation shell
+- layout boundaries
 
-Reference UI semantics:
-- frontend/screens/mobile/*
+Out of scope:
+- styling
+- interaction logic
+- state management
+- animations
 
-Governance source:
-- docs/mobile/*
+This layer exists to satisfy Stage-1 (Visual / Structural readiness).
