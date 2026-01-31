@@ -1,64 +1,68 @@
-aliases:
-  content-validate:
-    scope: scripts
-    affects_readiness: true
-    scripts:
-      - backend/scripts/content-validator/content-validate-run.sh
+# SoftFocus Alias Registry
+# Canonical execution map for alias-softfocus CLI
 
-  frontend-build:
-    scope: scripts
-    affects_readiness: true
-    scripts:
-      - alias_softfocus/bin/frontend-build
+# =========================
+# Mobile UI Stage Gates
+# =========================
 
-  monetization-dry-run:
-    scope: governance
-    purpose: Enforce Phase C monetization readiness
-    status: DRY_RUN_ALLOWED
-    risk_level: HIGH
-    execution: MANUAL_ONLY
-    scripts:
-      - backend/scripts/governance/checklists/monetization-dry-run.check.sh
-    blocks:
-      - monetization
-      - production-release
-    manual_override: forbidden
+stage-1:
+  execution: RESTRICTED
+  description: Visual UI gate (Stage 1)
+  targets:
+    - ./scripts/gates/check-stage.sh stage-1 docs/mobile/audit/stage-1.latest.yaml
 
-  approve-monetization:
-    scope: governance
-    purpose: Explicit approval to enable monetization
-    status: LOCKED
-    risk_level: CRITICAL
-    execution: MANUAL_ONLY
-    scripts:
-      - backend/scripts/governance/approve-monetization.sh
-    requires:
-      - monetization-dry-run: PASS
-    blocks:
-      - production-release
-    manual_override: forbidden
+stage-2:
+  execution: RESTRICTED
+  description: Semantic UI gate (Stage 2)
+  targets:
+    - ./scripts/gates/check-stage.sh stage-2 docs/mobile/audit/stage-2.latest.yaml
 
-  snapshot:
-    scope: governance
-    purpose: >
-      Generate an immutable end-of-phase project snapshot bundle
-      for audit, archival, and governance verification.
-    status: READY
-    risk_level: LOW
-    execution: MANUAL_ONLY
-    affects_readiness: false
-    scripts:
-      - scripts/tools/end_of_phase_snapshot.sh
-    blocks: []
-    manual_override: forbidden
+stage-3:
+  execution: RESTRICTED
+  description: Interaction UI gate (Stage 3)
+  targets:
+    - ./scripts/gates/check-stage.sh stage-3 docs/mobile/audit/stage-3.latest.yaml
 
-  maintenance-guard:
-    scope: governance
-    purpose: Enforce Maintenance Mode after Phase D completion
-    status: READY
-    risk_level: HIGH
-    execution: MANUAL_ONLY
-    scripts:
-      - scripts/governance/maintenance-mode/check-maintenance-mode.sh
-    affects_readiness: true
-    manual_override: forbidden
+# =========================
+# Project Lifecycle
+# =========================
+
+bundle:
+  execution: RESTRICTED
+  description: Generate immutable project bundle
+  targets:
+    - ./scripts/generate-project-bundle.sh
+
+snapshot:
+  execution: RESTRICTED
+  description: Generate lifecycle snapshot
+  targets:
+    - ./scripts/generate-project-bundle.sh
+
+maintenance-guard:
+  execution: RESTRICTED
+  description: Enforce maintenance mode rules
+  targets:
+    - ./scripts/gates/maintenance-guard.sh
+
+# =========================
+# Validation & Build
+# =========================
+
+content-validate:
+  execution: ALLOWED
+  description: Validate content boundaries
+  targets:
+    - ./backend/scripts/content-validator/validate-content.cjs content
+
+frontend-build:
+  execution: ALLOWED
+  description: Build frontend
+  targets:
+    - ./frontend/build.sh
+
+monetization-dry-run:
+  execution: RESTRICTED
+  description: Dry run monetization delivery
+  targets:
+    - ./scripts/monetization/dry-run.sh
