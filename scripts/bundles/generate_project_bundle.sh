@@ -3,8 +3,11 @@ set -euo pipefail
 
 VERSION_FILE="release/VERSION.md"
 BUNDLE_DIR="artifacts/bundles"
-DATE_UTC="$(date -u +%Y-%m-%d)"
-TIME_UTC="$(date -u +%H:%M:%S)"
+
+# --- canonical UTC timestamp (GNU/BSD safe, no spaces) ---
+DATE_UTC="$(date -u '+%Y-%m-%d')"
+TIMESTAMP_UTC="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+
 VERSION="unknown"
 GIT_COMMIT="unknown"
 GIT_BRANCH="unknown"
@@ -64,7 +67,7 @@ done
   echo "# SoftFocus — Project Bundle"
   echo ""
   echo "- Version: $VERSION"
-  echo "- Generated: ${DATE_UTC} ${TIME_UTC} (UTC)"
+  echo "- Generated (UTC): $TIMESTAMP_UTC"
   echo "- Git: ${GIT_COMMIT} (${GIT_BRANCH})"
   echo ""
   echo "---"
@@ -93,18 +96,6 @@ echo "---" >> "$OUT"
 echo "_This bundle is generated automatically. Do not edit manually._" >> "$OUT"
 
 info "Generated $OUT"
-# --------- update latest.md ---------
-LATEST="$BUNDLE_DIR/latest.md"
-NOW_UTC="$(date -u +%Y-%m-%d %H:%M:%S)"
-
-{
-  echo "<!--"
-  echo "Latest bundle pointer"
-  echo "Updated: $NOW_UTC UTC"
-  echo "Source: $(basename "$OUT")"
-  echo "-->"
-  echo ""
-} > "$BUNDLE_DIR/.latest_header.tmp"
 
 # --------- checksum (sha256) ---------
 if command -v sha256sum >/dev/null 2>&1; then
@@ -127,6 +118,17 @@ awk -v cs="$CHECKSUM" '
 
 mv "$tmp_checksum" "$OUT"
 
+# --------- update latest.md ---------
+LATEST="$BUNDLE_DIR/latest.md"
+
+{
+  echo "<!--"
+  echo "Latest bundle pointer"
+  echo "Updated: $TIMESTAMP_UTC"
+  echo "Source: $(basename "$OUT")"
+  echo "-->"
+  echo ""
+} > "$BUNDLE_DIR/.latest_header.tmp"
 
 if ln -sf "$(basename "$OUT")" "$LATEST" 2>/dev/null; then
   cat "$BUNDLE_DIR/.latest_header.tmp" "$OUT" > "$BUNDLE_DIR/.latest.tmp"
