@@ -35,6 +35,7 @@ These documents define rules, constraints, and enforcement.
 Directories:
 - docs/governance/
 - docs/control/
+- docs/control/PROJECT_BUNDLE_POLICY.md
 
 Characteristics:
 - normative
@@ -152,3 +153,11 @@ If implementation diverges from docs/frontend/,
 the documentation is considered canonical
 and the implementation must be corrected.
 
+
+### Runtime Split
+
+- app/web → governed by docs/web/**
+- app/mobile → governed by docs/mobile/**
+- app/shared → governed by docs/product/**
+
+Cross-scope references are forbidden.
