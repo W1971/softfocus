@@ -8,10 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Backend CI gate + pipeline check
+      - name: Backend CI gates (FAIL-FAST)
         run: |
-          ./scripts/alias/sfctl ci-gate
-          ./scripts/alias/sfctl pipeline-check
+          ./scripts/alias/sfctl stage-1
+          ./scripts/alias/sfctl stage-2
+          ./scripts/alias/sfctl stage-3
+
+      - name: Backend bundle check
+        run: |
+          ./scripts/alias/sfctl bundle
 
   frontend:
     needs: backend
