@@ -23,6 +23,38 @@ It introduces no new rules.
 
 This brief must be read together with:
 
+- docs/mobile/design/MOBILE_FINAL_DESIGN_CONTRACT.md
+- docs/mobile/design/MOBILE_CANONICAL_FLOW.md
+- docs/mobile/design/MOBILE_DESIGN_PROHIBITIONS.md
+- docs/mobile/design/MOBILE_DESIGN_PASS_FAIL.md
+
+If a design decision conflicts with any of the above,
+the design is invalid.
+---
+type: design-brief
+scope: mobile
+audience: designer
+mutability: restricted
+---
+
+# SoftFocus — Mobile Design Brief (v1)
+
+## Role of This Document
+
+This document is an **execution bridge**.
+
+It translates existing SoftFocus mobile governance,
+policies, and constraints into a **single-page brief**
+for design execution.
+
+It introduces no new rules.
+
+---
+
+## Canonical References (Mandatory)
+
+This brief must be read together with:
+
 - docs/mobile/MOBILE_PRODUCT_DESIGN_CONTRACT.md
 - docs/mobile/MOBILE_UI_INTERACTION_RULES.md
 - docs/mobile/MOBILE_SCREEN_ARCHETYPES.md
@@ -122,3 +154,15 @@ This brief defines **constraints**, not inspiration.
 
 If something needs to be explained,
 it does not belong in the product.
+---
+
+## Absolute Rejection Rule
+
+A design must be rejected immediately if:
+
+- the designer feels the need to explain it,
+- the designer adds elements “to help the user”,
+- the design answers “what to do next”,
+- the design feels engaging or motivating.
+
+If explanation is required — the design has failed.

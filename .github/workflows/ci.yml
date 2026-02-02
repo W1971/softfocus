@@ -15,19 +15,5 @@ jobs:
           alias-softfocus run pipeline-check
 
   frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Frontend test + build
-      - name: Generate alias status
-  run: npm run alias:status
-
-- name: Alias gate
-  run: alias-softfocus run project-clean
-
-        run: |
-          cd frontend
-          npm ci
-          npm test
-          npm run build
+    uses: ./.github/workflows/frontend.yml
+    needs: backend
