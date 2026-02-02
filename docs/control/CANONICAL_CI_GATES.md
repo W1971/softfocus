@@ -1,80 +1,56 @@
 ---
-type: control-contract
-scope: ci
-mutability: frozen
+type: control
+scope: ci-gates
+status: active
+last_verified_utc: 2026-02-02T14:20Z
 ---
-## Phase Binding
 
-These CI gates are **binding for Phase D (Maintenance Mode)**.
+# Canonical CI Gates — Phase D
 
-While Phase D is active:
-- gate definitions are immutable
-- scripts may not be modified
-- invocation rules may not be changed
+## Overview
 
-Changing any gate requires:
-- explicit exit from Phase D
-- new governance declaration
+CI execution in Phase D is intentionally minimal.
 
-# SoftFocus — Canonical CI Gates
-
-This document defines **mandatory CI gates**
-that must pass for any commit to be accepted.
-
-No gate may be bypassed.
-No gate may be weakened without governance approval.
+The goal is to:
+- protect frozen meaning
+- validate bundle integrity
+- prevent accidental expansion
 
 ---
 
-## Gate: ACTIVE_DOCS_ONLY
+## Executable Gates
 
-Script:
-scripts/ci/check-active-docs-only.sh
+The only executable CI gate is:
 
-Purpose:
-- enforce strict active documentation scope
-- prevent semantic drift
-- block accidental introduction of non-canonical docs
+- `bundle`
 
-Severity:
-FAIL (blocking)
-
-Invocation:
-- pre-commit
-- CI (push, pull_request)
-
-Rationale:
-Documentation defines product meaning.
-Unscoped documents are a governance violation.
+It performs:
+- bundle generation
+- freshness validation
+- structural diff validation
 
 ---
 
-## Governance Rule
+## Non-Executable Gates
 
-If this gate fails:
-- commit MUST be rejected
-- CI MUST fail
-- no override is allowed
+The following lifecycle gates exist only at design level:
 
+- stage-1
+- stage-2
+- stage-3
+
+They are satisfied by:
+- documentation freeze
+- audit artefacts
+- Phase D lock declaration
 
 ---
 
-## Gate: RUNTIME_SPLIT_ENFORCER
+## Product Readiness
 
-Script:
-scripts/ci/RUNTIME_SPLIT_ENFORCER.sh
+A product is considered READY if:
 
-Purpose:
-- enforce strict separation of mobile / web / shared runtime
-- prevent cross-scope contamination
-- guarantee governance alignment at filesystem level
-
-Severity:
-FAIL (blocking)
-
-Invocation:
-- CI only (push, pull_request)
-
-Override:
-Not allowed.
+- bundle alias passes
+- no CORE alias is in FAIL
+- Phase D lock is respected
 

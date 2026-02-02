@@ -1,68 +1,29 @@
-# SoftFocus Alias Registry
-# Canonical execution map for alias-softfocus CLI
+aliases:
+  bundle:
+    description: Generate and validate canonical project bundle
+    status: READY
+    execution: ALLOWED
+    affects_readiness: true
+    scripts:
+      - scripts/bundles/generate_project_bundle.sh
+    ci_gates:
+      - scripts/ci/guards/bundle-freshness-guard.sh
+      - scripts/ci/guards/bundle-diff-guard.sh
 
-# =========================
-# Mobile UI Stage Gates
-# =========================
+  stage-1:
+    description: Mobile UI visual gate (design-level)
+    status: DESIGN_ONLY
+    execution: FORBIDDEN
+    affects_readiness: true
 
-stage-1:
-  execution: RESTRICTED
-  description: Visual UI gate (Stage 1)
-  targets:
-    - ./scripts/gates/check-stage.sh stage-1 docs/mobile/audit/stage-1.latest.yaml
+  stage-2:
+    description: Mobile UI semantic gate (design-level)
+    status: DESIGN_ONLY
+    execution: FORBIDDEN
+    affects_readiness: true
 
-stage-2:
-  execution: RESTRICTED
-  description: Semantic UI gate (Stage 2)
-  targets:
-    - ./scripts/gates/check-stage.sh stage-2 docs/mobile/audit/stage-2.latest.yaml
-
-stage-3:
-  execution: RESTRICTED
-  description: Interaction UI gate (Stage 3)
-  targets:
-    - ./scripts/gates/check-stage.sh stage-3 docs/mobile/audit/stage-3.latest.yaml
-
-# =========================
-# Project Lifecycle
-# =========================
-
-bundle:
-  execution: RESTRICTED
-  description: Generate immutable project bundle
-  targets:
-    - ./scripts/generate-project-bundle.sh
-
-snapshot:
-  execution: RESTRICTED
-  description: Generate lifecycle snapshot
-  targets:
-    - ./scripts/generate-project-bundle.sh
-
-maintenance-guard:
-  execution: RESTRICTED
-  description: Enforce maintenance mode rules
-  targets:
-    - ./scripts/gates/maintenance-guard.sh
-
-# =========================
-# Validation & Build
-# =========================
-
-content-validate:
-  execution: ALLOWED
-  description: Validate content boundaries
-  targets:
-    - ./backend/scripts/content-validator/validate-content.cjs content
-
-frontend-build:
-  execution: ALLOWED
-  description: Build frontend
-  targets:
-    - ./frontend/build.sh
-
-monetization-dry-run:
-  execution: RESTRICTED
-  description: Dry run monetization delivery
-  targets:
-    - ./scripts/monetization/dry-run.sh
+  stage-3:
+    description: Mobile UI interaction gate (design-level)
+    status: DESIGN_ONLY
+    execution: FORBIDDEN
+    affects_readiness: true

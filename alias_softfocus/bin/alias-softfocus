@@ -1,173 +1,58 @@
 #!/usr/bin/env node
 
-/**
- * SoftFocus Canonical Alias CLI
- *
- * Supported:
- *   alias-softfocus stage-1
- *   alias-softfocus stage-2
- *   alias-softfocus stage-3
- *   alias-softfocus bundle
- *
- * Advanced:
- *   alias-softfocus run <alias>
- *   alias-softfocus list
- *   alias-softfocus docs
- */
-
 import fs from "fs";
-import { spawnSync } from "child_process";
+import path from "path";
+import yaml from "js-yaml";
 import { resolveAlias } from "../lib/resolve-alias.js";
 
-const [, , rawCommand, rawAlias, ...rawArgs] = process.argv;
-const FORCE = process.env.FORCE === "1";
+const ALIASES_PATH = path.resolve("docs/control/ALIASES.yaml");
+const cmd = process.argv[2];
 
-/**
- * Shorthand commands mapped to `run <alias>`
- */
-const SHORTHANDS = new Set([
-  "stage-1",
-  "stage-2",
-  "stage-3",
-  "bundle",
-]);
-
-let command = rawCommand;
-let aliasName = rawAlias;
-let args = rawArgs;
-
-/**
- * Rewrite shorthand:
- *   alias-softfocus stage-2
- * → alias-softfocus run stage-2
- */
-if (SHORTHANDS.has(rawCommand)) {
-  command = "run";
-  aliasName = rawCommand;
-  args = rawAlias ? [rawAlias, ...rawArgs] : rawArgs;
+function loadRegistry() {
+  if (!fs.existsSync(ALIASES_PATH)) {
+    console.error("ERROR: ALIASES.yaml not found");
+    process.exit(1);
+  }
+  const raw = fs.readFileSync(ALIASES_PATH, "utf8");
+  return yaml.load(raw);
 }
 
-if (!command) {
-  usage();
+if (!cmd) {
+  console.error("Usage: alias-softfocus <command>");
   process.exit(1);
 }
 
-switch (command) {
-  case "run":
-    if (!aliasName) {
-      console.error("ERROR: alias name required");
-      usage();
-      process.exit(1);
-    }
-    runAlias(aliasName, args);
-    break;
+if (cmd === "list") {
+  const registry = loadRegistry();
 
-  case "list":
-    listAliases();
-    break;
-
-  case "docs":
-    docsStub();
-    break;
-
-  default:
-    console.error(`ERROR: unknown command '${command}'`);
-    usage();
-    process.exit(1);
-}
-
-/* ===================== */
-/* Execution Logic       */
-/* ===================== */
-
-function runAlias(alias, args) {
-  let hadWarnings = false;
-
-  try {
-    const resolved = resolveAlias(alias);
-
-    if (resolved.execution === "RESTRICTED" && !FORCE) {
-      console.error(
-        `Execution restricted for alias '${alias}'. Use FORCE=1 to override.`
-      );
-      process.exit(1);
-    }
-
-    for (const target of resolved.targets) {
-      const result = spawnSync(target, args, {
-        stdio: "inherit",
-        shell: true,
-      });
-
-      if (result.status !== 0) {
-        console.warn(`[WARN] Alias '${alias}' target failed: ${target}`);
-        hadWarnings = true;
-      }
-    }
-
-    writeExecutionEvidence(alias, hadWarnings ? "PASS_WITH_WARN" : "PASS");
-  } catch (err) {
-    console.error(`ERROR: ${err.message}`);
+  if (!registry || !registry.aliases) {
+    console.error("ERROR: Invalid alias registry structure");
     process.exit(1);
   }
-}
-
-function writeExecutionEvidence(alias, status) {
-  const entry = {
-    alias,
-    status,
-    timestamp: new Date().toISOString(),
-  };
-
-  fs.mkdirSync("alias_softfocus/status", { recursive: true });
-  fs.appendFileSync(
-    "alias_softfocus/status/execution.log",
-    JSON.stringify(entry) + "\n"
-  );
-}
-
-/* ===================== */
-/* Utility Commands      */
-/* ===================== */
-
-function listAliases() {
-  const raw = fs.readFileSync("docs/control/ALIASES.yaml", "utf8");
-
-  const names = raw
-    .split("\n")
-    .map((l) => l.trimEnd())
-    .filter((l) => /^[a-z0-9-]+:\s*$/.test(l))
-    .map((l) => l.replace(":", ""));
 
   console.log("Available SoftFocus aliases:");
-  names.forEach((a) => console.log(" ", a));
-}
-
-function docsStub() {
-  console.log(
-    "[INFO] docs command is available but operates in stub mode (Phase A/B)."
-  );
+  Object.keys(registry.aliases).forEach(a => {
+    console.log(`  ${a}`);
+  });
   process.exit(0);
 }
 
-/* ===================== */
-/* Help                  */
-/* ===================== */
+if (cmd === "docs") {
+  console.log("Alias documentation available in docs/control/");
+  process.exit(0);
+}
 
-function usage() {
-  console.log(`
-Usage:
-  alias-softfocus <command>
+// default: execute alias
+try {
+  const alias = resolveAlias(cmd);
 
-Commands:
-  stage-1   Run visual UI gate
-  stage-2   Run semantic UI gate
-  stage-3   Run interaction gate
-  bundle    Generate project bundle
-
-Advanced:
-  alias-softfocus run <alias>
-  alias-softfocus list
-  alias-softfocus docs
-`);
+  for (const target of alias.targets) {
+    console.log(`[ALIAS] Running: ${target}`);
+    const res = await import("child_process").then(m =>
+      m.execSync(target, { stdio: "inherit", shell: true })
+    );
+  }
+} catch (err) {
+  console.error(`ERROR: ${err.message}`);
+  process.exit(1);
 }
