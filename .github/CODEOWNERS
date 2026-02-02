@@ -8,3 +8,15 @@ docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md @softfocus/governance
 # Root landing page (semantic boundary)
 app/page.tsx                @softfocus/governance
 app/en/page.tsx             @softfocus/governance
+# --- Governance & CI (LOCKED) ---
+.github/workflows/*        @W1971
+
+# --- Core governance ---
+docs/control/*             @W1971
+docs/mobile/*              @W1971
+docs/status/*              @W1971
+
+# --- Alias & CI logic ---
+scripts/alias/*            @W1971
+scripts/ci/*               @W1971
+
