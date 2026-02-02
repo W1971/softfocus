@@ -10,10 +10,9 @@ jobs:
 
       - name: Backend CI gate + pipeline check
         run: |
-          cd backend
-          alias_softfocus/bin/ci-gate
-          alias-softfocus run pipeline-check
+          ./scripts/alias/sfctl ci-gate
+          ./scripts/alias/sfctl pipeline-check
 
   frontend:
-    uses: ./.github/workflows/frontend.yml
     needs: backend
+    uses: ./.github/workflows/frontend.yml
