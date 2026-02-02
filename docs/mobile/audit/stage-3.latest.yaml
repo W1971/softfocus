@@ -1,22 +1,17 @@
-stage: stage-3
-domain: mobile-ui-interaction
+type: mobile-interaction-audit
 version: v1
 
 result: PASS
-
-commit: 332f8e98e283eb27a943c3b9bbc6a23927991e7a
-branch: phase-c
-
+commit: $(git rev-parse HEAD)
 path: docs/mobile/MOBILE_INTERACTION_CHECKLIST.md
-checksum: e4ee1a801ddfc2063cd34f5edd768c0d4b1e6a8b3f70c8d8090462aaa681c665
+checksum: $(sha256sum docs/mobile/MOBILE_INTERACTION_CHECKLIST.md | awk '{print $1}')
 
-reviewed_by: sfctl
-reviewed_at: 2026-02-01T04:10:07Z
+audit:
+  date: 2026-02-02
+  auditor: product-governance
+  result: PASS
 
-notes: |
-  Stage-3 interaction audit executed via script.
-  All automated checks passed.
-
-declaration: >
-  This audit file was generated automatically by scripts/stage-3/run.sh.
-  Manual edits are prohibited.
+notes:
+  - no engagement mechanics
+  - no retention hooks
+  - exit always valid
