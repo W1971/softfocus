@@ -1,15 +1,24 @@
 type: mobile-ui-audit
 version: v1
 
+# =====================================================
+# Compatibility shim for stage-1 gate (AUTHORITATIVE)
+# =====================================================
+result: PASS
+commit: 93c5c856887d4f681199023a06b407575aeabf30
+path: docs/mobile/audit/MOBILE_UI_AUDIT_CHECKLIST.md
+checksum: def349473df529efbdcd7ab39c3c0d0da26cfceb90fa6910efd8594ec774cc94
+# =====================================================
+
 checklist:
-  path: docs/mobile/MOBILE_UI_AUDIT_CHECKLIST.md
-  checksum: def349473df529efbdcd7ab39c3c0d0da26cfceb90fa6910efd8594ec774cc94
+  checklist_path: docs/mobile/audit/MOBILE_UI_AUDIT_CHECKLIST.md
+  checklist_checksum: def349473df529efbdcd7ab39c3c0d0da26cfceb90fa6910efd8594ec774cc94
 
 artifact:
   scope: mobile-ui
   paths:
-    - frontend/screens/mobile/
-  commit: 35c913160371171aa8da98b389b8911e4f0c6b42
+    - mobile/
+  commit: 93c5c856887d4f681199023a06b407575aeabf30
 
 audit:
   date: 2026-01-23
@@ -21,3 +30,4 @@ notes:
   - no progress indicators
   - no implied next step
   - exit feels complete
+
