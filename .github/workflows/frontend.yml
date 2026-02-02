@@ -1,0 +1,61 @@
+name: SoftFocus Frontend (Reusable)
+
+on:
+  workflow_call:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # =========================
+      # 1️⃣ GATES
+      # =========================
+      - name: Gate — Generate alias status
+        run: npm run alias:status
+
+      - name: Gate — Alias project clean
+        run: alias-softfocus run project-clean
+
+      # =========================
+      # 2️⃣ MOBILE GUARDS (FAIL-FAST)
+      # =========================
+      - name: Guard — Mobile governance (FAIL-FAST)
+        run: ./scripts/ci/mobile.sh
+
+      # =========================
+      # 3️⃣ BUILD
+      # =========================
+      - name: Build — Frontend test + build
+        run: |
+          cd frontend
+          npm ci
+          npm test
+          npm run build
+
+      # =========================
+      # 4️⃣ POST-BUILD GUARDS
+      # =========================
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Guard — ShellCheck (CI scripts)
+        run: shellcheck scripts/ci/**/*.sh
+
+      # =========================
+      # 5️⃣ CI SUMMARY
+      # =========================
+      - name: CI Summary — SoftFocus Frontend
+        if: always()
+        run: |
+          if [[ "${{ job.status }}" == "success" ]]; then
+            echo "## ✅ SoftFocus Frontend: READY" >> $GITHUB_STEP_SUMMARY
+            echo "- Gates: PASS" >> $GITHUB_STEP_SUMMARY
+            echo "- Mobile governance: PASS" >> $GITHUB_STEP_SUMMARY
+            echo "- Build: PASS" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ SoftFocus Frontend: FAIL" >> $GITHUB_STEP_SUMMARY
+            echo "- One or more steps failed" >> $GITHUB_STEP_SUMMARY
+          fi
