@@ -3,23 +3,25 @@ set -euo pipefail
 
 echo "[DOCS] Checking active documentation scope"
 
-ALLOWED_PREFIXES=(
-  "docs/overview.md"
-  "docs/PROJECT_DOCS_HIERARCHY.md"
-  "docs/PROJECT_DOCUMENTATION_OVERVIEW.md"
+ ALLOWED_PREFIXES=(
+   "docs/overview.md"
+   "docs/PROJECT_DOCS_HIERARCHY.md"
+   "docs/PROJECT_DOCUMENTATION_OVERVIEW.md"
 
-  "docs/control/"
-  "docs/governance/"
-  "docs/frontend/"
-  "docs/product/"
-  "docs/seo/"
-  "docs/guides/"
-  "docs/mobile/"
-  "docs/metrics/"
-  "docs/operations/"
-  "docs/engineering/"
-  "docs/release/"
-)
+   "docs/control/"
+   "docs/governance/"
+   "docs/frontend/"
+   "docs/product/"
+   "docs/seo/"
+   "docs/guides/"
+   "docs/mobile/"
+   "docs/web/"
+   "docs/metrics/"
+   "docs/operations/"
+   "docs/engineering/"
+   "docs/release/"
+ )
+
 
 violations=0
 
