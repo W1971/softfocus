@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -e
+
+CMD="$1"
+
+case "$CMD" in
+  stage-1)
+    ./scripts/gates/check-stage.sh stage-1 docs/mobile/audit/stage-1.latest.yaml
+    ;;
+  stage-2)
+    ./scripts/gates/check-stage.sh stage-2 docs/mobile/audit/stage-2.latest.yaml
+    ;;
+  stage-3)
+    ./scripts/gates/check-stage.sh stage-3 docs/mobile/audit/stage-3.latest.yaml
+    ;;
+  bundle)
+    ./scripts/generate-project-bundle.sh
+    ;;
+  *)
+    echo "Unknown command"
+    echo ""
+    echo "Available commands:"
+    echo "  stage-1   Run visual UI gate"
+    echo "  stage-2   Run semantic UI gate"
+    echo "  stage-3   Run interaction gate"
+    echo "  bundle    Generate project bundle"
+    exit 1
+    ;;
+esac
