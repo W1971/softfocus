@@ -1,3 +1,24 @@
+---
+type: product-manifesto
+boundary: non-clinical
+scope: product
+mutability: frozen
+---
+
+## Non-Clinical Scope Declaration
+
+This document is **non-clinical and non-medical**.
+
+It does not provide:
+- diagnosis
+- treatment
+- therapy
+- medical or psychological advice
+
+All references to burnout, recovery, load, capacity, or mental states
+are **analytical and informational only** and must not be interpreted
+as health-related claims.
+
 # SoftFocus — Product Manifesto
 
 ## What we do

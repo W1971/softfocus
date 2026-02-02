@@ -3,9 +3,20 @@ type: product-definition
 scope: global
 status: target
 mutability: restricted
+boundary: non-clinical
 ---
 
 # SoftFocus — Product End State
+
+## Non-Clinical Scope Declaration
+
+This document is **non-medical and non-clinical**.
+
+It does not provide diagnosis, treatment,
+therapeutic guidance, or medical recommendations.
+
+All references to burnout, recovery, load,
+or cognitive capacity are **analytical and informational only**.
 
 This document defines the **final intended shape of the SoftFocus product**.
 
@@ -33,7 +44,8 @@ clear understanding of this condition.
 
 ### Purpose
 
-Provide **non-clinical understanding of burnout risk**
+Provide non-clinical understanding of burnout risk
+as an abstract analytical signal under sustained load
 before any measurement or tooling.
 
 ### Characteristics
