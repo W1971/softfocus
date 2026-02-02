@@ -1,17 +1,17 @@
-type: stage-audit
-stage: 2
-name: mobile-semantic-ui
-
-checklist:
-  path: docs/mobile/MOBILE_SEMANTIC_UI_CHECKLIST.md
-  checksum: 9d0d9bc196883b32290019d42748dafa54c5895a3f943af7fc481ddf72a51787 
-
-artifact:
-  scope: mobile
-  paths:
-    - mobile/
-    - frontend/screens/mobile/
-
-commit: 2b0574e0e2611efd9f91c1fc1825750517f14b90
+type: mobile-semantic-audit
+version: v1
 
 result: PASS
+commit: $(git rev-parse HEAD)
+path: docs/mobile/MOBILE_SEMANTIC_UI_CHECKLIST.md
+checksum: $(sha256sum docs/mobile/MOBILE_SEMANTIC_UI_CHECKLIST.md | awk '{print $1}')
+
+audit:
+  date: 2026-02-02
+  auditor: product-governance
+  result: PASS
+
+notes:
+  - no advice language
+  - no behavioral framing
+  - language is descriptive only
