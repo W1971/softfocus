@@ -1,33 +1,87 @@
 ---
-type: governance
+type: governance-declaration
+scope: project
 phase: phase-d
-status: declared
+mode: maintenance
 mutability: frozen
 ---
 
-# Phase D — Maintenance Mode Declaration
+# SoftFocus — Phase D Declaration (Maintenance Mode)
 
-SoftFocus has entered **Phase D (Maintenance Mode)**.
+## Status
 
-## Meaning
+Phase D is hereby **formally declared**.
 
-- Product logic is frozen
-- Analytical models are immutable
-- CI gates are canonical and non-modifiable
-- No new features or axes are allowed
+SoftFocus has completed all planned product definition,
+governance, and execution phases required for v1.
 
-## Allowed Changes
+The project now enters **Maintenance Mode**.
 
-- Security fixes
-- Infrastructure compatibility updates
-- Documentation clarifications (non-semantic)
+---
+
+## Meaning of Phase D
+
+Phase D signifies:
+
+- product meaning is frozen
+- analytical logic is frozen
+- execution surfaces are frozen
+- governance rules are immutable
+
+SoftFocus is no longer under active development.
+It is operated as a **stable analytical asset**.
+
+---
+
+## Allowed Changes (Strict)
+
+The following are allowed **only if they do not alter meaning**:
+
+- dependency updates
+- security fixes
+- infrastructure maintenance
+- copy fixes that preserve semantics
+- CI stability improvements
+
+All allowed changes must:
+- preserve existing behavior
+- pass all canonical CI gates
+- avoid introducing new surfaces or logic
+
+---
 
 ## Forbidden Changes
 
-- Scoring logic
-- Analytical interpretation
-- UI semantics
-- Product scope expansion
+The following are explicitly forbidden:
 
-Any violation invalidates operational status.
+- new analytical axes
+- new calculators or assessments
+- changes to scoring or interpretation
+- UX or UI redesigns
+- content expansion affecting meaning
+- monetization model changes
+
+Any such change requires:
+- a new project version
+- a new governance phase
+- explicit re-opening declaration
+
+---
+
+## Governance Authority
+
+This declaration overrides:
+- roadmaps
+- drafts
+- design discussions
+- experimental artifacts
+
+Only documents marked as **canonical** remain authoritative.
+
+---
+
+## Effective Date
+
+This declaration is effective immediately
+upon merge into the main governance branch.
 

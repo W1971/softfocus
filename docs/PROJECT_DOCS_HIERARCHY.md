@@ -161,3 +161,12 @@ and the implementation must be corrected.
 - app/shared → governed by docs/product/**
 
 Cross-scope references are forbidden.
+
+## Project Phase Status
+
+- Current phase: **Phase D**
+- Mode: **Maintenance**
+- Mutability: **Frozen**
+
+No new product logic, surfaces, or meaning
+may be introduced under Phase D.
