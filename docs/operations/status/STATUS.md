@@ -25,6 +25,7 @@ No secondary indicators.
 - Audits: **FINAL**
 - Monetization: **Operational**
 - CI: **Authoritative**
+- Mobile runtime: PASS (SDK 54 validated on iOS)
 
 ---
 

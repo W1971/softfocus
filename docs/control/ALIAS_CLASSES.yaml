@@ -1,0 +1,33 @@
+---
+type: control
+scope: alias-classes
+status: active
+last_verified_utc: 2026-02-02T13:10Z
+---
+
+# Alias Classes
+# Defines criticality level of each alias.
+
+aliases:
+  # -------------------------
+  # CORE — block readiness
+  # -------------------------
+  bundle: CORE
+  stage-1: CORE
+  stage-2: CORE
+  stage-3: CORE
+  maintenance-guard: CORE
+
+  # -------------------------
+  # OPTIONAL — do not block
+  # -------------------------
+  content-validate: OPTIONAL
+  frontend-build: OPTIONAL
+  backend-check: OPTIONAL
+  pipeline-check: OPTIONAL
+
+  # -------------------------
+  # EXPERIMENTAL — excluded
+  # -------------------------
+  monetization-dry-run: EXPERIMENTAL
+  v2-governance: EXPERIMENTAL

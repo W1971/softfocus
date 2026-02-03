@@ -54,6 +54,9 @@ Allowed changes:
 - operational fixes
 - audit artefact updates
 - bundle regeneration
+- dependency alignment required by platform vendors
+  (e.g. Expo SDK upgrades without semantic impact)
+
 
 Forbidden changes:
 - new CI stages

@@ -222,3 +222,18 @@ No expansion work is permitted in v1.x.
 Phase D is formally closed for meaning changes.
 All subsequent changes must comply with Maintenance Mode constraints.
 
+## Runtime Compatibility (Mobile)
+
+SoftFocus mobile runtime is validated against:
+- Expo SDK 54
+- React Native 0.81.x
+- React 19.x
+- Hermes (default)
+
+This compatibility baseline is mandatory for:
+- Expo Go (iOS / Android)
+- development builds
+- App Store / Play Store submission
+
+Older Expo SDK versions are explicitly unsupported
+due to Expo Go runtime constraints.

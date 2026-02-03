@@ -1,0 +1,5 @@
+SoftFocus is a non-clinical analytical app that provides clarity
+about recovery capacity under sustained cognitive load.
+
+It does not offer advice, therapy, or recommendations.
+It presents a single analytical statement and ends interaction.
