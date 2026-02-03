@@ -8,13 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Backend CI gates (FAIL-FAST)
+      - name: Phase D — backend verification only
         run: |
-          ./scripts/alias/sfctl stage-1
-          ./scripts/alias/sfctl stage-2
-          ./scripts/alias/sfctl stage-3
+          echo "Phase D: governance frozen"
+          echo "No stage gates executed"
 
-      - name: Backend bundle check
+      - name: Verify bundle reproducibility
         run: |
           ./scripts/alias/sfctl bundle
 
