@@ -1,45 +1,37 @@
----
-type: status
-scope: ci
-status: canonical
-phase: phase-d
----
+# SoftFocus — System Status
 
-# SoftFocus — CI Status
-
-## Interpretation
-
-- **READY** — all governance, mobile, and build checks passed
-- **FAIL** — at least one mandatory check failed
-
-CI is the **single source of truth**
-for operational readiness.
+**Status:** 🟢 OPERATIONAL  
+**Phase:** D — Maintenance Mode  
+**Governance:** Frozen
 
 ---
 
-## Current Model
+## Source of Truth
 
-CI executes in strict order:
+System status is defined exclusively by **CI**.
 
-1. Backend gates
-2. Frontend gates
-3. Mobile governance (FAIL-FAST)
-4. Frontend build
-5. Post-build guards
+- 🟢 CI PASS → System READY
+- 🔴 CI FAIL → System BLOCKED
 
-If any step fails:
-- build is blocked
-- release is blocked
-- discussion is out of scope
+No manual overrides.
+No secondary indicators.
 
 ---
 
-## Public Signal
+## Current State
 
-The CI badge reflects the current system state:
+- Product logic: **LOCKED**
+- Mobile surface: **DONE**
+- Audits: **FINAL**
+- Monetization: **Operational**
+- CI: **Authoritative**
 
-- Green → READY
-- Red → FAIL
+---
 
-No manual override exists.
+## Live CI
 
+![SoftFocus CI](https://github.com/W1971/softfocus/actions/workflows/ci.yml/badge.svg)
+
+---
+
+_Last updated automatically via CI._
