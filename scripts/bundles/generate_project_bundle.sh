@@ -6,7 +6,11 @@ set -euo pipefail
 # Phase D / Maintenance Mode
 #
 # SINGLE authority for bundle structure & meaning.
-# Any meaningful change MUST be done here.
+# This script defines the FINAL v1.x state.
+#
+# Any meaningful change requires:
+# - new phase declaration
+# - new bundle contract
 # ==================================================
 
 VERSION_FILE="release/VERSION.md"
@@ -30,32 +34,49 @@ OUT="$BUNDLE_DIR/project_bundle_${VERSION}_${DATE_UTC}.md"
 
 # --------------------------------------------------
 # Canonical document set (ORDER MATTERS)
+# Phase D = FINAL meaning for v1.x
 # --------------------------------------------------
 DOCS_REQUIRED=(
+  # Entry point
   "docs/overview.md"
 
+  # Documentation system
   "docs/PROJECT_DOCS_HIERARCHY.md"
   "docs/PROJECT_DOCUMENTATION_OVERVIEW.md"
 
-  "docs/control/execution/EXECUTION_5K_NO_DEV.md"
+  # Phase D governance
   "docs/control/FINAL_PHASE_D_DECLARATION.md"
   "docs/control/PHASE_D_LOCK_AND_MAINTENANCE.md"
   "docs/control/ALIAS_STATUS_MODEL.md"
   "docs/control/CANONICAL_CI_GATES.md"
+  "docs/operations/MAINTENANCE_MODE.md"
 
+  # Product end-state
   "docs/product/PRODUCT_END_STATE.md"
   "docs/product/runtime/RUNTIME_SPLIT.md"
 
+  # Mobile & Web scopes (mobile DONE)
   "docs/mobile/MOBILE_PRODUCT_SCOPE.md"
+  "docs/mobile/MOBILE_DISTRIBUTION_ENDPOINT.md"
   "docs/web/WEB_PRODUCT_SCOPE.md"
 
+  # Monetization (non-UI, entitlement-only)
+  "docs/operations/monetization/MOBILE_MONETIZATION_BINDING.md"
+
+  # SEO & distribution
   "docs/seo/SEO_ENTRY_INDEX.md"
   "docs/seo/PSEO_CANON.md"
   "docs/seo/ROLE_PAGES_STATUS.md"
 
+  # Canonical explanations
   "docs/guides/CANONICAL_EXPLANATIONS_INDEX_RU.md"
+
+  # Operational status (non-active, read-only)
+  "docs/operations/status/STATUS.md"
 )
 
+# --------------------------------------------------
+# Prepare output
 # --------------------------------------------------
 mkdir -p "$BUNDLE_DIR"
 : > "$OUT"
@@ -64,6 +85,8 @@ for f in "${DOCS_REQUIRED[@]}"; do
   [ -f "$f" ] || fail "Missing required doc: $f"
 done
 
+# --------------------------------------------------
+# Header
 # --------------------------------------------------
 {
   echo "# SoftFocus — Project Bundle (Phase D)"
@@ -91,6 +114,51 @@ for f in "${DOCS_REQUIRED[@]}"; do
   emit "$f"
 done
 
+# --------------------------------------------------
+# NEXT REQUIRED PHASE (DECLARATIVE, NON-EXECUTABLE)
+# --------------------------------------------------
+cat >> "$OUT" <<'MD'
+==================================================
+NEXT REQUIRED PHASE (DECLARATIVE)
+==================================================
+
+SoftFocus v1.x is COMPLETE and operating in Phase D (Maintenance Mode).
+
+No further development is permitted within this phase.
+
+Any future work MUST occur under a new phase with a new bundle contract.
+
+### Required conditions to leave Phase D
+
+A transition to the next phase (e.g. Phase E / v2.x) requires ALL of the following:
+
+1. A new phase declaration document
+2. A new product axis or expanded analytical scope
+3. A new bundle generator contract
+4. Explicit invalidation of Phase D immutability
+5. New CI gates and audit stages
+
+Without these conditions, any attempt to:
+- add features
+- modify UX
+- expand monetization surfaces
+- introduce adaptive behavior
+
+is a governance violation.
+
+### Interpretation
+
+Phase D is not a pause.
+It is a **closed, operational end state**.
+
+The next phase is not an extension of v1.x,
+but a **separate product evolution**.
+
+MD
+
+# --------------------------------------------------
+# Footer
+# --------------------------------------------------
 cat >> "$OUT" <<'MD'
 ==================================================
 REFERENCE: DISTRIBUTION CONTEXT (NON-CANONICAL)
@@ -101,10 +169,9 @@ REFERENCE: DISTRIBUTION CONTEXT (NON-CANONICAL)
 - All pages resolve to one canonical assessment
 - Monetization occurs only post-result
 
+---
+_Canonical Phase D bundle._
 MD
-
-echo "---" >> "$OUT"
-echo "_Canonical Phase D bundle._" >> "$OUT"
 
 cp "$OUT" "$BUNDLE_DIR/project_bundle.CURRENT.md"
 cp "$OUT" "$BUNDLE_DIR/latest.md"
