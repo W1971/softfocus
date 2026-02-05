@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function Index() {
+export default function ResultScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Recovery does not close under current load.
+      <Text style={styles.title}>
+        SoftFocus Mobile — OK
       </Text>
     </View>
   );
@@ -13,13 +13,15 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
   },
-  text: {
-    fontSize: 20,
-    textAlign: "center",
-    color: "#000000",
+  title: {
+    fontSize: 18,
+    fontWeight: '400',
+    color: '#000000',
+    textAlign: 'center',
   },
 });
