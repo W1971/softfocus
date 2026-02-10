@@ -4,10 +4,12 @@
     "slug": "softfocus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "sdkVersion": "54.0.0",
     "platforms": [
       "ios",
       "android"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
     ],
     "android": {
       "package": "com.vladimirpanin.softfocus"
@@ -15,8 +17,10 @@
     "ios": {
       "bundleIdentifier": "com.vladimirpanin.softfocus"
     },
-    "plugins": [
-      "expo-router"
-    ]
+    "extra": {
+      "eas": {
+        "projectId": "2e1fe917-59de-4c8e-a150-13044d2c2b56"
+      }
+    }
   }
 }

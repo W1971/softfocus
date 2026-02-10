@@ -56,6 +56,20 @@ SoftFocus is structured around **product-grade domains**, each with explicit gov
 
 Assessments remain the **primary analytical entry point**.
 
+#### Assessment Instrumentation (Clarification; no new meaning)
+Assessments may be implemented as **role-aware question sets** to improve signal capture
+without changing interpretation semantics.
+
+- QuestionSets: 40–60 вопросов на роль (типовой объём), в 5 канонических секциях:
+  - latency / residual / compensation / predictability / detachment
+- QuestionSets do **not** contain scoring or interpretation.
+- Aggregation produces the same section-level signal shape (0–3 per section),
+  which is then interpreted by canonical recovery logic.
+
+Reference artifacts (non-canonical to meaning):
+- `app/shared/questionSets/**` — question pools
+- `docs/assessments/contracts/QUESTION_SET_CONTRACT.md` — format contract
+
 ---
 
 ### 2.2 Calculators (`/kalkulyatory`)
@@ -67,6 +81,18 @@ Assessments remain the **primary analytical entry point**.
 
 The **Recovery Calculator v1** is formally frozen under governance and is the
 **primary monetizable analytical artifact** in v1.x.
+
+#### Result Contract (Clarification; no new meaning)
+Calculator output may be represented via a stable, deterministic **Result Contract**
+to ensure identical interpretation across runtimes (web/mobile) without changing scoring.
+
+- Contract is descriptive and non-clinical.
+- Entitlement affects **depth only** (no UI monetization messaging).
+- Canonical meaning remains owned by Recovery Scoring v1.
+
+Reference artifacts (non-canonical to meaning):
+- `app/shared/contracts/result.contract.schema.json` — schema
+- `scripts/cli/runProAssessment.cjs` — local contract builder/validator (dev tooling only)
 
 ---
 

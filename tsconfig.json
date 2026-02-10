@@ -1,11 +1,21 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"],
-      "@/frontend/*": ["frontend/*"],
-      "@/backend/*": ["backend/*"]
-    },
+   "paths": {
+  "@/*": ["./*"],
+  "@/frontend/*": ["frontend/*"],
+  "@/backend/*": ["backend/*"],
+  "@/lib/*": ["frontend/lib/*"],
+  "@/components/*": ["frontend/components/*"],
+  "@/screens/*": ["frontend/screens/*"],
+  "@/adapters/*": ["frontend/adapters/*"],
+  "@/engine/*": ["frontend/engine/*"],
+  "@/content/*": ["frontend/content/*"],
+  "@/state/*": ["frontend/state/*"],
+  "@/types/*": ["frontend/types/*"],
+  "@/utils/*": ["frontend/utils/*"]
+},
+
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
