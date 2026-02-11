@@ -263,3 +263,30 @@ This compatibility baseline is mandatory for:
 
 Older Expo SDK versions are explicitly unsupported
 due to Expo Go runtime constraints.
+
+---
+
+## 9. Future Version Line (v2.x — Declared)
+
+SoftFocus has formally declared a **v2.x version line**,
+operating under **Phase A — Analytical Exploration**.
+
+v2.x introduces a new analytical focus,
+independent from the v1.x recovery model.
+
+### v2 Analytical Axis (Declared)
+
+**load predictability → control illusion → cognitive fragmentation**
+
+This axis examines how sustained responsibility
+and uncertainty reshape cognitive structure,
+not recovery or energy capacity.
+
+### Separation Rule
+
+- v1.x remains operational and frozen
+- v2.x is non-executable and conceptual
+- No shared scoring, logic, or UI is permitted
+
+v2.x will progress only via explicit phase declarations
+and a new bundle contract.
