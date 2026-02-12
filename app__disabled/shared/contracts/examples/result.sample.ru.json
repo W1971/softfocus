@@ -1,0 +1,54 @@
+{
+  "contract_version": "1.0",
+  "phase": "phase-d",
+  "boundary": "non-clinical",
+  "model": {
+    "name": "recovery-capacity-v1",
+    "version": "v1",
+    "source_of_truth": "scripts/core/recovery/scoreRecovery.cjs"
+  },
+  "locale": "ru-RU",
+  "generated_at_utc": "2026-02-10T00:00:00Z",
+  "inputs": {
+    "period_days": 14,
+    "scale": {
+      "min": 0,
+      "max": 3,
+      "labels": ["Сигнал отсутствует", "Эпизодически", "Регулярно", "Устойчиво"]
+    },
+    "role": "executive",
+    "section_scores": {
+      "latency": 2.4,
+      "residual": 2.7,
+      "compensation": 2.2,
+      "predictability": 2.6,
+      "detachment": 1.8
+    }
+  },
+  "summary": {
+    "state": "recovery_does_not_close",
+    "confidence": "high"
+  },
+  "profile": {
+    "dominant_load": "residual",
+    "dominant_mechanism": "compensation",
+    "stability": "unstable",
+    "drivers": [
+      { "key": "residual", "level": "high" },
+      { "key": "predictability", "level": "high" },
+      { "key": "latency", "level": "medium" }
+    ]
+  },
+  "interpretation": {
+    "headline": "Восстановление не закрывается при текущей нагрузке",
+    "body": [
+      "Сигналы остаточной усталости устойчивы и не снижаются после пауз.",
+      "Восстановление даёт непредсказуемый эффект при схожих циклах нагрузки.",
+      "Работоспособность удерживается компенсацией, а не восстановленным ресурсом."
+    ]
+  },
+  "entitlement": {
+    "present": false,
+    "tier": "none"
+  }
+}

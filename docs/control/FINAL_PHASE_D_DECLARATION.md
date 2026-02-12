@@ -67,3 +67,13 @@ SoftFocus is now suitable for:
 - audit / investor review
 
 This declaration is final.
+
+---
+
+## Scope Clarification
+
+This declaration applies to v1.x only.
+
+v2.x operates under a separate phase line
+and does not modify Phase D immutability.
+

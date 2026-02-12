@@ -290,3 +290,518 @@ not recovery or energy capacity.
 
 v2.x will progress only via explicit phase declarations
 and a new bundle contract.
+# Upgrade SoftFocus-Web
+Version: Phase C → Institutional Surface Upgrade
+Scope: Design / Architecture / UX / SEO / Production Hardening
+Duration: 7 Days Intensive Sprint
+
+---
+
+## 🎯 Sprint Objective
+
+Elevate SoftFocus-Web from a structured product prototype
+to a visually institutional, typographically refined,
+SEO-strong, production-grade multilingual analytical system.
+
+---
+
+# DAY 1 — Structural Architecture Hardening
+
+## 1.1 Finalize i18n Structure
+
+- Confirm `/[lang]` routing integrity
+- Validate `/en /ru /es /ar`
+- Ensure canonical + hreflang works correctly
+- Add `x-default`
+- Fix metadata consistency across routes
+
+## 1.2 Remove Layout Duplication
+
+- Root layout → only `<html>` shell
+- `[lang]/layout.tsx` → language surface
+- v2 layout → isolated context
+- No nested `<html>` or `<body>` duplication
+
+## 1.3 Middleware/Proxy Stabilization
+
+- Finalize auto language detection
+- Ensure no hydration mismatch
+- Add safe fallback to `/en`
+
+Deliverable:
+Clean architecture tree + no console errors.
+
+---
+
+# DAY 2 — Typography System (Apple-Level Calibration)
+
+## 2.1 Establish Type Scale
+
+Create a strict modular scale:
+
+- H1: 88 → 80 → 72 responsive
+- H2: 32
+- H3: 20
+- Body Large: 24
+- Body: 20
+- Caption: 14
+
+## 2.2 Baseline Grid System
+
+- 8px rhythm base
+- Vertical spacing multiples of 16px
+- Strict max-width alignment
+
+## 2.3 Refine Hero
+
+- Increase negative letter-spacing precision
+- Balance line-length to 14–16ch for titles
+- Improve optical alignment
+
+Deliverable:
+Visually Apple Keynote-grade hero.
+
+---
+
+# DAY 3 — Header & Navigation Institutional Upgrade
+
+## 3.1 Navigation System
+
+- Replace simple links with structured nav
+- Add subtle hover underline animation
+- Improve active link precision
+
+## 3.2 Scroll Behavior
+
+- Smooth height shrink
+- Typography shift on scroll
+- Increase contrast on scroll
+- Micro-shadow tuning
+
+## 3.3 Language Switcher Upgrade
+
+- Active language highlight
+- Subtle weight difference
+- RTL tested
+
+Deliverable:
+Header feels like apple.com.
+
+---
+
+# DAY 4 — v2 Flow UX Refinement
+
+## 4.1 Progress Indicator Redesign
+
+- Replace simple progress with refined bar
+- Add smooth easing transitions
+- Add stage labeling
+
+## 4.2 Question Presentation Upgrade
+
+- Improve whitespace
+- Improve statement rhythm
+- Add micro fade transitions
+
+## 4.3 Result Page Depth
+
+- Increase hierarchy contrast
+- Separate core / dynamic / boundary visually
+- Add analytical severity marker
+
+Deliverable:
+v2 flow feels institutional, not startup.
+
+---
+
+# DAY 5 — Visual Depth & Surface Enhancement
+
+## 5.1 Subtle Mathematical Grid
+
+- Reduce grid opacity
+- Improve spacing coherence
+- Align grid to typography rhythm
+
+## 5.2 Elevation System
+
+- Define 3 elevation levels
+- Subtle shadow system
+- Hover states refined
+
+## 5.3 Micro Motion Audit
+
+- Fade timings unified
+- No abrupt transitions
+- Use cubic-bezier refinement
+
+Deliverable:
+Design feels intentional, not decorative.
+
+---
+
+# DAY 6 — SEO & Authority Upgrade
+
+## 6.1 Structured Data
+
+- Add JSON-LD Organization
+- Add WebApplication schema
+- Add FAQ (if applicable)
+
+## 6.2 Metadata Precision
+
+- Improve titles per language
+- Improve descriptions per language
+- Add OG tags
+- Add Twitter card
+
+## 6.3 Performance
+
+- Lighthouse 95+ target
+- Check CLS
+- Check hydration
+- Check bundle size
+
+Deliverable:
+Search + technical authority solid.
+
+---
+
+# DAY 7 — Institutional Polish & Production Readiness
+
+## 7.1 Visual Audit
+
+- Check every spacing block
+- Remove any inconsistent font-weight
+- Remove accidental color shifts
+
+## 7.2 Console Clean State
+
+- No hydration warnings
+- No layout mismatch
+- No missing metadata
+
+## 7.3 Prepare Production Snapshot
+
+- Final commit
+- Tag version
+- Document upgrade summary
+- Screenshot documentation
+
+Deliverable:
+Phase C Institutional Web Surface.
+
+---
+
+# Success Criteria
+
+- Zero console errors
+- Multilingual SEO correct
+- Apple-level typography
+- Institutional seriousness
+- No design noise
+- No hydration mismatch
+- Lighthouse 95+
+- Production-ready build
+
+---
+
+# Optional Advanced Upgrade (If Time Remains)
+
+- Dark mode (mathematical version)
+- Analytical PDF export
+- Subtle parallax depth
+- Motion-controlled typography scaling
+- Interactive structural diagram
+
+---
+
+End of Sprint Plan.
+Upgrade Softfocus-Web
+=====================
+
+**Phase:** Surface Maturation**Objective:** Elevate SoftFocus-Web to institutional-grade editorial system**Duration:** 7 days**Scope:** Design / Typography / Architecture / Interaction / SEO
+
+Week Goal
+---------
+
+Transform SoftFocus-Web from:
+
+> clean prototype
+
+into:
+
+> mathematically precise, editorial-grade, multilingual, production-ready system.
+
+No feature expansion.Only depth, precision, refinement.
+
+Day 1 — Layout Architecture Hardening
+=====================================
+
+### 1.1 Remove Nested 
+
+Ensure:
+
+*   Root layout owns 
+    
+*   \[lang\]/layout.tsx renders only content
+    
+*   No hydration mismatch
+    
+
+### 1.2 Clean Route Tree
+
+Target structure:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   app/   ├ layout.tsx   ├ [lang]/   │   ├ layout.tsx   │   ├ page.tsx   │   ├ v2/   │   │   ├ page.tsx   │   │   ├ flow/   │   │   ├ intake/   │   │   └ result/   `
+
+### 1.3 Fix Metadata Canonical Logic
+
+Ensure:
+
+*   canonical per language
+    
+*   hreflang cluster correct
+    
+*   no duplicated alternates
+    
+
+Day 2 — Typographic System (Apple-Keynote Grade)
+================================================
+
+### 2.1 Build Typographic Scale
+
+Introduce controlled modular scale:
+
+TokenSizeHero XL88pxHero L72pxLead24pxBody20pxMicro14px
+
+No arbitrary sizes allowed.
+
+### 2.2 Mathematical Vertical Rhythm
+
+Define baseline grid:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   --sf-rhythm: 8px;   `
+
+All spacing = multiple of 8.
+
+Remove:
+
+*   56px
+    
+*   64px
+    
+*   192pxunless justified by rhythm.
+    
+
+### 2.3 Refine Letterspacing
+
+Hero:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   letter-spacing: -0.055em   `
+
+Nav:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   0.08em uppercase   `
+
+Body:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   0em or 0.01em max   `
+
+Day 3 — Header as Institutional System
+======================================
+
+### 3.1 Active Route Precision
+
+*   usePathname
+    
+*   pattern-aware active state
+    
+*   subtle underline indicator
+    
+
+### 3.2 Scroll Behavior
+
+*   height shrink
+    
+*   font-size micro shift
+    
+*   opacity + blur recalibration
+    
+
+### 3.3 Language Switch Architecture
+
+Switch must:
+
+*   preserve current path
+    
+*   switch only language segment
+    
+*   not reset to homepage
+    
+
+Example:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   /en/v2/flow  → /ru/v2/flow   `
+
+Day 4 — Assessment UI Refinement
+================================
+
+### 4.1 Question Surface Polish
+
+Remove:
+
+*   visual noise
+    
+*   heavy borders
+    
+*   hard contrasts
+    
+
+Add:
+
+*   16px rhythm
+    
+*   soft segmented scale
+    
+*   tactile hover state
+    
+
+### 4.2 Result Page Depth
+
+Refactor result page to:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   Name  3-line core  dynamic paragraph  boundary  exit   `
+
+Typography:
+
+*   Name: 56–64px
+    
+*   Core lines: 22px
+    
+*   Dynamic: 19px
+    
+*   Boundary: 14px
+    
+
+Add whitespace dominance.
+
+Day 5 — RTL / i18n Hardening
+============================
+
+### 5.1 Arabic RTL Audit
+
+Verify:
+
+*   nav alignment
+    
+*   flex direction reversal
+    
+*   padding inversion
+    
+*   margin logic
+    
+
+### 5.2 Semantic Direction Control
+
+Use:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML
+
+Avoid manual CSS flips unless necessary.
+
+### 5.3 Language Detection Refinement
+
+Improve proxy:
+
+*   prioritize explicit path
+    
+*   fallback to accept-language
+    
+*   default = EN
+    
+
+Day 6 — Motion & Interaction Calibration
+========================================
+
+### 6.1 Reveal Animation Softening
+
+Current:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   900ms ease   `
+
+Upgrade to:
+
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   cubic-bezier(.25,.1,.25,1)   `
+
+### 6.2 Remove Over-animation
+
+SoftFocus is quiet.
+
+*   No bounce
+    
+*   No scale pop
+    
+*   No animated counters
+    
+
+### 6.3 Subtle Page Transition (Optional)
+
+Opacity crossfade only.
+
+Day 7 — Authority Polish & Production Readiness
+===============================================
+
+### 7.1 Add:
+
+*   sitemap.ts
+    
+*   robots.ts
+    
+*   OpenGraph images per language
+    
+*   structured metadata
+    
+
+### 7.2 Performance
+
+Target:
+
+*   < 120kb JS
+    
+*   zero hydration warnings
+    
+*   no layout shift
+    
+
+### 7.3 Final Design Integrity Review
+
+Ask:
+
+*   Is it quieter than before?
+    
+*   Is spacing mathematically consistent?
+    
+*   Does anything feel “producty”?
+    
+
+Remove anything decorative.
+
+Deliverable After 7 Days
+========================
+
+SoftFocus-Web should feel:
+
+*   Editorial
+    
+*   Calm
+    
+*   Institutional
+    
+*   Exact
+    
+*   Intentional
+    
+*   Non-startup
+    
+
+Not “app-like”.Not “SaaS-like”.Not “wellness”.

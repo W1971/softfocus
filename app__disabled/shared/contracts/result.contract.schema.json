@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "softfocus://contracts/result.contract.schema.json",
+  "title": "SoftFocus Result Contract (v1.x)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "phase",
+    "boundary",
+    "model",
+    "locale",
+    "generated_at_utc",
+    "inputs",
+    "summary",
+    "profile",
+    "interpretation",
+    "entitlement"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9]\\d*)$",
+      "description": "Contract version line for v1.x (Phase D)."
+    },
+    "phase": {
+      "type": "string",
+      "enum": ["phase-d"]
+    },
+    "boundary": {
+      "type": "string",
+      "enum": ["non-clinical"]
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "source_of_truth"],
+      "properties": {
+        "name": { "type": "string", "enum": ["recovery-capacity-v1"] },
+        "version": { "type": "string", "enum": ["v1"] },
+        "source_of_truth": {
+          "type": "string",
+          "description": "Canonical scoring implementation reference (path string)."
+        }
+      }
+    },
+    "locale": {
+      "type": "string",
+      "description": "BCP-47 locale code, e.g., ru-RU."
+    },
+    "generated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["period_days", "scale", "role", "section_scores"],
+      "properties": {
+        "period_days": { "type": "integer", "minimum": 7, "maximum": 30 },
+        "scale": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max", "labels"],
+          "properties": {
+            "min": { "type": "integer", "enum": [0] },
+            "max": { "type": "integer", "enum": [3] },
+            "labels": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "role": {
+          "type": "string",
+          "description": "Role context used only for copy/labels, not for scoring semantics."
+        },
+        "section_scores": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["latency", "residual", "compensation", "predictability", "detachment"],
+          "properties": {
+            "latency": { "type": "number", "minimum": 0, "maximum": 3 },
+            "residual": { "type": "number", "minimum": 0, "maximum": 3 },
+            "compensation": { "type": "number", "minimum": 0, "maximum": 3 },
+            "predictability": { "type": "number", "minimum": 0, "maximum": 3 },
+            "detachment": { "type": "number", "minimum": 0, "maximum": 3 }
+          }
+        }
+      }
+    },
+
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "confidence"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": ["recovery_closes", "recovery_unstable", "recovery_does_not_close"]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Deterministic confidence based on internal consistency rules."
+        }
+      }
+    },
+
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dominant_load", "dominant_mechanism", "stability", "drivers"],
+      "properties": {
+        "dominant_load": {
+          "type": "string",
+          "enum": ["latency", "residual", "predictability"],
+          "description": "Which section dominates the burden signal."
+        },
+        "dominant_mechanism": {
+          "type": "string",
+          "enum": ["compensation", "detachment"],
+          "description": "Which mechanism dominates the maintaining pattern."
+        },
+        "stability": {
+          "type": "string",
+          "enum": ["stable", "variable", "unstable"],
+          "description": "Recovery predictability class."
+        },
+        "drivers": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "level"],
+            "properties": {
+              "key": {
+                "type": "string",
+                "enum": ["latency", "residual", "compensation", "predictability", "detachment"]
+              },
+              "level": {
+                "type": "string",
+                "enum": ["low", "medium", "high"]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headline", "body"],
+      "properties": {
+        "headline": { "type": "string", "maxLength": 140 },
+        "body": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": { "type": "string", "maxLength": 240 }
+        }
+      }
+    },
+
+    "entitlement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "tier"],
+      "properties": {
+        "present": { "type": "boolean" },
+        "tier": {
+          "type": "string",
+          "enum": ["none", "depth_v1"],
+          "description": "No UI messaging allowed; tier changes only content depth."
+        }
+      }
+    }
+  }
+}

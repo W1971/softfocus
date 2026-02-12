@@ -34,3 +34,23 @@ This document defines mandatory runtime separation.
 
 Violations invalidate the build.
 
+
+## Runtime Separation (v1 / v2)
+
+SoftFocus now operates as two isolated runtimes:
+
+v1.x (operational):
+- Recovery axis
+- Deterministic scoring
+- Phase D lock active
+
+v2.x (isolated exploration):
+- Cognitive axis
+- Non-executable
+- Phase C structural freeze
+
+No scoring, logic, or UI semantics may be shared
+between these runtimes.
+
+Any cross-axis coupling is a governance violation.
+

@@ -36,3 +36,15 @@ No secondary indicators.
 ---
 
 _Last updated automatically via CI._
+
+## v2 Status
+
+- Phase: C
+- Mode: Prototype Freeze
+- Scoring: Not executable
+- Monetization: Disabled
+- Release: Not permitted
+
+v2 is structurally complete at prototype level.
+Analytical meaning remains unactivated.
+

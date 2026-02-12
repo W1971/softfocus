@@ -1,0 +1,22 @@
+{
+  "app.title": "SoftFocus",
+  "app.subtitle": "Аналитическая ориентация по восстановлению",
+  "app.boundary": "Неклиническая оценка",
+
+  "action.start": "Начать оценку",
+  "action.next": "Далее",
+  "action.back": "Назад",
+  "action.repeat": "Повторить оценку",
+  "action.close": "Закрыть",
+
+  "period.label": "Период: последние 14 дней",
+
+  "state.recovery_closes": "Восстановление закрывается",
+  "state.recovery_unstable": "Восстановление нестабильно",
+  "state.recovery_does_not_close": "Восстановление не закрывается",
+
+  "profile.title": "Профиль нагрузки",
+  "profile.dominant_load": "Доминирующий источник",
+  "profile.dominant_mechanism": "Удерживающий механизм",
+  "profile.stability": "Предсказуемость восстановления"
+}
